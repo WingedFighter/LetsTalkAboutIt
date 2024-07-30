@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://ct12ic4uf8j0l"]
+
+[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/message_list.gd" id="1_bxajm"]
+
+[node name="MessageList" type="GraphNode"]
+title = "MessageList"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 1
+slot/0/right_color = Color(0, 0, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = true
+slot/1/left_type = 2
+slot/1/left_color = Color(0, 1, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+script = ExtResource("1_bxajm")
+
+[node name="ID" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ID"]
+layout_mode = 2
+text = "ID"
+
+[node name="Control" type="Control" parent="ID"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="ID"]
+layout_mode = 2
+text = "0"
+alignment = 2
+max_length = 6
+
+[node name="Message0" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="Message0"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Message0"]
+layout_mode = 2
+text = "0"
+
+[node name="Control" type="Control" parent="Message0"]
+layout_mode = 2
+size_flags_horizontal = 3
