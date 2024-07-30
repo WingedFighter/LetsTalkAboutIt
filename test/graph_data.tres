@@ -1,0 +1,117 @@
+[gd_resource type="Resource" script_class="GraphData" load_steps=10 format=3 uid="uid://bicjndxbir0rp"]
+
+[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/node_data.gd" id="1_ojvis"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/graph_data.gd" id="2_tugia"]
+
+[sub_resource type="Resource" id="Resource_mp1xn"]
+script = ExtResource("1_ojvis")
+name = "Lines"
+type = "Lines"
+position_offset = Vector2(120, 120)
+data = {
+"id": "1",
+"lines": Array[String](["This is an example of the lines object. Each line currently has a hard", "coded limit of 70 characters.", "And can display up to 3 lines"])
+}
+
+[sub_resource type="Resource" id="Resource_hg8xe"]
+script = ExtResource("1_ojvis")
+name = "Message"
+type = "ConversationMessage"
+position_offset = Vector2(740, 100)
+data = {
+"character_id": "-1",
+"expression": 4,
+"id": "10",
+"line_id": "1"
+}
+
+[sub_resource type="Resource" id="Resource_m0ypu"]
+script = ExtResource("1_ojvis")
+name = "Lines2"
+type = "Lines"
+position_offset = Vector2(120, 280)
+data = {
+"id": "2",
+"lines": Array[String](["This is another example of a lines object with a single line.", "", ""])
+}
+
+[sub_resource type="Resource" id="Resource_ls17t"]
+script = ExtResource("1_ojvis")
+name = "Message2"
+type = "ConversationMessage"
+position_offset = Vector2(620, 260)
+data = {
+"character_id": "-1",
+"expression": 4,
+"id": "11",
+"line_id": "2"
+}
+
+[sub_resource type="Resource" id="Resource_0yrio"]
+script = ExtResource("1_ojvis")
+name = "MessageList"
+type = "MessageList"
+position_offset = Vector2(1040, 100)
+data = {
+"id": "20",
+"message_list": Array[String](["10", "11"])
+}
+
+[sub_resource type="Resource" id="Resource_2v2te"]
+script = ExtResource("1_ojvis")
+name = "Conversation"
+type = "Conversation"
+position_offset = Vector2(1360, 20)
+data = {
+"end": false,
+"id": "30",
+"messages": "20",
+"next_id": "31"
+}
+
+[sub_resource type="Resource" id="Resource_u321e"]
+script = ExtResource("1_ojvis")
+name = "Conversation2"
+type = "Conversation"
+position_offset = Vector2(1620, 20)
+data = {
+"end": true,
+"id": "31",
+"messages": "-1",
+"next_id": "-1"
+}
+
+[resource]
+script = ExtResource("2_tugia")
+connections = [{
+"from_node": &"Lines",
+"from_port": 0,
+"to_node": &"Message",
+"to_port": 0
+}, {
+"from_node": &"Lines2",
+"from_port": 0,
+"to_node": &"Message2",
+"to_port": 0
+}, {
+"from_node": &"Message",
+"from_port": 0,
+"to_node": &"MessageList",
+"to_port": 0
+}, {
+"from_node": &"Message2",
+"from_port": 0,
+"to_node": &"MessageList",
+"to_port": 1
+}, {
+"from_node": &"MessageList",
+"from_port": 0,
+"to_node": &"Conversation",
+"to_port": 1
+}, {
+"from_node": &"Conversation",
+"from_port": 0,
+"to_node": &"Conversation2",
+"to_port": 0
+}]
+nodes = [SubResource("Resource_mp1xn"), SubResource("Resource_hg8xe"), SubResource("Resource_m0ypu"), SubResource("Resource_ls17t"), SubResource("Resource_0yrio"), SubResource("Resource_2v2te"), SubResource("Resource_u321e")]
