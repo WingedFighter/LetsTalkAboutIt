@@ -1,9 +1,123 @@
-[gd_scene load_steps=6 format=3 uid="uid://i7vwwcxkyii3"]
+[gd_scene load_steps=15 format=3 uid="uid://i7vwwcxkyii3"]
 
 [ext_resource type="Script" path="res://test/test.gd" id="1_oxwfa"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/conversation_manager.gd" id="1_r1hvk"]
-[ext_resource type="Resource" uid="uid://bicjndxbir0rp" path="res://test/graph_data.tres" id="3_0vrra"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/node_data.gd" id="3_j1uu3"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/ingame_data/conversation_state.gd" id="4_ogikd"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/graph_data.gd" id="4_swtwr"]
+
+[sub_resource type="Resource" id="Resource_u1fdn"]
+script = ExtResource("3_j1uu3")
+name = "MessageList"
+type = "MessageList"
+position_offset = Vector2(922, 262.5)
+data = {
+"id": "11",
+"message_list": Array[String](["23", "24"])
+}
+
+[sub_resource type="Resource" id="Resource_4qm6p"]
+script = ExtResource("3_j1uu3")
+name = "Message2"
+type = "ConversationMessage"
+position_offset = Vector2(420, 440)
+data = {
+"character_id": "-1",
+"expression": 4,
+"id": "23",
+"line_id": "7"
+}
+
+[sub_resource type="Resource" id="Resource_dlsth"]
+script = ExtResource("3_j1uu3")
+name = "Message"
+type = "ConversationMessage"
+position_offset = Vector2(400, 160)
+data = {
+"character_id": "-1",
+"expression": 4,
+"id": "24",
+"line_id": "6"
+}
+
+[sub_resource type="Resource" id="Resource_hykqi"]
+script = ExtResource("3_j1uu3")
+name = "Conversation"
+type = "Conversation"
+position_offset = Vector2(1220, 180)
+data = {
+"end": false,
+"id": "30",
+"messages": "11",
+"next_id": "32"
+}
+
+[sub_resource type="Resource" id="Resource_fsloo"]
+script = ExtResource("3_j1uu3")
+name = "Lines"
+type = "Lines"
+position_offset = Vector2(140, 100)
+data = {
+"id": "6",
+"lines": Array[String](["This is a test", "", ""])
+}
+
+[sub_resource type="Resource" id="Resource_d5a57"]
+script = ExtResource("3_j1uu3")
+name = "Lines2"
+type = "Lines"
+position_offset = Vector2(100, 400)
+data = {
+"id": "7",
+"lines": Array[String](["This is also a test", "", ""])
+}
+
+[sub_resource type="Resource" id="Resource_js6jk"]
+script = ExtResource("3_j1uu3")
+name = "Conversation2"
+type = "Conversation"
+position_offset = Vector2(1500, 160)
+data = {
+"end": true,
+"id": "32",
+"messages": "-1",
+"next_id": "-1"
+}
+
+[sub_resource type="Resource" id="Resource_x3nae"]
+script = ExtResource("4_swtwr")
+connections = Array[Dictionary]([{
+"from_node": &"Message2",
+"from_port": 0,
+"to_node": &"MessageList",
+"to_port": 0
+}, {
+"from_node": &"Message",
+"from_port": 0,
+"to_node": &"MessageList",
+"to_port": 1
+}, {
+"from_node": &"MessageList",
+"from_port": 0,
+"to_node": &"Conversation",
+"to_port": 1
+}, {
+"from_node": &"Lines",
+"from_port": 0,
+"to_node": &"Message",
+"to_port": 0
+}, {
+"from_node": &"Lines2",
+"from_port": 0,
+"to_node": &"Message2",
+"to_port": 0
+}, {
+"from_node": &"Conversation",
+"from_port": 0,
+"to_node": &"Conversation2",
+"to_port": 0
+}])
+nodes = [SubResource("Resource_u1fdn"), SubResource("Resource_4qm6p"), SubResource("Resource_dlsth"), SubResource("Resource_hykqi"), SubResource("Resource_fsloo"), SubResource("Resource_d5a57"), SubResource("Resource_js6jk")]
 
 [sub_resource type="Resource" id="Resource_wbxrh"]
 script = ExtResource("4_ogikd")
@@ -16,5 +130,5 @@ script = ExtResource("1_oxwfa")
 script = ExtResource("1_r1hvk")
 graph_data_save_location = "res://test/graph_data.tres"
 conversation_state_save_location = "res://test/conversation_state.tres"
-graph_data = ExtResource("3_0vrra")
+graph_data = SubResource("Resource_x3nae")
 conversation_state = SubResource("Resource_wbxrh")

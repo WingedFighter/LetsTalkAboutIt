@@ -85,7 +85,7 @@ func on_connection_request(from_node: StringName, from_port: int, to_node: Strin
     match(get_graph_element_type_as_string(from_child)):
         "Conversation":
             if get_graph_element_type_as_string(to_child) == "Conversation":
-                from_child.set_output_value(from_port, to_child)
+                from_child.set_next_id(to_child.id)
         "ConversationMessage":
             if get_graph_element_type_as_string(to_child) == "MessageList":
                 to_child.add_new_message(from_child.id)
@@ -122,7 +122,7 @@ func delete_node(node: GraphNode) -> void:
                 match(get_graph_element_type_as_string(from_child)):
                     "Conversation":
                         if get_graph_element_type_as_string(to_child) == "Conversation":
-                            from_child.set_output_value(connection.from_port, null)
+                            from_child.set_next_id("-1")
                     "ConversationMessage":
                         if get_graph_element_type_as_string(to_child) == "MessageList":
                             to_child.delete_message(from_child.id)
@@ -183,7 +183,7 @@ func init_graph(graph_data: GraphData) -> void:
         var g_node = get_graph_element_from_name(node.name)
         match(node.type):
             "Conversation":
-                g_node.set_output_value(0, get_graph_element_from_id(node.data.next_id))
+                g_node.set_next_id(node.data.next_id)
     for connection in graph_data.connections:
         $ConversationGraph.connect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 

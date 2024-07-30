@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/message_list.gd" id="1_bxajm"]
 
 [node name="MessageList" type="GraphNode"]
+offset_right = 128.0
+offset_bottom = 111.0
 title = "MessageList"
 slot/0/left_enabled = false
 slot/0/left_type = 0

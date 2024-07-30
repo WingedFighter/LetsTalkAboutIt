@@ -11,24 +11,35 @@ func _enter_tree() -> void:
     $ID/LineEdit.text_changed.connect(id_change)
     $End/CheckBox.toggled.connect(set_end_state)
 
-func id_change(new_text: String):
+func id_change(new_text: String) -> void:
     id = new_text
     if $ID/LineEdit.text != new_text:
         $ID/LineEdit.text = new_text
+    update_connections()
+
+func get_graph_element_from_name(p_name: StringName) -> GraphNode:
+    var graph = get_parent()
+    if graph && graph is GraphEdit:
+        for child in graph.get_children():
+            if child.name == p_name:
+                return child
+    return
+
+func update_connections() -> void:
+    if get_parent() && get_parent() is GraphEdit:
+        for connection in get_parent().get_connection_list():
+            if connection.to_node == name:
+                var from_node = get_graph_element_from_name(connection.from_node)
+                if from_node is Conversation:
+                    from_node.set_next_id(id)
 
 func set_messages(message_list_id: String) -> void:
     messages = message_list_id
 
-func set_output_value(out_port: int, to_child: Node) -> void:
-    if get_output_port_slot(out_port) == 1:
-        if !to_child:
-            next_id = "-1"
-            $NextID/LineEdit.text = "-1"
-            $NextID/LineEdit.editable = true
-        elif to_child is Conversation:
-            next_id = to_child.id
-            $NextID/LineEdit.text = to_child.id
-            $NextID/LineEdit.editable = false
+func set_next_id(p_next_id: String) -> void:
+    next_id = p_next_id
+    $NextID/LineEdit.text = next_id
+    $NextID/LineEdit.editable = p_next_id == "-1"
 
 func set_end_state(toggled_on: bool) -> void:
     end = toggled_on

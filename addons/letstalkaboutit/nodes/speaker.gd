@@ -1,6 +1,7 @@
 extends Node
 class_name Speaker
 
+@export var character_id: String
 @export var character_name: String
 @export var character_base_panel: String 
 
