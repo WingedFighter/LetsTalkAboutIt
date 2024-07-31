@@ -1,117 +1,348 @@
-[gd_resource type="Resource" script_class="GraphData" load_steps=10 format=3 uid="uid://bicjndxbir0rp"]
+[gd_resource type="Resource" script_class="GraphData" load_steps=24 format=3 uid="uid://bicjndxbir0rp"]
 
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/node_data.gd" id="1_ojvis"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/graph_data.gd" id="2_tugia"]
 
-[sub_resource type="Resource" id="Resource_u1fdn"]
-script = ExtResource("1_ojvis")
-name = "MessageList"
-type = "MessageList"
-position_offset = Vector2(922, 262.5)
-data = {
-"id": "11",
-"message_list": Array[String](["23", "24"])
-}
-
-[sub_resource type="Resource" id="Resource_4qm6p"]
-script = ExtResource("1_ojvis")
-name = "Message2"
-type = "ConversationMessage"
-position_offset = Vector2(420, 440)
-data = {
-"character_id": "-1",
-"expression": 4,
-"id": "23",
-"line_id": "7"
-}
-
-[sub_resource type="Resource" id="Resource_dlsth"]
-script = ExtResource("1_ojvis")
-name = "Message"
-type = "ConversationMessage"
-position_offset = Vector2(400, 160)
-data = {
-"character_id": "-1",
-"expression": 4,
-"id": "24",
-"line_id": "6"
-}
-
-[sub_resource type="Resource" id="Resource_hykqi"]
+[sub_resource type="Resource" id="Resource_gayhq"]
 script = ExtResource("1_ojvis")
 name = "Conversation"
 type = "Conversation"
-position_offset = Vector2(1220, 180)
+position_offset = Vector2(886.5, 268)
 data = {
 "end": false,
-"id": "30",
-"messages": "11",
-"next_id": "32"
+"id": "31",
+"messages": "21",
+"next_id": "10"
 }
 
-[sub_resource type="Resource" id="Resource_fsloo"]
+[sub_resource type="Resource" id="Resource_2n8es"]
 script = ExtResource("1_ojvis")
-name = "Lines"
-type = "Lines"
-position_offset = Vector2(140, 100)
-data = {
-"id": "6",
-"lines": Array[String](["This is a test", "", ""])
-}
-
-[sub_resource type="Resource" id="Resource_d5a57"]
-script = ExtResource("1_ojvis")
-name = "Lines2"
-type = "Lines"
-position_offset = Vector2(100, 400)
-data = {
-"id": "7",
-"lines": Array[String](["This is also a test", "", ""])
-}
-
-[sub_resource type="Resource" id="Resource_js6jk"]
-script = ExtResource("1_ojvis")
-name = "Conversation2"
+name = "Conversation3"
 type = "Conversation"
-position_offset = Vector2(1500, 160)
+position_offset = Vector2(1520, 180)
 data = {
 "end": true,
 "id": "32",
-"messages": "-1",
+"messages": "22",
 "next_id": "-1"
+}
+
+[sub_resource type="Resource" id="Resource_i0r7b"]
+script = ExtResource("1_ojvis")
+name = "Conversation4"
+type = "Conversation"
+position_offset = Vector2(1520, 340)
+data = {
+"end": true,
+"id": "33",
+"messages": "23",
+"next_id": "-1"
+}
+
+[sub_resource type="Resource" id="Resource_r68e5"]
+script = ExtResource("1_ojvis")
+name = "MessageList"
+type = "MessageList"
+position_offset = Vector2(320, 380)
+data = {
+"id": "20",
+"message_list": Array[String](["41", "42"])
+}
+
+[sub_resource type="Resource" id="Resource_f543f"]
+script = ExtResource("1_ojvis")
+name = "MessageList2"
+type = "MessageList"
+position_offset = Vector2(600, 80)
+data = {
+"id": "21",
+"message_list": Array[String](["43"])
+}
+
+[sub_resource type="Resource" id="Resource_6owon"]
+script = ExtResource("1_ojvis")
+name = "MessageList3"
+type = "MessageList"
+position_offset = Vector2(1280, 80)
+data = {
+"id": "22",
+"message_list": Array[String](["44"])
+}
+
+[sub_resource type="Resource" id="Resource_wc2w6"]
+script = ExtResource("1_ojvis")
+name = "MessageList4"
+type = "MessageList"
+position_offset = Vector2(1280, 480)
+data = {
+"id": "23",
+"message_list": Array[String](["45"])
+}
+
+[sub_resource type="Resource" id="Resource_0l1ch"]
+script = ExtResource("1_ojvis")
+name = "Message"
+type = "ConversationMessage"
+position_offset = Vector2(-60, 420)
+data = {
+"character_id": "-1",
+"expression": 4,
+"id": "41",
+"line_id": "100"
+}
+
+[sub_resource type="Resource" id="Resource_q383f"]
+script = ExtResource("1_ojvis")
+name = "Message2"
+type = "ConversationMessage"
+position_offset = Vector2(-60, 600)
+data = {
+"character_id": "-1",
+"expression": 4,
+"id": "42",
+"line_id": "101"
+}
+
+[sub_resource type="Resource" id="Resource_i26s5"]
+script = ExtResource("1_ojvis")
+name = "Lines3"
+type = "Lines"
+position_offset = Vector2(-700, 440)
+data = {
+"id": "100",
+"lines": Array[String](["This is an example of some lines", "Each message in a conversation supports up to three lines and each", "line can be up to 70 characters long"]),
+"one_line": false
+}
+
+[sub_resource type="Resource" id="Resource_26cfj"]
+script = ExtResource("1_ojvis")
+name = "Lines4"
+type = "Lines"
+position_offset = Vector2(-520, 640)
+data = {
+"id": "101",
+"lines": Array[String](["This is another example of lines", "", ""]),
+"one_line": false
+}
+
+[sub_resource type="Resource" id="Resource_63b13"]
+script = ExtResource("1_ojvis")
+name = "Message3"
+type = "ConversationMessage"
+position_offset = Vector2(200, 40)
+data = {
+"character_id": "-1",
+"expression": 0,
+"id": "43",
+"line_id": "102"
+}
+
+[sub_resource type="Resource" id="Resource_jwkk3"]
+script = ExtResource("1_ojvis")
+name = "Lines5"
+type = "Lines"
+position_offset = Vector2(-40, 60)
+data = {
+"id": "102",
+"lines": Array[String](["A more simple example", "What follows is a choice", ""]),
+"one_line": false
+}
+
+[sub_resource type="Resource" id="Resource_x6gl7"]
+script = ExtResource("1_ojvis")
+name = "Message4"
+type = "ConversationMessage"
+position_offset = Vector2(960, 0)
+data = {
+"character_id": "-1",
+"expression": 4,
+"id": "44",
+"line_id": "103"
+}
+
+[sub_resource type="Resource" id="Resource_1yvlg"]
+script = ExtResource("1_ojvis")
+name = "Lines6"
+type = "Lines"
+position_offset = Vector2(760, -40)
+data = {
+"id": "103",
+"lines": Array[String](["You chose:", "Choice 1 ", "Nice"]),
+"one_line": false
+}
+
+[sub_resource type="Resource" id="Resource_llxpt"]
+script = ExtResource("1_ojvis")
+name = "Message5"
+type = "ConversationMessage"
+position_offset = Vector2(1000, 660)
+data = {
+"character_id": "-1",
+"expression": 4,
+"id": "45",
+"line_id": "104"
+}
+
+[sub_resource type="Resource" id="Resource_1abcq"]
+script = ExtResource("1_ojvis")
+name = "Lines7"
+type = "Lines"
+position_offset = Vector2(720, 720)
+data = {
+"id": "104",
+"lines": Array[String](["You choose:", "Choice 2", "Sweet!"]),
+"one_line": false
+}
+
+[sub_resource type="Resource" id="Resource_6gh26"]
+script = ExtResource("1_ojvis")
+name = "Conversation2"
+type = "Conversation"
+position_offset = Vector2(580, 280)
+data = {
+"end": false,
+"id": "30",
+"messages": "20",
+"next_id": "31"
+}
+
+[sub_resource type="Resource" id="Resource_ab8ho"]
+script = ExtResource("1_ojvis")
+name = "Lines"
+type = "Lines"
+position_offset = Vector2(900, 460)
+data = {
+"id": "12",
+"lines": Array[String](["Choice 1", "", ""]),
+"one_line": true
+}
+
+[sub_resource type="Resource" id="Resource_bl1sg"]
+script = ExtResource("1_ojvis")
+name = "Lines2"
+type = "Lines"
+position_offset = Vector2(720, 520)
+data = {
+"id": "13",
+"lines": Array[String](["Choice 2", "", ""]),
+"one_line": true
+}
+
+[sub_resource type="Resource" id="Resource_j441k"]
+script = ExtResource("1_ojvis")
+name = "ConversationChoice"
+type = "ConversationChoice"
+position_offset = Vector2(1220, 260)
+data = {
+"choice_list": Array[String](["12", "13"]),
+"id": "10",
+"next_id_list": {
+"12": "32",
+"13": "33"
+}
 }
 
 [resource]
 script = ExtResource("2_tugia")
 connections = Array[Dictionary]([{
-"from_node": &"Message2",
+"from_node": &"Conversation2",
 "from_port": 0,
-"to_node": &"MessageList",
+"to_node": &"Conversation",
 "to_port": 0
 }, {
-"from_node": &"Message",
+"from_node": &"MessageList",
 "from_port": 0,
-"to_node": &"MessageList",
+"to_node": &"Conversation2",
 "to_port": 1
 }, {
-"from_node": &"MessageList",
+"from_node": &"MessageList2",
 "from_port": 0,
 "to_node": &"Conversation",
 "to_port": 1
 }, {
-"from_node": &"Lines",
+"from_node": &"MessageList3",
+"from_port": 0,
+"to_node": &"Conversation3",
+"to_port": 1
+}, {
+"from_node": &"MessageList4",
+"from_port": 0,
+"to_node": &"Conversation4",
+"to_port": 1
+}, {
+"from_node": &"Message",
+"from_port": 0,
+"to_node": &"MessageList",
+"to_port": 0
+}, {
+"from_node": &"Message2",
+"from_port": 0,
+"to_node": &"MessageList",
+"to_port": 1
+}, {
+"from_node": &"Lines3",
 "from_port": 0,
 "to_node": &"Message",
 "to_port": 0
 }, {
-"from_node": &"Lines2",
+"from_node": &"Lines4",
 "from_port": 0,
 "to_node": &"Message2",
 "to_port": 0
 }, {
+"from_node": &"Message3",
+"from_port": 0,
+"to_node": &"MessageList2",
+"to_port": 0
+}, {
+"from_node": &"Lines5",
+"from_port": 0,
+"to_node": &"Message3",
+"to_port": 0
+}, {
+"from_node": &"Message4",
+"from_port": 0,
+"to_node": &"MessageList3",
+"to_port": 0
+}, {
+"from_node": &"Lines6",
+"from_port": 0,
+"to_node": &"Message4",
+"to_port": 0
+}, {
+"from_node": &"Message5",
+"from_port": 0,
+"to_node": &"MessageList4",
+"to_port": 0
+}, {
+"from_node": &"Lines7",
+"from_port": 0,
+"to_node": &"Message5",
+"to_port": 0
+}, {
 "from_node": &"Conversation",
 "from_port": 0,
-"to_node": &"Conversation2",
+"to_node": &"ConversationChoice",
+"to_port": 0
+}, {
+"from_node": &"Lines",
+"from_port": 0,
+"to_node": &"ConversationChoice",
+"to_port": 1
+}, {
+"from_node": &"Lines2",
+"from_port": 0,
+"to_node": &"ConversationChoice",
+"to_port": 2
+}, {
+"from_node": &"ConversationChoice",
+"from_port": 0,
+"to_node": &"Conversation3",
+"to_port": 0
+}, {
+"from_node": &"ConversationChoice",
+"from_port": 1,
+"to_node": &"Conversation4",
 "to_port": 0
 }])
-nodes = [SubResource("Resource_u1fdn"), SubResource("Resource_4qm6p"), SubResource("Resource_dlsth"), SubResource("Resource_hykqi"), SubResource("Resource_fsloo"), SubResource("Resource_d5a57"), SubResource("Resource_js6jk")]
+nodes = [SubResource("Resource_gayhq"), SubResource("Resource_2n8es"), SubResource("Resource_i0r7b"), SubResource("Resource_r68e5"), SubResource("Resource_f543f"), SubResource("Resource_6owon"), SubResource("Resource_wc2w6"), SubResource("Resource_0l1ch"), SubResource("Resource_q383f"), SubResource("Resource_i26s5"), SubResource("Resource_26cfj"), SubResource("Resource_63b13"), SubResource("Resource_jwkk3"), SubResource("Resource_x6gl7"), SubResource("Resource_1yvlg"), SubResource("Resource_llxpt"), SubResource("Resource_1abcq"), SubResource("Resource_6gh26"), SubResource("Resource_ab8ho"), SubResource("Resource_bl1sg"), SubResource("Resource_j441k")]

@@ -4,12 +4,35 @@ class_name Lines
 
 @export var id: String = "0"
 @export var lines: Array[String] = ["", "", ""]
+@export var one_line: bool = false:
+    set(value):
+        one_line = value
+        if value:
+            $Line1/LineEdit.visible = false
+            $Line2/LineEdit.visible = false
+        else:
+            $Line1/LineEdit.visible = true
+            $Line2/LineEdit.visible = true
+        if is_inside_tree():
+            resizable = true
+            await get_tree().process_frame
+            resize_request.emit(get_minimum_size())
+            await get_tree().process_frame
+            resizable = false
 
 func _enter_tree() -> void:
     $ID/LineEdit.text_changed.connect(id_change)
     $Line0/LineEdit.text_changed.connect(set_line0_content)
     $Line1/LineEdit.text_changed.connect(set_line1_content)
     $Line2/LineEdit.text_changed.connect(set_line2_content)
+    if one_line:
+        $Line1/LineEdit.visible = false
+        $Line2/LineEdit.visible = false
+        resizable = true
+        await get_tree().process_frame
+        resize_request.emit(get_minimum_size())
+        await get_tree().process_frame
+        resizable = false
 
 func update_connections() -> void:
     if get_parent() && get_parent() is GraphEdit:
@@ -18,6 +41,8 @@ func update_connections() -> void:
                 var to_node = get_graph_element_from_name(connection.to_node)
                 if to_node is ConversationMessage:
                     to_node.set_line_id(id)
+                if to_node is ConversationChoice:
+                    to_node.update_existing_choice(id, connection.to_port)
 
 func id_change(new_text: String) -> void:
     id = new_text

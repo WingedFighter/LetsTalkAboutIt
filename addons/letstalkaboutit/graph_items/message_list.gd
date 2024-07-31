@@ -51,7 +51,6 @@ func delete_message(message_id: String) -> void:
 		get_node("Message" + message).get_node("Label").text = str(index)
 		index += 1
 	get_node("MessageTemplate").get_node("Label").text = str(index)
-	get_node("MessageTemplate").get_node("Label").size = Vector2.ZERO
 	resizable = true
 	await get_tree().process_frame
 	resize_request.emit(get_minimum_size())

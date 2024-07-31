@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5ios6xl7sc4m"]
+
+[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/conversation_choice.gd" id="1_wn4ai"]
+
+[node name="ConversationChoice" type="GraphNode"]
+title = "ConversationChoice"
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = true
+slot/1/left_type = 3
+slot/1/left_color = Color(1, 0, 1, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+script = ExtResource("1_wn4ai")
+
+[node name="ID" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ID"]
+layout_mode = 2
+text = "ID"
+
+[node name="Control" type="Control" parent="ID"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="ID"]
+layout_mode = 2
+text = "0"
+alignment = 2
+max_length = 6
+
+[node name="ChoiceTemplate" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ChoiceTemplate"]
+layout_mode = 2
+text = "0"
+
+[node name="Spacer" type="Control" parent="ChoiceTemplate"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="ChoiceTemplate"]
+layout_mode = 2
+text = "-1"
+alignment = 2
+max_length = 6

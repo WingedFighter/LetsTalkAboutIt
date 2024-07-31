@@ -44,6 +44,9 @@ func get_node_by_id(p_id: String) -> NodeData:
 
 func get_full_conversation() -> Dictionary:
 	var c_object = get_conversation()
+	print(c_object.type) 
+	if !c_object:
+		return {}
 	match(c_object.type):
 		"Conversation":
 			var result = {"data": c_object.data}
@@ -58,12 +61,36 @@ func get_full_conversation() -> Dictionary:
 						if temp_message.data.line_id != "-1":
 							result.lines_data.append(get_node_by_type_and_id("Lines", temp_message.data.line_id).data)
 			return result
+		"ConversationChoice":
+			var result = {"data": c_object.data}
+			if c_object.data.choice_list.size() > 0:
+				result["choice_list_data"] = []
+				for choice_id in result.data.choice_list:
+					result.choice_list_data.append(get_node_by_type_and_id("Lines", choice_id).data)
+			if c_object.data.next_id_list.size() > 0:
+				result["next_id_list"] = {}
+				for n_id in c_object.data.next_id_list:
+					result.next_id_list[n_id] = c_object.data.next_id_list[n_id]
+			return result
 	return {}
 
 func get_conversation() -> NodeData:
-	var next_node = get_node_by_id(conversation_state.current_conversation)
+	if get_current_conversation_id() == "-1":
+		print("Waiting on Choice Input")
+		return
+	print(get_current_conversation_id())
+	var next_node = get_node_by_id(get_current_conversation_id())
 	match(next_node.type):
 		"Conversation":
-			conversation_state.current_conversation = next_node.data.next_id
+			set_current_conversation_id(next_node.data.next_id)
+			return next_node
+		"ConversationChoice":
+			set_current_conversation_id("-1")
 			return next_node
 	return
+
+func set_current_conversation_id(convo: String) -> void:
+	conversation_state.current_conversation = convo
+
+func get_current_conversation_id() -> String:
+	return conversation_state.current_conversation

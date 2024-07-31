@@ -76,25 +76,40 @@ func get_graph_element_from_id(p_id: String) -> GraphNode:
 
 func on_connection_request(from_node: StringName, from_port: int, to_node: StringName, to_port: int):
     var graph = $ConversationGraph
+    print(from_port)
+    print(to_port)
     for connection in graph.get_connection_list():
         if connection.to_node == to_node and connection.to_port == to_port:
             return
     graph.connect_node(from_node, from_port, to_node, to_port)
     var from_child = get_graph_element_from_name(from_node)
     var to_child = get_graph_element_from_name(to_node)
-    match(get_graph_element_type_as_string(from_child)):
+    var from_type = get_graph_element_type_as_string(from_child)
+    var to_type = get_graph_element_type_as_string(to_child)
+    match(from_type):
         "Conversation":
-            if get_graph_element_type_as_string(to_child) == "Conversation":
+            if to_type == "Conversation":
+                from_child.set_next_id(to_child.id)
+            if to_type == "ConversationChoice":
                 from_child.set_next_id(to_child.id)
         "ConversationMessage":
-            if get_graph_element_type_as_string(to_child) == "MessageList":
+            if to_type == "MessageList":
                 to_child.add_new_message(from_child.id)
         "MessageList":
-            if get_graph_element_type_as_string(to_child) == "Conversation":
+            if to_type == "Conversation":
                 to_child.set_messages(from_child.id)
         "Lines":
-            if get_graph_element_type_as_string(to_child) == "ConversationMessage":
+            if to_type == "ConversationMessage":
                 to_child.set_line_id(from_child.id)
+            if to_type == "ConversationChoice":
+                from_child.one_line = true
+                to_child.add_new_choice(from_child.id)
+        "ConversationChoice":
+            if to_type == "Conversation":
+                from_child.set_next_id(to_child.id, from_port)
+            if to_type == "ConversationChoice":
+                from_child.set_next_id(to_child.id, from_port)
+                
 
 func on_add_index_pressed(index: int) -> void:
     add_new_graph_node(add_index[index])
@@ -105,7 +120,7 @@ func delete_captured(nodes: Array[StringName]) -> void:
 
 func on_delete_pressed() -> void:
     for node in selected_nodes:
-        if selected_nodes[node]:
+        if selected_nodes[node] && is_instance_valid(node):
             delete_node(node)
     selected_nodes = {}
 
@@ -119,19 +134,31 @@ func delete_node(node: GraphNode) -> void:
                 $ConversationGraph.disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
                 var from_child = get_graph_element_from_name(connection.from_node)
                 var to_child = get_graph_element_from_name(connection.to_node)
-                match(get_graph_element_type_as_string(from_child)):
+                var from_type = get_graph_element_type_as_string(from_child)
+                var to_type = get_graph_element_type_as_string(to_child)
+                match(from_type):
                     "Conversation":
-                        if get_graph_element_type_as_string(to_child) == "Conversation":
+                        if to_type == "Conversation":
+                            from_child.set_next_id("-1")
+                        if to_type == "ConversationChoice":
                             from_child.set_next_id("-1")
                     "ConversationMessage":
-                        if get_graph_element_type_as_string(to_child) == "MessageList":
+                        if to_type == "MessageList":
                             to_child.delete_message(from_child.id)
                     "MessageList":
-                        if get_graph_element_type_as_string(to_child) == "Conversation":
+                        if to_type == "Conversation":
                             to_child.set_messages("-1")
                     "Lines":
-                        if get_graph_element_type_as_string(to_child) == "ConversationMessage":
+                        if to_type == "ConversationMessage":
                             to_child.set_line_id("-1")
+                        if to_type == "ConversationChoice":
+                            from_child.one_line = false
+                            to_child.delete_choice(from_child.id)
+                    "ConversationChoice":
+                        if to_type == "Conversation":
+                            from_child.set_next_id("-1", connection.from_port)
+                        if to_type == "ConversationChoice":
+                            from_child.set_next_id(to_child.id, connection.from_port)
         node.queue_free()
 
 func add_new_graph_node(type: String) -> void:
@@ -178,12 +205,22 @@ func init_graph(graph_data: GraphData) -> void:
             "Lines":
                 g_node.id_change(node.data.id)
                 g_node.set_all_lines(node.data.lines)
+                g_node.one_line = node.data.one_line
+            "ConversationChoice":
+                g_node.id_change(node.data.id)
+                for choice in node.data.choice_list:
+                    g_node.add_new_choice(choice)
         $ConversationGraph.add_child(g_node, true)
     for node in graph_data.nodes:
         var g_node = get_graph_element_from_name(node.name)
         match(node.type):
             "Conversation":
                 g_node.set_next_id(node.data.next_id)
+            "ConversationChoice":
+                var index = 0
+                for n_id in node.data.next_id_list:
+                    g_node.set_next_id(node.data.next_id_list[n_id], index)
+                    index += 1
     for connection in graph_data.connections:
         $ConversationGraph.connect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 
@@ -226,6 +263,11 @@ func save_graph_data(nodes: Array, connections: Array) -> void:
                 "Lines":
                     node_data.data.id = node.id
                     node_data.data.lines = node.lines
+                    node_data.data.one_line = node.one_line
+                "ConversationChoice":
+                    node_data.data.id = node.id
+                    node_data.data.choice_list = node.choice_list
+                    node_data.data.next_id_list = node.next_id_list
             node_data.position_offset = node.position_offset
             # node data
             graph_data.nodes.append(node_data)
@@ -255,4 +297,6 @@ func get_graph_element_type_as_string(node: GraphNode) -> String:
         return "ConversationMessage"
     elif node is MessageList:
         return "MessageList"
+    elif node is ConversationChoice:
+        return "ConversationChoice"
     return ""
