@@ -8,6 +8,8 @@ const MessageList: PackedScene = preload("res://addons/letstalkaboutit/graph_ite
 const ConversationMessage: PackedScene = preload("res://addons/letstalkaboutit/graph_items/message.tscn")
 const Lines: PackedScene = preload("res://addons/letstalkaboutit/graph_items/lines.tscn")
 const ConversationChoice: PackedScene = preload("res://addons/letstalkaboutit/graph_items/conversation_choice.tscn")
+const TalkSetFlag: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_set_flag.tscn")
+
 const ConversationManager: Script = preload("res://addons/letstalkaboutit/nodes/conversation_manager.gd")
 
 var icon = preload("res://icon.svg")
@@ -18,7 +20,8 @@ var graph_types = {
 	"MessageList": MessageList,
 	"ConversationMessage": ConversationMessage,
 	"Lines": Lines,
-	"ConversationChoice": ConversationChoice
+	"ConversationChoice": ConversationChoice,
+	"TalkSetFlag": TalkSetFlag
 }
 
 var conversation_panel

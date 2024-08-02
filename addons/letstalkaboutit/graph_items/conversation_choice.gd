@@ -28,34 +28,34 @@ func update_connections() -> void:
 		for connection in get_parent().get_connection_list():
 			if connection.to_node == name:
 				var from_node = get_graph_element_from_name(connection.from_node)
-				if from_node is Conversation:
+				if from_node is Conversation || from_node is TalkSetFlag:
 					from_node.set_next_id(id)
+				if from_node is ConversationChoice || from_node is ConversationBranch:
+					from_node.set_next_id(id, connection.from_port)
 
 func reset_choice_connections() -> void:
 	if get_parent() && get_parent() is GraphEdit:
 		for connection in get_parent().get_connection_list():
 			if connection.from_node == name:
 				var to_node = get_graph_element_from_name(connection.to_node)
-				if to_node is Conversation || to_node is ConversationChoice:
+				if to_node is Conversation || to_node is ConversationChoice || to_node is ConversationBranch || to_node is TalkSetFlag:
 					get_parent().disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 					get_parent().connect_node(connection.from_node, choice_list.find(to_node.id), connection.to_node, connection.to_port)
 			if connection.to_node == name && connection.to_port > 0:
 				var from_node = get_graph_element_from_name(connection.from_node)
-				if from_node is Conversation || from_node is ConversationChoice || from_node is Lines:
+				if from_node is Conversation || from_node is ConversationChoice || from_node is Lines || from_node is ConversationBranch || from_node is TalkSetFlag:
 					get_parent().disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 					get_parent().connect_node(connection.from_node, connection.from_port, connection.to_node, choice_list.find(from_node.id) + 1)
 
 func delete_choice(choice_id: String) -> void:
 	var output_port = choice_list.find(choice_id)
-	print("Output Port: " + str(output_port))
 	choice_list.remove_at(output_port)
 	next_id_list.erase(choice_id)
 	if get_parent() && get_parent() is GraphEdit:
 		for connection in get_parent().get_connection_list():
 			if connection.from_node == name:
 				var to_node = get_graph_element_from_name(connection.to_node)
-				if to_node is Conversation || to_node is ConversationChoice:
-					print("Output Ports: " + str(connection.from_port))
+				if to_node is Conversation || to_node is ConversationChoice || to_node is ConversationBranch || to_node is TalkSetFlag:
 					if connection.from_port == output_port:
 						get_parent().disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 	get_node("Choice" + choice_id).queue_free()
@@ -94,8 +94,10 @@ func update_existing_choice(choice_id: String, port: int) -> void:
 		get_node("Choice" + choice_list[port - 1]).name = "Choice" + choice_id
 		choice_list[port - 1] = choice_id
 
+func check_choice_set(port: int) -> bool:
+	return next_id_list[choice_list[port]] != "-1"
+
 func set_next_id(next_id: String, port: int) -> void:
-	print(port)
 	next_id_list[choice_list[port]] = next_id
 	var l_edit = get_node("Choice" + choice_list[port]).get_node("LineEdit")
 	l_edit.text = next_id

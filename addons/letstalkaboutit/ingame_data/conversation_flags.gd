@@ -1,18 +1,13 @@
-extends Resource
-class_name ConversationState
+extends Node
+class_name ConversationFlags
 
-@export var current_conversation: String
-@export var flags: Dictionary
-
-func _init(p_current_conversation: String = "0", p_flags = {}) -> void:
-    current_conversation = p_current_conversation
-    flags = p_flags
+var flags: Dictionary = {}
 
 func add_flag(flag_name: String, flag_value: bool = false) -> void:
     set_flag(flag_name, flag_value)
 
 func get_flag(flag_name: String) -> bool:
-    return flags[flag_name] == "true"
+    return bool(flags[flag_name])
 
 func set_flag(flag_name: String, flag_value: bool) -> void:
     flags[flag_name] = str(flag_value)
