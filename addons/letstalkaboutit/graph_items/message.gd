@@ -9,6 +9,7 @@ class_name ConversationMessage
 
 func _enter_tree() -> void:
 	$ID/LineEdit.text_changed.connect(id_change)
+	$Expression/OptionButton.clear()
 	for mood in Speaker.MOOD:
 		$Expression/OptionButton.add_item(mood, Speaker.MOOD[mood])
 	if expression == -1:
