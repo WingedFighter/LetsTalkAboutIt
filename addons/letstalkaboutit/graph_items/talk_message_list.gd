@@ -1,6 +1,6 @@
 @tool
 extends GraphNode
-class_name MessageList
+class_name TalkMessageList
 
 @export var id: String = "0"
 @export var message_list: Array[String] = []
@@ -29,7 +29,7 @@ func update_connections() -> void:
 		for connection in get_parent().get_connection_list():
 			if connection.from_node == name:
 				var to_node = get_graph_element_from_name(connection.to_node)
-				if to_node is Conversation:
+				if to_node is TalkBasic:
 					to_node.set_messages(id)
 
 func reset_message_connections() -> void:
@@ -37,7 +37,7 @@ func reset_message_connections() -> void:
 		for connection in get_parent().get_connection_list():
 			if connection.to_node == name:
 				var from_node = get_graph_element_from_name(connection.from_node)
-				if from_node is ConversationMessage:
+				if from_node is TalkMessage:
 					get_parent().disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 					get_parent().connect_node(connection.from_node, connection.from_port, connection.to_node, message_list.find(from_node.id))
 

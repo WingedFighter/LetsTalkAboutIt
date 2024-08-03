@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://ct12ic4uf8j0l"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/message_list.gd" id="1_bxajm"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_message_list.gd" id="1_bxajm"]
 
-[node name="MessageList" type="GraphNode"]
+[node name="TalkTalkMessageList" type="GraphNode"]
 offset_right = 128.0
 offset_bottom = 111.0
-title = "MessageList"
+title = "TalkMessageList"
 slot/0/left_enabled = false
 slot/0/left_type = 0
 slot/0/left_color = Color(1, 1, 1, 1)

@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://bkuyvpcwb2xtu"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/conversation.gd" id="1_363hv"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_basic.gd" id="1_363hv"]
 
-[node name="Conversation" type="GraphNode"]
+[node name="TalkBasic" type="GraphNode"]
 process_mode = 3
 size_flags_vertical = 3
-title = "Conversation"
+title = "Talk"
 slot/0/left_enabled = true
 slot/0/left_type = 0
 slot/0/left_color = Color(1, 1, 1, 1)

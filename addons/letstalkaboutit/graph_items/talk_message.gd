@@ -1,6 +1,6 @@
 @tool
 extends GraphNode
-class_name ConversationMessage
+class_name TalkMessage
 
 @export var id: String = "0"
 @export var line_id: String = "-1"
@@ -37,7 +37,7 @@ func update_connections() -> void:
 		for connection in get_parent().get_connection_list():
 			if connection.from_node == name:
 				var to_node = get_graph_element_from_name(connection.to_node)
-				if to_node is MessageList:
+				if to_node is TalkMessageList:
 					to_node.udpate_existing_message(connection.to_port, id)
 
 func set_line_id(p_line_id: String) -> void:

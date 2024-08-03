@@ -1,6 +1,6 @@
 @tool
 extends GraphNode
-class_name Lines
+class_name TalkLines
 
 @export var id: String = "0"
 @export var lines: Array[String] = ["", "", ""]
@@ -39,9 +39,9 @@ func update_connections() -> void:
         for connection in get_parent().get_connection_list():
             if connection.from_node == name:
                 var to_node = get_graph_element_from_name(connection.to_node)
-                if to_node is ConversationMessage:
+                if to_node is TalkMessage:
                     to_node.set_line_id(id)
-                if to_node is ConversationChoice:
+                if to_node is TalkChoice:
                     to_node.update_existing_choice(id, connection.to_port)
 
 func id_change(new_text: String) -> void:

@@ -1,5 +1,5 @@
 extends Resource
-class_name ConversationState
+class_name TalkState
 
 @export var current_conversation: String
 @export var flags: Dictionary

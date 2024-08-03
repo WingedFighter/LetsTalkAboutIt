@@ -5,8 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_4t1q6"]
 script = ExtResource("1_ojvis")
-name = "Conversation"
-type = "Conversation"
+name = "TalkBasic"
+type = "TalkBasic"
 position_offset = Vector2(886.5, 268)
 data = {
 "end": false,
@@ -17,8 +17,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_uqxc6"]
 script = ExtResource("1_ojvis")
-name = "Conversation3"
-type = "Conversation"
+name = "TalkBasic3"
+type = "TalkBasic"
 position_offset = Vector2(1520, 180)
 data = {
 "end": false,
@@ -29,8 +29,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_yxsnq"]
 script = ExtResource("1_ojvis")
-name = "Conversation4"
-type = "Conversation"
+name = "TalkBasic4"
+type = "TalkBasic"
 position_offset = Vector2(1520, 340)
 data = {
 "end": false,
@@ -41,8 +41,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_dyjpj"]
 script = ExtResource("1_ojvis")
-name = "MessageList"
-type = "MessageList"
+name = "TalkMessageList"
+type = "TalkMessageList"
 position_offset = Vector2(320, 380)
 data = {
 "id": "20",
@@ -51,8 +51,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_bojhf"]
 script = ExtResource("1_ojvis")
-name = "MessageList2"
-type = "MessageList"
+name = "TalkMessageList2"
+type = "TalkMessageList"
 position_offset = Vector2(600, 80)
 data = {
 "id": "21",
@@ -61,8 +61,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_8hm48"]
 script = ExtResource("1_ojvis")
-name = "MessageList3"
-type = "MessageList"
+name = "TalkMessageList3"
+type = "TalkMessageList"
 position_offset = Vector2(1280, 80)
 data = {
 "id": "22",
@@ -71,8 +71,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_tpt08"]
 script = ExtResource("1_ojvis")
-name = "MessageList4"
-type = "MessageList"
+name = "TalkMessageList4"
+type = "TalkMessageList"
 position_offset = Vector2(1280, 480)
 data = {
 "id": "23",
@@ -82,7 +82,7 @@ data = {
 [sub_resource type="Resource" id="Resource_kbard"]
 script = ExtResource("1_ojvis")
 name = "Message"
-type = "ConversationMessage"
+type = "TalkMessage"
 position_offset = Vector2(-60, 420)
 data = {
 "character_id": "-1",
@@ -94,7 +94,7 @@ data = {
 [sub_resource type="Resource" id="Resource_e7t3x"]
 script = ExtResource("1_ojvis")
 name = "Message2"
-type = "ConversationMessage"
+type = "TalkMessage"
 position_offset = Vector2(-60, 600)
 data = {
 "character_id": "-1",
@@ -105,8 +105,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_ntjti"]
 script = ExtResource("1_ojvis")
-name = "Lines3"
-type = "Lines"
+name = "TalkLines3"
+type = "TalkLines"
 position_offset = Vector2(-700, 440)
 data = {
 "id": "100",
@@ -116,8 +116,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_kylxd"]
 script = ExtResource("1_ojvis")
-name = "Lines4"
-type = "Lines"
+name = "TalkLines4"
+type = "TalkLines"
 position_offset = Vector2(-520, 640)
 data = {
 "id": "101",
@@ -128,7 +128,7 @@ data = {
 [sub_resource type="Resource" id="Resource_d64ps"]
 script = ExtResource("1_ojvis")
 name = "Message3"
-type = "ConversationMessage"
+type = "TalkMessage"
 position_offset = Vector2(200, 40)
 data = {
 "character_id": "-1",
@@ -139,8 +139,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_is3hm"]
 script = ExtResource("1_ojvis")
-name = "Lines5"
-type = "Lines"
+name = "TalkLines5"
+type = "TalkLines"
 position_offset = Vector2(-40, 60)
 data = {
 "id": "102",
@@ -151,7 +151,7 @@ data = {
 [sub_resource type="Resource" id="Resource_q18eg"]
 script = ExtResource("1_ojvis")
 name = "Message4"
-type = "ConversationMessage"
+type = "TalkMessage"
 position_offset = Vector2(960, 0)
 data = {
 "character_id": "-1",
@@ -162,8 +162,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_8xmtf"]
 script = ExtResource("1_ojvis")
-name = "Lines6"
-type = "Lines"
+name = "TalkLines6"
+type = "TalkLines"
 position_offset = Vector2(760, -40)
 data = {
 "id": "103",
@@ -174,7 +174,7 @@ data = {
 [sub_resource type="Resource" id="Resource_23sjq"]
 script = ExtResource("1_ojvis")
 name = "Message5"
-type = "ConversationMessage"
+type = "TalkMessage"
 position_offset = Vector2(1000, 660)
 data = {
 "character_id": "-1",
@@ -185,8 +185,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_pnwua"]
 script = ExtResource("1_ojvis")
-name = "Lines7"
-type = "Lines"
+name = "TalkLines7"
+type = "TalkLines"
 position_offset = Vector2(720, 720)
 data = {
 "id": "104",
@@ -196,8 +196,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_1bono"]
 script = ExtResource("1_ojvis")
-name = "Conversation2"
-type = "Conversation"
+name = "TalkBasic2"
+type = "TalkBasic"
 position_offset = Vector2(580, 280)
 data = {
 "end": false,
@@ -208,8 +208,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_iwdjy"]
 script = ExtResource("1_ojvis")
-name = "Lines"
-type = "Lines"
+name = "TalkLines"
+type = "TalkLines"
 position_offset = Vector2(900, 460)
 data = {
 "id": "12",
@@ -219,8 +219,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_dxtas"]
 script = ExtResource("1_ojvis")
-name = "Lines2"
-type = "Lines"
+name = "TalkLines2"
+type = "TalkLines"
 position_offset = Vector2(720, 520)
 data = {
 "id": "13",
@@ -230,8 +230,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_nkri3"]
 script = ExtResource("1_ojvis")
-name = "ConversationChoice"
-type = "ConversationChoice"
+name = "TalkChoice"
+type = "TalkChoice"
 position_offset = Vector2(1220, 260)
 data = {
 "choice_list": Array[String](["12", "13"]),
@@ -268,8 +268,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_17b7k"]
 script = ExtResource("1_ojvis")
-name = "ConversationBranch"
-type = "ConversationBranch"
+name = "TalkBranch"
+type = "TalkBranch"
 position_offset = Vector2(2200, 220)
 data = {
 "false_next_id": "35",
@@ -280,8 +280,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_jfv0q"]
 script = ExtResource("1_ojvis")
-name = "Conversation5"
-type = "Conversation"
+name = "TalkBasic5"
+type = "TalkBasic"
 position_offset = Vector2(2740, 180)
 data = {
 "end": true,
@@ -292,8 +292,8 @@ data = {
 
 [sub_resource type="Resource" id="Resource_ulpbg"]
 script = ExtResource("1_ojvis")
-name = "Conversation6"
-type = "Conversation"
+name = "TalkBasic6"
+type = "TalkBasic"
 position_offset = Vector2(2740, 340)
 data = {
 "end": false,
@@ -304,135 +304,135 @@ data = {
 
 [resource]
 script = ExtResource("2_tugia")
-connections = Array[Dictionary]([{
-"from_node": &"Conversation2",
+connections = [{
+"from_node": &"TalkBasic2",
 "from_port": 0,
-"to_node": &"Conversation",
+"to_node": &"TalkBasic",
 "to_port": 0
 }, {
-"from_node": &"MessageList",
+"from_node": &"TalkMessageList",
 "from_port": 0,
-"to_node": &"Conversation2",
+"to_node": &"TalkBasic2",
 "to_port": 1
 }, {
-"from_node": &"MessageList2",
+"from_node": &"TalkMessageList2",
 "from_port": 0,
-"to_node": &"Conversation",
+"to_node": &"TalkBasic",
 "to_port": 1
 }, {
-"from_node": &"MessageList3",
+"from_node": &"TalkMessageList3",
 "from_port": 0,
-"to_node": &"Conversation3",
+"to_node": &"TalkBasic3",
 "to_port": 1
 }, {
-"from_node": &"MessageList4",
+"from_node": &"TalkMessageList4",
 "from_port": 0,
-"to_node": &"Conversation4",
+"to_node": &"TalkBasic4",
 "to_port": 1
 }, {
 "from_node": &"Message",
 "from_port": 0,
-"to_node": &"MessageList",
+"to_node": &"TalkMessageList",
 "to_port": 0
 }, {
 "from_node": &"Message2",
 "from_port": 0,
-"to_node": &"MessageList",
+"to_node": &"TalkMessageList",
 "to_port": 1
 }, {
-"from_node": &"Lines3",
+"from_node": &"TalkLines3",
 "from_port": 0,
 "to_node": &"Message",
 "to_port": 0
 }, {
-"from_node": &"Lines4",
+"from_node": &"TalkLines4",
 "from_port": 0,
 "to_node": &"Message2",
 "to_port": 0
 }, {
 "from_node": &"Message3",
 "from_port": 0,
-"to_node": &"MessageList2",
+"to_node": &"TalkMessageList2",
 "to_port": 0
 }, {
-"from_node": &"Lines5",
+"from_node": &"TalkLines5",
 "from_port": 0,
 "to_node": &"Message3",
 "to_port": 0
 }, {
 "from_node": &"Message4",
 "from_port": 0,
-"to_node": &"MessageList3",
+"to_node": &"TalkMessageList3",
 "to_port": 0
 }, {
-"from_node": &"Lines6",
+"from_node": &"TalkLines6",
 "from_port": 0,
 "to_node": &"Message4",
 "to_port": 0
 }, {
 "from_node": &"Message5",
 "from_port": 0,
-"to_node": &"MessageList4",
+"to_node": &"TalkMessageList4",
 "to_port": 0
 }, {
-"from_node": &"Lines7",
+"from_node": &"TalkLines7",
 "from_port": 0,
 "to_node": &"Message5",
 "to_port": 0
 }, {
-"from_node": &"Conversation",
+"from_node": &"TalkBasic",
 "from_port": 0,
-"to_node": &"ConversationChoice",
+"to_node": &"TalkChoice",
 "to_port": 0
 }, {
-"from_node": &"Lines",
+"from_node": &"TalkLines",
 "from_port": 0,
-"to_node": &"ConversationChoice",
+"to_node": &"TalkChoice",
 "to_port": 1
 }, {
-"from_node": &"Lines2",
+"from_node": &"TalkLines2",
 "from_port": 0,
-"to_node": &"ConversationChoice",
+"to_node": &"TalkChoice",
 "to_port": 2
 }, {
-"from_node": &"ConversationChoice",
+"from_node": &"TalkChoice",
 "from_port": 0,
-"to_node": &"Conversation3",
+"to_node": &"TalkBasic3",
 "to_port": 0
 }, {
-"from_node": &"ConversationChoice",
+"from_node": &"TalkChoice",
 "from_port": 1,
-"to_node": &"Conversation4",
+"to_node": &"TalkBasic4",
 "to_port": 0
 }, {
-"from_node": &"Conversation3",
+"from_node": &"TalkBasic3",
 "from_port": 0,
 "to_node": &"TalkSetFlag",
 "to_port": 0
 }, {
-"from_node": &"Conversation4",
+"from_node": &"TalkBasic4",
 "from_port": 0,
 "to_node": &"TalkSetFlag2",
 "to_port": 0
 }, {
 "from_node": &"TalkSetFlag",
 "from_port": 0,
-"to_node": &"ConversationBranch",
+"to_node": &"TalkBranch",
 "to_port": 0
 }, {
 "from_node": &"TalkSetFlag2",
 "from_port": 0,
-"to_node": &"ConversationBranch",
+"to_node": &"TalkBranch",
 "to_port": 0
 }, {
-"from_node": &"ConversationBranch",
+"from_node": &"TalkBranch",
 "from_port": 0,
-"to_node": &"Conversation5",
+"to_node": &"TalkBasic5",
 "to_port": 0
 }, {
-"from_node": &"ConversationBranch",
+"from_node": &"TalkBranch",
 "from_port": 1,
-"to_node": &"Conversation6",
+"to_node": &"TalkBasic6",
 "to_port": 0
-}])
+}]
 nodes = [SubResource("Resource_4t1q6"), SubResource("Resource_uqxc6"), SubResource("Resource_yxsnq"), SubResource("Resource_dyjpj"), SubResource("Resource_bojhf"), SubResource("Resource_8hm48"), SubResource("Resource_tpt08"), SubResource("Resource_kbard"), SubResource("Resource_e7t3x"), SubResource("Resource_ntjti"), SubResource("Resource_kylxd"), SubResource("Resource_d64ps"), SubResource("Resource_is3hm"), SubResource("Resource_q18eg"), SubResource("Resource_8xmtf"), SubResource("Resource_23sjq"), SubResource("Resource_pnwua"), SubResource("Resource_1bono"), SubResource("Resource_iwdjy"), SubResource("Resource_dxtas"), SubResource("Resource_nkri3"), SubResource("Resource_yr74l"), SubResource("Resource_fcrnu"), SubResource("Resource_17b7k"), SubResource("Resource_jfv0q"), SubResource("Resource_ulpbg")]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/letstalkaboutit/main_screen/main_screen_convo_node.gd" id="1_2amcx"]
 
-[node name="Conversations" type="Control" groups=["ConvoScreen"]]
+[node name="TalkEditor" type="Control" groups=["ConvoScreen"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2amcx")
 
-[node name="ConversationGraph" type="GraphEdit" parent="."]
+[node name="TalkGraph" type="GraphEdit" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

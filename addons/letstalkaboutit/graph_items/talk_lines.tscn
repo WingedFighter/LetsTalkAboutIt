@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5gcqtuhgc46x"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/lines.gd" id="1_teuhd"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_lines.gd" id="1_teuhd"]
 
-[node name="Lines" type="GraphNode"]
+[node name="TalkLines" type="GraphNode"]
 offset_right = 103.0
 offset_bottom = 152.0
 title = "Lines"

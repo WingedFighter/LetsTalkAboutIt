@@ -1,36 +1,39 @@
 @tool
 extends EditorPlugin
 
-const ConversationPanel: PackedScene = preload("res://addons/letstalkaboutit/main_screen/main_screen_convo_node.tscn")
-const Conversation: PackedScene = preload("res://addons/letstalkaboutit/graph_items/conversation.tscn")
-const ConversationBranch: PackedScene = preload("res://addons/letstalkaboutit/graph_items/conversation_branch.tscn")
-const MessageList: PackedScene = preload("res://addons/letstalkaboutit/graph_items/message_list.tscn")
-const ConversationMessage: PackedScene = preload("res://addons/letstalkaboutit/graph_items/message.tscn")
-const Lines: PackedScene = preload("res://addons/letstalkaboutit/graph_items/lines.tscn")
-const ConversationChoice: PackedScene = preload("res://addons/letstalkaboutit/graph_items/conversation_choice.tscn")
+# Bottom dock editor panel
+const TalkPanel: PackedScene = preload("res://addons/letstalkaboutit/main_screen/main_screen_convo_node.tscn")
+
+# Graph nodes
+const TalkBasic: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_basic.tscn")
+const TalkBranch: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_branch.tscn")
+const TalkMessageList: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_message_list.tscn")
+const TalkMessage: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_message.tscn")
+const TalkLines: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_lines.tscn")
+const TalkChoice: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_choice.tscn")
 const TalkSetFlag: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_set_flag.tscn")
 
-const ConversationManager: Script = preload("res://addons/letstalkaboutit/nodes/conversation_manager.gd")
+const TalkManager: Script = preload("res://addons/letstalkaboutit/nodes/talk_manager.gd")
 
 var icon = preload("res://icon.svg")
 
 var graph_types = {
-	"Conversation": Conversation,
-	"ConversationBranch": ConversationBranch,
-	"MessageList": MessageList,
-	"ConversationMessage": ConversationMessage,
-	"Lines": Lines,
-	"ConversationChoice": ConversationChoice,
+	"TalkBasic": TalkBasic,
+	"TalkBranch": TalkBranch,
+	"TalkMessageList": TalkMessageList,
+	"TalkMessage": TalkMessage,
+	"TalkLines": TalkLines,
+	"TalkChoice": TalkChoice,
 	"TalkSetFlag": TalkSetFlag
 }
 
 var conversation_panel
 
 func _enter_tree() -> void:
-	add_custom_type("ConversationManager", "Node", ConversationManager, icon)
+	add_custom_type("TalkManager", "Node", TalkManager, icon)
 
 func _handles(object: Object) -> bool:
-	return object is ConversationManager
+	return object is TalkManager
 
 func _make_visible(visible: bool) -> void:
 	if visible:
@@ -39,7 +42,7 @@ func _make_visible(visible: bool) -> void:
 		remove_conversation_panel()
 
 func _edit(object: Object) -> void:
-	if object && object is ConversationManager:
+	if object && object is TalkManager:
 		conversation_panel.load_conversation_manager(object)
 
 func _exit_tree() -> void:
@@ -48,9 +51,9 @@ func _exit_tree() -> void:
 
 func add_conversation_panel() -> void:
 	if !conversation_panel:
-		conversation_panel = ConversationPanel.instantiate()
+		conversation_panel = TalkPanel.instantiate()
 		conversation_panel.add_types = graph_types
-	add_control_to_bottom_panel(conversation_panel, "ConversationManager")
+	add_control_to_bottom_panel(conversation_panel, "TalkManager")
 
 func remove_conversation_panel() -> void:
 	if conversation_panel:

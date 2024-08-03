@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5ios6xl7sc4m"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/conversation_choice.gd" id="1_wn4ai"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_choice.gd" id="1_ju5wr"]
 
-[node name="ConversationChoice" type="GraphNode"]
-title = "ConversationChoice"
+[node name="TalkChoice" type="GraphNode"]
+title = "Choice"
 slot/0/left_enabled = true
 slot/0/left_type = 0
 slot/0/left_color = Color(1, 1, 1, 1)
@@ -22,7 +22,7 @@ slot/1/right_type = 0
 slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
-script = ExtResource("1_wn4ai")
+script = ExtResource("1_ju5wr")
 
 [node name="ID" type="HBoxContainer" parent="."]
 layout_mode = 2
