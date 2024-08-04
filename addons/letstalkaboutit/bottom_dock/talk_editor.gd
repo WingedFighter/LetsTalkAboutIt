@@ -5,7 +5,8 @@ var menu_bar: MenuBar
 var add_menu: PopupMenu
 var delete_button: Button
 var save_button: Button
-var conversation_manager: TalkManager
+var graph_data: GraphData
+var graph_save_location: String
 
 #TODO: Add update link when actively connected and an edit is made
 
@@ -117,9 +118,6 @@ func on_connection_request(from_node: StringName, from_port: int, to_node: Strin
         "TalkLines":
             if to_type == "TalkMessage":
                 to_child.set_line_id(from_child.id)
-            if to_type == "TalkChoice":
-                from_child.one_line = true
-                to_child.add_new_choice(from_child.id)
         "TalkChoice":
             if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
                 from_child.set_next_id(to_child.id, from_port)
@@ -169,9 +167,6 @@ func delete_node(node: GraphNode) -> void:
                     "TalkLines":
                         if to_type == "TalkMessage":
                             to_child.set_line_id("-1")
-                        if to_type == "TalkChoice":
-                            from_child.one_line = false
-                            to_child.delete_choice(from_child.id)
                     "TalkChoice":
                         if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
                             from_child.set_next_id("-1", connection.from_port)
@@ -181,7 +176,7 @@ func delete_node(node: GraphNode) -> void:
                     "TalkSetFlag":
                         if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
                             from_child.set_next_id("-1")
-        node.queue_free()
+        node.free()
 
 func add_new_graph_node(type: String) -> void:
     var node: GraphNode = add_types[type].instantiate()
@@ -190,19 +185,25 @@ func add_new_graph_node(type: String) -> void:
     node.position_offset.x = graph.scroll_offset.x + (size.x / 2) - (node.size.x / 2)
     node.position_offset.y = graph.scroll_offset.y + (size.y / 2) - (node.size.y / 2)
     node.delete_request.connect(delete_node.bind(node))
+    if node is TalkChoice:
+        node.line_list_resource = TalkListResource.new()
 
 func on_node_selected(node: Node) -> void:
+    if node is TalkMessage:
+        EditorInterface.edit_resource(node.line_resource)
+    if node is TalkChoice:
+        EditorInterface.edit_resource(node.line_list_resource)
     selected_nodes[node] = true
 
 func on_node_deselected(node: Node) -> void:
     selected_nodes[node] = false
 
-func load_conversation_manager(manager: TalkManager) -> void:
+func load_talk_manager(manager: TalkManager) -> void:
     if !manager:
         return
-    conversation_manager = manager
+    graph_save_location = manager.graph_data_save_location
     load_graph_data()
-    init_graph(conversation_manager.graph_data)
+    init_graph(graph_data)
 
 func init_graph(graph_data: GraphData) -> void:
     clear_graph()
@@ -219,6 +220,7 @@ func init_graph(graph_data: GraphData) -> void:
                 g_node.set_line_id(node.data.line_id)
                 g_node.set_character_id(node.data.character_id)
                 g_node.set_expression(node.data.expression)
+                g_node.set_lines(node.data.lines)
             "TalkMessageList":
                 for message in node.data.message_list:
                     g_node.add_new_message(message)
@@ -228,6 +230,7 @@ func init_graph(graph_data: GraphData) -> void:
             "TalkChoice":
                 for choice in node.data.choice_list:
                     g_node.add_new_choice(choice)
+                g_node.line_list_resource = node.data.line_list_resource
             "TalkBranch":
                 g_node.set_flag_name(node.data.flag_name)
             "TalkSetFlag":
@@ -263,8 +266,8 @@ func save_graph() -> void:
     save_graph_data($TalkGraph.get_children(), $TalkGraph.get_connection_list())
 
 func save_graph_data(nodes: Array, connections: Array) -> void:
-    var graph_data = GraphData.new()
-    graph_data.connections = connections
+    var n_graph_data = GraphData.new()
+    n_graph_data.connections = connections
     for node in nodes:
         if node is GraphNode:
             var node_data = NodeData.new()
@@ -281,17 +284,19 @@ func save_graph_data(nodes: Array, connections: Array) -> void:
                     node_data.data.line_id = node.line_id
                     node_data.data.character_id = node.character_id
                     node_data.data.expression = node.expression
+                    node_data.data.lines = node.line_resource.lines
                 "TalkMessageList":
                     node_data.data.id = node.id
                     node_data.data.message_list = node.message_list
                 "TalkLines":
                     node_data.data.id = node.id
-                    node_data.data.lines = node.lines
+                    node_data.data.lines = node.line_resource.lines
                     node_data.data.one_line = node.one_line
                 "TalkChoice":
                     node_data.data.id = node.id
                     node_data.data.choice_list = node.choice_list
                     node_data.data.next_id_list = node.next_id_list
+                    node_data.data.line_list_resource = node.line_list_resource
                 "TalkBranch":
                     node_data.data.id = node.id
                     node_data.data.flag_name = node.flag_name
@@ -304,19 +309,23 @@ func save_graph_data(nodes: Array, connections: Array) -> void:
                     node_data.data.flag_value = node.flag_value
             node_data.position_offset = node.position_offset
             # node data
-            graph_data.nodes.append(node_data)
-    if ResourceSaver.save(graph_data, conversation_manager.graph_data_save_location) == OK:
-        conversation_manager.graph_data = graph_data
+            n_graph_data.nodes.append(node_data)
+    if ResourceSaver.save(n_graph_data, graph_save_location) == OK:
+        graph_data = graph_data
         print("Saved")
     else:
         print ("Error saving data")
 
 func load_graph_data() -> void:
-    if ResourceLoader.exists(conversation_manager.graph_data_save_location):
-        var g_data = ResourceLoader.load(conversation_manager.graph_data_save_location)
+    if ResourceLoader.exists(graph_save_location):
+        var g_data = ResourceLoader.load(graph_save_location)
         if g_data is GraphData:
-            conversation_manager.graph_data = g_data
+            graph_data = g_data
             print("Loaded graph data")
+        else:
+            graph_data = GraphData.new()
+    else:
+        graph_data = GraphData.new()
 
 func get_graph_element_type_as_string(node: GraphNode) -> String:
     if !node:

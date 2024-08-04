@@ -9,6 +9,7 @@ var list_size: int = 0
 
 func _enter_tree() -> void:
 	$ID/LineEdit.text_changed.connect(id_change)
+	call_deferred("reset_size")
 
 func id_change(new_text: String) -> void:
 	id = new_text
@@ -51,11 +52,7 @@ func delete_message(message_id: String) -> void:
 		get_node("Message" + message).get_node("Label").text = str(index)
 		index += 1
 	get_node("MessageTemplate").get_node("Label").text = str(index)
-	resizable = true
-	await get_tree().process_frame
-	resize_request.emit(get_minimum_size())
-	await get_tree().process_frame
-	resizable = false
+	call_deferred("reset_size")
 
 func add_new_message(message_id: String) -> void:
 	var index = message_list.size()
@@ -73,6 +70,7 @@ func add_new_message(message_id: String) -> void:
 
 	# Setup new slot
 	set_slot(message_list.size() + 1, true, 2, Color(0.0, 1.0, 1.0), false, 0, Color.WHITE)
+	call_deferred("reset_size")
 
 func udpate_existing_message(index: int, message_id: String) -> void:
 	if index < message_list.size():
@@ -93,3 +91,10 @@ func create_message_hbox(index: String, message_id: String) -> HBoxContainer:
 	hbox.add_child(spacer_2)
 	spacer_2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	return hbox
+
+func reset_size() -> void:
+	resizable = true
+	await get_tree().process_frame
+	resize_request.emit(get_minimum_size())
+	await get_tree().process_frame
+	resizable = false

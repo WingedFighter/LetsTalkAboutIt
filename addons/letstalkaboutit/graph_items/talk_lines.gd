@@ -3,7 +3,7 @@ extends GraphNode
 class_name TalkLines
 
 @export var id: String = "0"
-@export var lines: Array[String] = ["", "", ""]
+@export var line_resource: TalkLinesResource
 @export var one_line: bool = false:
     set(value):
         one_line = value
@@ -21,6 +21,8 @@ class_name TalkLines
             resizable = false
 
 func _enter_tree() -> void:
+    if !line_resource:
+        line_resource = TalkLinesResource.new()
     $ID/LineEdit.text_changed.connect(id_change)
     $Line0/LineEdit.text_changed.connect(set_line0_content)
     $Line1/LineEdit.text_changed.connect(set_line1_content)
@@ -33,6 +35,14 @@ func _enter_tree() -> void:
         resize_request.emit(get_minimum_size())
         await get_tree().process_frame
         resizable = false
+
+func _process(delta: float) -> void:
+    if $Line0/LineEdit.text != line_resource.lines[0]:
+        set_line0_content(line_resource.lines[0])
+    if $Line1/LineEdit.text != line_resource.lines[1]:
+        set_line1_content(line_resource.lines[1])
+    if $Line2/LineEdit.text != line_resource.lines[2]:
+        set_line2_content(line_resource.lines[2])
 
 func update_connections() -> void:
     if get_parent() && get_parent() is GraphEdit:
@@ -77,16 +87,16 @@ func set_line_with_index(index: int, new_text: String) -> void:
             set_line2_content(new_text)
 
 func set_line0_content(new_text: String) -> void:
-    lines[0] = new_text
-    if $Line0/LineEdit.text != new_text:
-        $Line0/LineEdit.text = new_text
+    if !line_resource:
+        line_resource = TalkLinesResource.new()
+    line_resource.lines[0] = new_text
 
 func set_line1_content(new_text: String) -> void:
-    lines[1] = new_text
-    if $Line1/LineEdit.text != new_text:
-        $Line1/LineEdit.text = new_text
+    if !line_resource:
+        line_resource = TalkLinesResource.new()
+    line_resource.lines[1] = new_text
 
 func set_line2_content(new_text: String) -> void:
-    lines[2] = new_text
-    if $Line2/LineEdit.text != new_text:
-        $Line2/LineEdit.text = new_text
+    if !line_resource:
+        line_resource = TalkLinesResource.new()
+    line_resource.lines[2] = new_text

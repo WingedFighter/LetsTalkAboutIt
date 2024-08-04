@@ -1,13 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://i7vwwcxkyii3"]
+[gd_scene load_steps=5 format=3 uid="uid://i7vwwcxkyii3"]
 
 [ext_resource type="Script" path="res://test/test.gd" id="1_oxwfa"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_manager.gd" id="1_r1hvk"]
-[ext_resource type="Resource" uid="uid://bvmtqauitxkye" path="res://test/graph_data.tres" id="3_7dpkg"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/ingame_data/talk_state.gd" id="4_ogikd"]
 
-[sub_resource type="Resource" id="Resource_wbxrh"]
+[sub_resource type="Resource" id="Resource_gbpq7"]
 script = ExtResource("4_ogikd")
-current_conversation = "30"
+current_talk = "30"
 flags = {}
 
 [node name="Test" type="Node2D"]
@@ -16,6 +15,5 @@ script = ExtResource("1_oxwfa")
 [node name="TalkManager" type="Node" parent="."]
 script = ExtResource("1_r1hvk")
 graph_data_save_location = "res://test/graph_data.tres"
-conversation_state_save_location = "res://test/conversation_state.tres"
-graph_data = ExtResource("3_7dpkg")
-conversation_state = SubResource("Resource_wbxrh")
+talk_state_save_location = "res://test/talk_state.tres"
+talk_state = SubResource("Resource_gbpq7")

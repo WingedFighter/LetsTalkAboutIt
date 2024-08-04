@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://csxtylons4juu"]
+[gd_scene load_steps=4 format=3 uid="uid://csxtylons4juu"]
 
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_message.gd" id="1_skib8"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/ingame_data/talk_lines.gd" id="2_3c685"]
+
+[sub_resource type="Resource" id="Resource_orx1e"]
+script = ExtResource("2_3c685")
+lines = Array[String](["", "", ""])
 
 [node name="TalkMessage" type="GraphNode"]
 title = "Message"
@@ -14,15 +19,15 @@ slot/0/right_color = Color(0, 1, 1, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
 slot/1/left_enabled = true
-slot/1/left_type = 3
-slot/1/left_color = Color(1, 0, 1, 1)
+slot/1/left_type = 4
+slot/1/left_color = Color(1, 1, 0, 1)
 slot/1/left_icon = null
 slot/1/right_enabled = false
 slot/1/right_type = 0
 slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
-slot/2/left_enabled = true
+slot/2/left_enabled = false
 slot/2/left_type = 4
 slot/2/left_color = Color(1, 1, 0, 1)
 slot/2/left_icon = null
@@ -31,16 +36,8 @@ slot/2/right_type = 0
 slot/2/right_color = Color(1, 1, 1, 1)
 slot/2/right_icon = null
 slot/2/draw_stylebox = true
-slot/3/left_enabled = false
-slot/3/left_type = 0
-slot/3/left_color = Color(1, 1, 1, 1)
-slot/3/left_icon = null
-slot/3/right_enabled = false
-slot/3/right_type = 0
-slot/3/right_color = Color(1, 1, 1, 1)
-slot/3/right_icon = null
-slot/3/draw_stylebox = true
 script = ExtResource("1_skib8")
+line_resource = SubResource("Resource_orx1e")
 expression = 4
 
 [node name="ID" type="HBoxContainer" parent="."]
@@ -59,15 +56,6 @@ layout_mode = 2
 text = "0"
 alignment = 2
 max_length = 6
-
-[node name="TalkLines" type="HBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="TalkLines"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "TalkLines"
-horizontal_alignment = 1
 
 [node name="Character" type="HBoxContainer" parent="."]
 layout_mode = 2

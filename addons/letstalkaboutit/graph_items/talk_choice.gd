@@ -4,10 +4,13 @@ class_name TalkChoice
 
 @export var id: String = "0"
 @export var choice_list: Array[String] = []
+@export var line_list_resource: TalkListResource = TalkListResource.new()
 @export var next_id_list: Dictionary = {}
 
 func _enter_tree() -> void:
 	$ID/LineEdit.text_changed.connect(id_change)
+	$Add.pressed.connect(add_new_choice)
+	call_deferred("reset_size")
 
 func id_change(new_text: String) -> void:
 	id = new_text
@@ -40,59 +43,86 @@ func reset_choice_connections() -> void:
 				var to_node = get_graph_element_from_name(connection.to_node)
 				if to_node is TalkBasic || to_node is TalkChoice || to_node is TalkBranch || to_node is TalkSetFlag:
 					get_parent().disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
-					get_parent().connect_node(connection.from_node, choice_list.find(to_node.id), connection.to_node, connection.to_port)
-			if connection.to_node == name && connection.to_port > 0:
-				var from_node = get_graph_element_from_name(connection.from_node)
-				if from_node is TalkBasic || from_node is TalkChoice || from_node is TalkLines || from_node is TalkBranch || from_node is TalkSetFlag:
-					get_parent().disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
-					get_parent().connect_node(connection.from_node, connection.from_port, connection.to_node, choice_list.find(from_node.id) + 1)
+					get_parent().connect_node(connection.from_node, choice_list.find(next_id_list.find_key(to_node.id)), connection.to_node, connection.to_port)
 
 func delete_choice(choice_id: String) -> void:
-	var output_port = choice_list.find(choice_id)
-	choice_list.remove_at(output_port)
+	# Find the index (also the output port number)
+	var c_index = choice_list.find(choice_id)
+
+	# Remove from lists
+	choice_list.remove_at(c_index)
+	line_list_resource.lines_list.erase(choice_id)
 	next_id_list.erase(choice_id)
+
+	# Delete related connection, if it exists
 	if get_parent() && get_parent() is GraphEdit:
 		for connection in get_parent().get_connection_list():
 			if connection.from_node == name:
 				var to_node = get_graph_element_from_name(connection.to_node)
 				if to_node is TalkBasic || to_node is TalkChoice || to_node is TalkBranch || to_node is TalkSetFlag:
-					if connection.from_port == output_port:
+					if connection.from_port == c_index:
 						get_parent().disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
+
+	# Delete Node
 	get_node("Choice" + choice_id).queue_free()
+
+	# Reset Connections
 	reset_choice_connections()
+
+	# Reset Choice Labels (0-n)
 	var index = 0
 	for choice in choice_list:
 		get_node("Choice" + choice).get_node("Label").text = str(index)
 		index += 1
 	get_node("ChoiceTemplate").get_node("Label").text = str(index)
+
+	# Notify inspector of change
+	line_list_resource.notify_property_list_changed()
+
+	# Reset Node Size
+	call_deferred("reset_size")
+
+func reset_size() -> void:
 	resizable = true
 	await get_tree().process_frame
 	resize_request.emit(get_minimum_size())
 	await get_tree().process_frame
 	resizable = false
 
-func add_new_choice(choice_id: String) -> void:
+func add_new_choice(choice_id: String = "-1") -> void:
 	var index = choice_list.size()
-	choice_list.append(choice_id)
+	var new_name = str(RandomNumberGenerator.new().randi_range(1, 10000))
+	if choice_id == "-1":
+		var exists = true
+		while(exists):
+			if choice_list.find(new_name) == -1:
+				exists = false
+			else:
+				new_name = str(int(new_name) + 1)
+	else:
+		new_name = choice_id
+	choice_list.append(new_name)
 
 	# Old Hbox
 	var hbox = get_child(get_child_count() - 1)
-	hbox.name = "Choice" + choice_id
+	hbox.visible = true
+	hbox.name = "Choice" + choice_list[index]
+	hbox.get_node("Delete").disabled = false
+	hbox.get_node("Delete").pressed.connect(delete_choice.bind(choice_list[index]))
 
 	# New Hbox
 	var new_hbox = hbox.duplicate()
 	add_child(new_hbox)
 	new_hbox.name = "ChoiceTemplate"
+	new_hbox.visible = false
 	new_hbox.get_node("Label").text = str(choice_list.size())
 
-	# Setup slots
-	set_slot_enabled_right(choice_list.size(), true)
-	set_slot(choice_list.size() + 1, true, 3, Color(1.0, 0.0, 1.0), false, 0, Color(1.0, 1.0, 1.0))
+	line_list_resource.lines_list[new_name] = ""
+	line_list_resource.notify_property_list_changed()
 
-func update_existing_choice(choice_id: String, port: int) -> void:
-	if port < choice_list.size() + 1:
-		get_node("Choice" + choice_list[port - 1]).name = "Choice" + choice_id
-		choice_list[port - 1] = choice_id
+	# Setup slots
+	set_slot(choice_list.size() + 2, false, 0, Color(1.0, 1.0, 1.0), true, 0, Color(1.0, 1.0, 1.0))
+	call_deferred("reset_size")
 
 func check_choice_set(port: int) -> bool:
 	return next_id_list[choice_list[port]] != "-1"

@@ -4,6 +4,7 @@ class_name TalkMessage
 
 @export var id: String = "0"
 @export var line_id: String = "-1"
+@export var line_resource: TalkLinesResource = TalkLinesResource.new()
 @export var character_id: String = "-1"
 @export var expression: Speaker.MOOD = -1
 
@@ -53,3 +54,6 @@ func set_expression(mood: int) -> void:
 	expression = mood
 	if $Expression/OptionButton.item_count > mood:
 		$Expression/OptionButton.select(mood)
+
+func set_lines(p_lines: Array[String]) -> void:
+	line_resource.lines = p_lines

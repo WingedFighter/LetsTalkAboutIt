@@ -36,7 +36,7 @@ func update_connections() -> void:
 		for connection in get_parent().get_connection_list():
 			if connection.to_node == name:
 				var from_node = get_graph_element_from_name(connection.from_node)
-				if from_node is TalkBasic || TalkSetFlag:
+				if from_node is TalkBasic || from_node is TalkSetFlag:
 					from_node.set_next_id(id)
 				if from_node is TalkChoice || from_node is TalkBranch:
 					from_node.set_next_id(id, connection.from_port)
