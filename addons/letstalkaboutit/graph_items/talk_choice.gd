@@ -8,15 +8,21 @@ class_name TalkChoice
 @export var next_id_list: Dictionary = {}
 
 func _enter_tree() -> void:
-	$ID/LineEdit.text_changed.connect(id_change)
+	line_list_resource.resource_local_to_scene = true
 	$Add.pressed.connect(add_new_choice)
+	id = generate_id()
 	call_deferred("reset_size")
 
-func id_change(new_text: String) -> void:
-	id = new_text
-	if $ID/LineEdit.text != new_text:
-		$ID/LineEdit.text = new_text
-	update_connections()
+func generate_id() -> String:
+	var id_num = RandomNumberGenerator.new().randi_range(1, 10000)
+	var new_id = "TalkChoice_" + str(id_num)
+	var graph = get_parent()
+	if graph && graph is GraphEdit:
+		for child in graph.get_children():
+			if child is TalkChoice && child.id == new_id:
+				id_num += 1
+				new_id = "TalkChoice_" + str(id_num)
+	return new_id
 
 func get_graph_element_from_name(p_name: StringName) -> GraphNode:
 	var graph = get_parent()
@@ -25,16 +31,6 @@ func get_graph_element_from_name(p_name: StringName) -> GraphNode:
 			if child.name == p_name:
 				return child
 	return
-
-func update_connections() -> void:
-	if get_parent() && get_parent() is GraphEdit:
-		for connection in get_parent().get_connection_list():
-			if connection.to_node == name:
-				var from_node = get_graph_element_from_name(connection.from_node)
-				if from_node is TalkBasic || from_node is TalkSetFlag:
-					from_node.set_next_id(id)
-				if from_node is TalkChoice || from_node is TalkBranch:
-					from_node.set_next_id(id, connection.from_port)
 
 func reset_choice_connections() -> void:
 	if get_parent() && get_parent() is GraphEdit:
@@ -83,11 +79,12 @@ func delete_choice(choice_id: String) -> void:
 	call_deferred("reset_size")
 
 func reset_size() -> void:
-	resizable = true
-	await get_tree().process_frame
-	resize_request.emit(get_minimum_size())
-	await get_tree().process_frame
-	resizable = false
+	if is_inside_tree():
+		resizable = true
+		await get_tree().process_frame
+		resize_request.emit(get_minimum_size())
+		await get_tree().process_frame
+		resizable = false
 
 func add_new_choice(choice_id: String = "-1") -> void:
 	var index = choice_list.size()
@@ -121,7 +118,7 @@ func add_new_choice(choice_id: String = "-1") -> void:
 	line_list_resource.notify_property_list_changed()
 
 	# Setup slots
-	set_slot(choice_list.size() + 2, false, 0, Color(1.0, 1.0, 1.0), true, 0, Color(1.0, 1.0, 1.0))
+	set_slot(choice_list.size() + 1, false, 0, Color(1.0, 1.0, 1.0), true, 0, Color(1.0, 1.0, 1.0))
 	call_deferred("reset_size")
 
 func check_choice_set(port: int) -> bool:
@@ -129,6 +126,3 @@ func check_choice_set(port: int) -> bool:
 
 func set_next_id(next_id: String, port: int) -> void:
 	next_id_list[choice_list[port]] = next_id
-	var l_edit = get_node("Choice" + choice_list[port]).get_node("LineEdit")
-	l_edit.text = next_id
-	l_edit.editable = next_id == "-1"

@@ -25,23 +25,16 @@ slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
 script = ExtResource("1_bxajm")
+id = "TalkMessageList_3988"
 
 [node name="ID" type="HBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="ID"]
 layout_mode = 2
-text = "ID"
-
-[node name="Control" type="Control" parent="ID"]
-layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="LineEdit" type="LineEdit" parent="ID"]
-layout_mode = 2
-text = "0"
-alignment = 2
-max_length = 6
+text = "Messages"
+horizontal_alignment = 1
 
 [node name="Message0" type="HBoxContainer" parent="."]
 layout_mode = 2

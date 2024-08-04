@@ -181,6 +181,8 @@ func add_new_graph_node(type: String) -> void:
     node.delete_request.connect(delete_node.bind(node))
     if node is TalkChoice:
         node.line_list_resource = TalkListResource.new()
+    if node is TalkMessage:
+        node.line_resource = TalkLinesResource.new()
 
 func on_node_selected(node: Node) -> void:
     if node is TalkMessage:
@@ -205,7 +207,7 @@ func init_graph(graph_data: GraphData) -> void:
         var g_node = add_types[node.type].instantiate()
         g_node.position_offset = node.position_offset
         g_node.name = node.name
-        g_node.id_change(node.data.id)
+        g_node.id = node.data.id
         match(node.type):
             "TalkBasic":
                 g_node.set_end_state(node.data.end)
@@ -214,6 +216,7 @@ func init_graph(graph_data: GraphData) -> void:
                 g_node.set_line_id(node.data.line_id)
                 g_node.set_character_id(node.data.character_id)
                 g_node.set_expression(node.data.expression)
+                g_node.line_resource = TalkLinesResource.new()
                 g_node.set_lines(node.data.lines)
             "TalkMessageList":
                 for message in node.data.message_list:
@@ -221,7 +224,8 @@ func init_graph(graph_data: GraphData) -> void:
             "TalkChoice":
                 for choice in node.data.choice_list:
                     g_node.add_new_choice(choice)
-                g_node.line_list_resource = node.data.line_list_resource
+                g_node.line_list_resource = TalkListResource.new()
+                g_node.line_list_resource.lines_list = node.data.line_list
             "TalkBranch":
                 g_node.set_flag_name(node.data.flag_name)
             "TalkSetFlag":
@@ -283,7 +287,7 @@ func save_graph_data(nodes: Array, connections: Array) -> void:
                     node_data.data.id = node.id
                     node_data.data.choice_list = node.choice_list
                     node_data.data.next_id_list = node.next_id_list
-                    node_data.data.line_list_resource = node.line_list_resource
+                    node_data.data.line_list =  node.line_list_resource.lines_list
                 "TalkBranch":
                     node_data.data.id = node.id
                     node_data.data.flag_name = node.flag_name

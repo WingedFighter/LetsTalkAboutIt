@@ -7,11 +7,14 @@ var updating = false
 
 func _init() -> void:
 	current_value = TalkLinesResource.new()
+	current_value.changed.connect(make_vbox)
+
+func _enter_tree() -> void:
 	make_vbox()
 
-#making hbox to add to lines, get edit object is needed
-
 func make_vbox() -> void:
+	if has_node("TalkLines_List"):
+		get_node("TalkLines_List").free()
 	var vbox = VBoxContainer.new()
 	add_child(vbox)
 	vbox.name = "TalkLines_List"

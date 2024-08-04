@@ -9,7 +9,6 @@ class_name TalkMessage
 @export var expression: Speaker.MOOD = -1
 
 func _enter_tree() -> void:
-	$ID/LineEdit.text_changed.connect(id_change)
 	$Expression/OptionButton.clear()
 	for mood in Speaker.MOOD:
 		$Expression/OptionButton.add_item(mood, Speaker.MOOD[mood])
@@ -18,28 +17,18 @@ func _enter_tree() -> void:
 	if $Expression/OptionButton.selected != expression:
 		$Expression/OptionButton.select(expression)
 	$Expression/OptionButton.item_selected.connect(expression_selected)
+	id = generate_id()
 
-func id_change(new_text: String) -> void:
-	id = new_text
-	if $ID/LineEdit.text != new_text:
-		$ID/LineEdit.text = new_text
-	update_connections()
-
-func get_graph_element_from_name(p_name: StringName) -> GraphNode:
+func generate_id() -> String:
+	var id_num = RandomNumberGenerator.new().randi_range(1, 10000)
+	var new_id = "TalkMessage_" + str(id_num)
 	var graph = get_parent()
 	if graph && graph is GraphEdit:
 		for child in graph.get_children():
-			if child.name == p_name:
-				return child
-	return
-
-func update_connections() -> void:
-	if get_parent() && get_parent() is GraphEdit:
-		for connection in get_parent().get_connection_list():
-			if connection.from_node == name:
-				var to_node = get_graph_element_from_name(connection.to_node)
-				if to_node is TalkMessageList:
-					to_node.udpate_existing_message(connection.to_port, id)
+			if child is TalkMessage && child.id == new_id:
+				id_num += 1
+				new_id = "TalkMessage_" + str(id_num)
+	return new_id
 
 func set_line_id(p_line_id: String) -> void:
 	line_id = p_line_id
