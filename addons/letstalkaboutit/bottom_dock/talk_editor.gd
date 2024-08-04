@@ -115,9 +115,6 @@ func on_connection_request(from_node: StringName, from_port: int, to_node: Strin
         "TalkMessageList":
             if to_type == "TalkBasic":
                 to_child.set_messages(from_child.id)
-        "TalkLines":
-            if to_type == "TalkMessage":
-                to_child.set_line_id(from_child.id)
         "TalkChoice":
             if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
                 from_child.set_next_id(to_child.id, from_port)
@@ -164,9 +161,6 @@ func delete_node(node: GraphNode) -> void:
                     "TalkMessageList":
                         if to_type == "TalkBasic":
                             to_child.set_messages("-1")
-                    "TalkLines":
-                        if to_type == "TalkMessage":
-                            to_child.set_line_id("-1")
                     "TalkChoice":
                         if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
                             from_child.set_next_id("-1", connection.from_port)
@@ -224,9 +218,6 @@ func init_graph(graph_data: GraphData) -> void:
             "TalkMessageList":
                 for message in node.data.message_list:
                     g_node.add_new_message(message)
-            "TalkLines":
-                g_node.set_all_lines(node.data.lines)
-                g_node.one_line = node.data.one_line
             "TalkChoice":
                 for choice in node.data.choice_list:
                     g_node.add_new_choice(choice)
@@ -288,10 +279,6 @@ func save_graph_data(nodes: Array, connections: Array) -> void:
                 "TalkMessageList":
                     node_data.data.id = node.id
                     node_data.data.message_list = node.message_list
-                "TalkLines":
-                    node_data.data.id = node.id
-                    node_data.data.lines = node.line_resource.lines
-                    node_data.data.one_line = node.one_line
                 "TalkChoice":
                     node_data.data.id = node.id
                     node_data.data.choice_list = node.choice_list
@@ -334,8 +321,6 @@ func get_graph_element_type_as_string(node: GraphNode) -> String:
         return "TalkBranch"
     elif node is TalkBasic:
         return "TalkBasic"
-    elif node is TalkLines:
-        return "TalkLines"
     elif node is TalkMessage:
         return "TalkMessage"
     elif node is TalkMessageList:

@@ -12,7 +12,6 @@ const TalkBasic: PackedScene = preload("res://addons/letstalkaboutit/graph_items
 const TalkBranch: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_branch.tscn")
 const TalkMessageList: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_message_list.tscn")
 const TalkMessage: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_message.tscn")
-const TalkLines: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_lines.tscn")
 const TalkChoice: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_choice.tscn")
 const TalkSetFlag: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_set_flag.tscn")
 
@@ -26,7 +25,6 @@ var graph_types = {
 	"TalkBranch": TalkBranch,
 	"TalkMessageList": TalkMessageList,
 	"TalkMessage": TalkMessage,
-	"TalkLines": TalkLines,
 	"TalkChoice": TalkChoice,
 	"TalkSetFlag": TalkSetFlag
 }
