@@ -2,25 +2,19 @@
 extends GraphNode
 class_name TalkMessageList
 
-@export var id: String = "0"
+@export var id: String = "0":
+	set(value):
+		id = value
+		if id != "0":
+			update_connections()
+
 @export var message_list: Array[String] = []
 
 var list_size: int = 0
 
 func _enter_tree() -> void:
 	call_deferred("reset_size")
-	id = generate_id()
-
-func generate_id() -> String:
-	var id_num = RandomNumberGenerator.new().randi_range(1, 10000)
-	var new_id = "TalkMessageList_" + str(id_num)
-	var graph = get_parent()
-	if graph && graph is GraphEdit:
-		for child in graph.get_children():
-			if child is TalkMessageList && child.id == new_id:
-				id_num += 1
-				new_id = "TalkMessageList_" + str(id_num)
-	return new_id
+	id = name
 
 func get_graph_element_from_name(p_name: StringName) -> GraphNode:
 	var graph = get_parent()
@@ -29,6 +23,14 @@ func get_graph_element_from_name(p_name: StringName) -> GraphNode:
 			if child.name == p_name:
 				return child
 	return
+
+func update_connections() -> void:
+	if get_parent() && get_parent() is GraphEdit:
+		for connection in get_parent().get_connection_list():
+			if connection.from_node == name:
+				var to_node = get_graph_element_from_name(connection.to_node)
+				if to_node is TalkBasic:
+					to_node.set_messages(id)
 
 func reset_message_connections() -> void:
 	if get_parent() && get_parent() is GraphEdit:

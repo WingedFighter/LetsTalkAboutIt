@@ -36,6 +36,9 @@ func _enter_tree() -> void:
     graph.delete_nodes_request.connect(delete_captured)
     make_popups()
 
+func _exit_tree() -> void:
+    save_graph()
+
 func make_popups() -> void:
     var graph  = $TalkGraph
     if !menu_bar:
@@ -124,7 +127,9 @@ func on_connection_request(from_node: StringName, from_port: int, to_node: Strin
         "TalkSetFlag":
             if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
                 from_child.set_next_id(to_child.id)
-                
+        "TalkStart":
+            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+                from_child.set_next_id(to_child.id)
 
 func on_add_index_pressed(index: int) -> void:
     add_new_graph_node(add_index[index])
@@ -170,6 +175,9 @@ func delete_node(node: GraphNode) -> void:
                     "TalkSetFlag":
                         if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
                             from_child.set_next_id("-1")
+                    "TalkStart":
+                        if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+                            from_child.set_next_id("-1")
         node.free()
 
 func add_new_graph_node(type: String) -> void:
@@ -200,6 +208,7 @@ func load_talk_manager(manager: TalkManager) -> void:
     graph_save_location = manager.graph_data_save_location
     load_graph_data()
     init_graph(graph_data)
+    save_graph()
 
 func init_graph(graph_data: GraphData) -> void:
     clear_graph()
@@ -246,6 +255,8 @@ func init_graph(graph_data: GraphData) -> void:
                 g_node.set_next_id(node.data.true_next_id, 0)
                 g_node.set_next_id(node.data.false_next_id, 1)
             "TalkSetFlag":
+                g_node.set_next_id(node.data.next_id)
+            "TalkStart":
                 g_node.set_next_id(node.data.next_id)
     for connection in graph_data.connections:
         $TalkGraph.connect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
@@ -298,6 +309,9 @@ func save_graph_data(nodes: Array, connections: Array) -> void:
                     node_data.data.next_id = node.next_id
                     node_data.data.flag_name = node.flag_name
                     node_data.data.flag_value = node.flag_value
+                "TalkStart":
+                    node_data.data.id = node.id
+                    node_data.data.next_id = node.next_id
             node_data.position_offset = node.position_offset
             # node data
             n_graph_data.nodes.append(node_data)
@@ -333,4 +347,6 @@ func get_graph_element_type_as_string(node: GraphNode) -> String:
         return "TalkChoice"
     elif node is TalkSetFlag:
         return "TalkSetFlag"
+    elif node is TalkStart:
+        return "TalkStart"
     return ""

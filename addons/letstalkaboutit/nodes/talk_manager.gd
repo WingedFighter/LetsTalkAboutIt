@@ -34,13 +34,6 @@ func save_talk_state() -> void:
 		if ResourceSaver.save(graph_data, talk_state_save_location) == OK:
 			print("TalkBasic State Saved")
 
-func get_node_by_type_and_id(p_type: String, p_id: String) -> NodeData:
-	for node in graph_data.nodes:
-		if node.type == p_type:
-			if node.data.id == p_id:
-				return node
-	return
-
 func get_node_by_id(p_id: String) -> NodeData:
 	for node in graph_data.nodes:
 		if node.data.id == p_id:
@@ -52,19 +45,23 @@ func get_full_talk() -> Dictionary:
 	if !c_object:
 		return {}
 	match(c_object.type):
+		"TalkStart":
+			var result = {"data": c_object.data}
+			return result
 		"TalkBasic":
 			var result = {"data": c_object.data}
 			if c_object.data.messages != "-1":
-				result["message_list_data"] = get_node_by_type_and_id("TalkMessageList", c_object.data.messages).data
+				print(get_node_by_id(c_object.data.messages))
+				result["message_list_data"] = get_node_by_id(c_object.data.messages).data
 				if result.message_list_data.message_list.size() > 0:
 					result["message_data"] = []
 					for message_id in result.message_list_data.message_list:
-						var temp_message = get_node_by_type_and_id("TalkMessage", message_id)
+						var temp_message = get_node_by_id(message_id)
 						result.message_data.append(temp_message.data)
 			return result
 		"TalkChoice":
 			var result = {"data": c_object.data}
-			result.lines_list = c_object.data.line_list_resource.lines_list
+			result.lines_list = c_object.data.line_list
 			return result
 		"TalkBranch":
 			var result = {"data": c_object.data}
@@ -88,6 +85,9 @@ func get_talk() -> NodeData:
 		return
 	var next_node = get_node_by_id(get_current_talk_id())
 	match(next_node.type):
+		"TalkStart":
+			set_current_talk_id(next_node.data.next_id)
+			return next_node
 		"TalkBasic":
 			set_current_talk_id(next_node.data.next_id)
 			return next_node

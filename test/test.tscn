@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_gbpq7"]
 script = ExtResource("4_ogikd")
-current_talk = "30"
+current_talk = "Start"
 flags = {}
 
 [node name="Test" type="Node2D"]

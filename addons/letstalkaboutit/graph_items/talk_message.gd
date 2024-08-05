@@ -2,7 +2,12 @@
 extends GraphNode
 class_name TalkMessage
 
-@export var id: String = "0"
+@export var id: String = "0":
+	set(value):
+		id = value
+		if id != "0":
+			update_connections()
+
 @export var line_id: String = "-1"
 @export var line_resource: TalkLinesResource = TalkLinesResource.new()
 @export var character_id: String = "-1"
@@ -17,18 +22,23 @@ func _enter_tree() -> void:
 	if $Expression/OptionButton.selected != expression:
 		$Expression/OptionButton.select(expression)
 	$Expression/OptionButton.item_selected.connect(expression_selected)
-	id = generate_id()
+	id = name
 
-func generate_id() -> String:
-	var id_num = RandomNumberGenerator.new().randi_range(1, 10000)
-	var new_id = "TalkMessage_" + str(id_num)
+func get_graph_element_from_name(p_name: StringName) -> GraphNode:
 	var graph = get_parent()
 	if graph && graph is GraphEdit:
 		for child in graph.get_children():
-			if child is TalkMessage && child.id == new_id:
-				id_num += 1
-				new_id = "TalkMessage_" + str(id_num)
-	return new_id
+			if child.name == p_name:
+				return child
+	return
+
+func update_connections() -> void:
+	if get_parent() && get_parent() is GraphEdit:
+		for connection in get_parent().get_connection_list():
+			if connection.from_node == name:
+				var to_node = get_graph_element_from_name(connection.to_node)
+				if to_node is TalkMessageList:
+					to_node.udpate_existing_message(connection.to_port, id)
 
 func set_line_id(p_line_id: String) -> void:
 	line_id = p_line_id

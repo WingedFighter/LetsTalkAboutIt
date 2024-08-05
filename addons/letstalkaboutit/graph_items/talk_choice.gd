@@ -2,7 +2,12 @@
 extends GraphNode
 class_name TalkChoice
 
-@export var id: String = "0"
+@export var id: String = "0":
+	set(value):
+		id = value
+		if id != "0":
+			update_connections()
+
 @export var choice_list: Array[String] = []
 @export var line_list_resource: TalkListResource = TalkListResource.new()
 @export var next_id_list: Dictionary = {}
@@ -10,19 +15,8 @@ class_name TalkChoice
 func _enter_tree() -> void:
 	line_list_resource.resource_local_to_scene = true
 	$Add.pressed.connect(add_new_choice)
-	id = generate_id()
+	id = name
 	call_deferred("reset_size")
-
-func generate_id() -> String:
-	var id_num = RandomNumberGenerator.new().randi_range(1, 10000)
-	var new_id = "TalkChoice_" + str(id_num)
-	var graph = get_parent()
-	if graph && graph is GraphEdit:
-		for child in graph.get_children():
-			if child is TalkChoice && child.id == new_id:
-				id_num += 1
-				new_id = "TalkChoice_" + str(id_num)
-	return new_id
 
 func get_graph_element_from_name(p_name: StringName) -> GraphNode:
 	var graph = get_parent()
@@ -31,6 +25,16 @@ func get_graph_element_from_name(p_name: StringName) -> GraphNode:
 			if child.name == p_name:
 				return child
 	return
+
+func update_connections() -> void:
+	if get_parent() && get_parent() is GraphEdit:
+		for connection in get_parent().get_connection_list():
+			if connection.to_node == name:
+				var from_node = get_graph_element_from_name(connection.from_node)
+				if from_node is TalkBasic || from_node is TalkSetFlag || from_node is TalkStart:
+					from_node.set_next_id(id)
+				if from_node is TalkChoice || from_node is TalkBranch:
+					from_node.set_next_id(id, connection.from_port)
 
 func reset_choice_connections() -> void:
 	if get_parent() && get_parent() is GraphEdit:
@@ -118,7 +122,8 @@ func add_new_choice(choice_id: String = "-1") -> void:
 	line_list_resource.notify_property_list_changed()
 
 	# Setup slots
-	set_slot(choice_list.size() + 1, false, 0, Color(1.0, 1.0, 1.0), true, 0, Color(1.0, 1.0, 1.0))
+	print(choice_list.size())
+	set_slot(choice_list.size(), false, 0, Color(1.0, 1.0, 1.0), true, 0, Color(1.0, 1.0, 1.0))
 	call_deferred("reset_size")
 
 func check_choice_set(port: int) -> bool:
