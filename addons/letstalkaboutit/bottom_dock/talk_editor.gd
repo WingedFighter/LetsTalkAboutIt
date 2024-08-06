@@ -3,10 +3,12 @@ extends Control
 
 var menu_bar: MenuBar
 var add_menu: PopupMenu
+var context_menu: PopupMenu
 var delete_button: Button
 var save_button: Button
 var graph_data: GraphData
 var graph_save_location: String
+var last_left_click: Vector2
 
 #TODO: Add update link when actively connected and an edit is made
 
@@ -22,6 +24,9 @@ var add_types: Dictionary = {}:
                 delete_button.queue_free()
             if is_instance_valid(save_button):
                 save_button.queue_free()
+            add_index = []
+            for type in add_types:
+                add_index.append(type)
             make_popups()
 
 var add_index: Array = []
@@ -34,10 +39,28 @@ func _enter_tree() -> void:
     graph.node_deselected.connect(on_node_deselected)
     graph.connection_request.connect(on_connection_request)
     graph.delete_nodes_request.connect(delete_captured)
+    graph.popup_request.connect(show_context_menu)
     make_popups()
 
 func _exit_tree() -> void:
     save_graph()
+
+func show_context_menu(p_position: Vector2) -> void:
+    if !context_menu:
+        context_menu = make_add_menu($TalkGraph)
+        context_menu.index_pressed.connect(on_add_index_pressed.bind(true))
+    last_left_click = p_position
+    context_menu.position = global_position + p_position
+    context_menu.show()
+
+func make_add_menu(parent: Node) -> PopupMenu:
+    var temp_menu = PopupMenu.new()
+    parent.add_child(temp_menu)
+    temp_menu.name = "Add"
+    var index = 0
+    for type in add_types:
+        temp_menu.add_item(type)
+    return temp_menu
 
 func make_popups() -> void:
     var graph  = $TalkGraph
@@ -45,12 +68,7 @@ func make_popups() -> void:
         menu_bar = MenuBar.new()
         graph.get_menu_hbox().add_child(menu_bar)
     if !add_menu:
-        add_menu = PopupMenu.new()
-        menu_bar.add_child(add_menu)
-        add_menu.name = "Add"
-        for type in add_types:
-            add_menu.add_item(type)
-            add_index.append(type)
+        add_menu = make_add_menu(menu_bar)
         add_menu.index_pressed.connect(on_add_index_pressed)
     if !delete_button:
         delete_button = Button.new()
@@ -131,8 +149,9 @@ func on_connection_request(from_node: StringName, from_port: int, to_node: Strin
             if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                 from_child.set_next_id(to_child.id)
 
-func on_add_index_pressed(index: int) -> void:
-    add_new_graph_node(add_index[index])
+func on_add_index_pressed(index: int, p_offset: bool = false) -> void:
+    print(add_index)
+    add_new_graph_node(add_index[index], p_offset)
 
 func delete_captured(nodes: Array[StringName]) -> void:
     for node in nodes:
@@ -180,12 +199,16 @@ func delete_node(node: GraphNode) -> void:
                             from_child.set_next_id("-1")
         node.free()
 
-func add_new_graph_node(type: String) -> void:
+func add_new_graph_node(type: String, p_offset: bool = false) -> void:
     var node: GraphNode = add_types[type].instantiate()
     var graph = $TalkGraph
     graph.add_child(node, true)
-    node.position_offset.x = graph.scroll_offset.x + (size.x / 2) - (node.size.x / 2)
-    node.position_offset.y = graph.scroll_offset.y + (size.y / 2) - (node.size.y / 2)
+    if !p_offset:
+        node.position_offset.x = graph.scroll_offset.x + (size.x / 2) - (node.size.x / 2)
+        node.position_offset.y = graph.scroll_offset.y + (size.y / 2) - (node.size.y / 2)
+    else:
+        node.position_offset.x = graph.scroll_offset.x + last_left_click.x
+        node.position_offset.y = graph.scroll_offset.y + last_left_click.y
     node.delete_request.connect(delete_node.bind(node))
     if node is TalkChoice:
         node.line_list_resource = TalkListResource.new()
@@ -219,7 +242,6 @@ func init_graph(graph_data: GraphData) -> void:
         g_node.id = node.data.id
         match(node.type):
             "TalkBasic":
-                g_node.set_end_state(node.data.end)
                 g_node.set_messages(node.data.messages)
             "TalkMessage":
                 g_node.set_line_id(node.data.line_id)
@@ -284,7 +306,6 @@ func save_graph_data(nodes: Array, connections: Array) -> void:
                     node_data.data.id = node.id
                     node_data.data.next_id = node.next_id
                     node_data.data.messages = node.messages
-                    node_data.data.end = node.end
                 "TalkMessage":
                     node_data.data.id = node.id
                     node_data.data.line_id = node.line_id

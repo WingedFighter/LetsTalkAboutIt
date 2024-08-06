@@ -3,19 +3,18 @@
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/node_data.gd" id="1_vdvr8"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/graph_data.gd" id="3_ejwwy"]
 
-[sub_resource type="Resource" id="Resource_348p5"]
+[sub_resource type="Resource" id="Resource_gwue8"]
 script = ExtResource("1_vdvr8")
 name = "TalkBasic"
 type = "TalkBasic"
 position_offset = Vector2(840, 60)
 data = {
-"end": false,
 "id": "TalkBasic",
 "messages": "TalkMessageList",
 "next_id": "TalkChoice"
 }
 
-[sub_resource type="Resource" id="Resource_h4t1o"]
+[sub_resource type="Resource" id="Resource_8nrg4"]
 script = ExtResource("1_vdvr8")
 name = "TalkMessageList"
 type = "TalkMessageList"
@@ -25,7 +24,7 @@ data = {
 "message_list": Array[String](["TalkMessage", "TalkMessage2"])
 }
 
-[sub_resource type="Resource" id="Resource_g6lep"]
+[sub_resource type="Resource" id="Resource_1cu2w"]
 script = ExtResource("1_vdvr8")
 name = "TalkMessage2"
 type = "TalkMessage"
@@ -38,7 +37,7 @@ data = {
 "lines": Array[String](["But there can be multiple messages per message list", "", ""])
 }
 
-[sub_resource type="Resource" id="Resource_qm4uh"]
+[sub_resource type="Resource" id="Resource_7hjgr"]
 script = ExtResource("1_vdvr8")
 name = "TalkStart"
 type = "TalkStart"
@@ -48,7 +47,7 @@ data = {
 "next_id": "TalkBasic"
 }
 
-[sub_resource type="Resource" id="Resource_ig4ni"]
+[sub_resource type="Resource" id="Resource_xjynr"]
 script = ExtResource("1_vdvr8")
 name = "TalkSetFlag"
 type = "TalkSetFlag"
@@ -60,7 +59,7 @@ data = {
 "next_id": "TalkBasic2"
 }
 
-[sub_resource type="Resource" id="Resource_t7yxq"]
+[sub_resource type="Resource" id="Resource_cs1mr"]
 script = ExtResource("1_vdvr8")
 name = "TalkSetFlag2"
 type = "TalkSetFlag"
@@ -72,19 +71,18 @@ data = {
 "next_id": "TalkBasic2"
 }
 
-[sub_resource type="Resource" id="Resource_7j073"]
+[sub_resource type="Resource" id="Resource_ip7y8"]
 script = ExtResource("1_vdvr8")
 name = "TalkBasic2"
 type = "TalkBasic"
 position_offset = Vector2(1720, 60)
 data = {
-"end": false,
 "id": "TalkBasic2",
 "messages": "TalkMessageList2",
 "next_id": "TalkBranch"
 }
 
-[sub_resource type="Resource" id="Resource_brynr"]
+[sub_resource type="Resource" id="Resource_gsgkl"]
 script = ExtResource("1_vdvr8")
 name = "TalkBranch"
 type = "TalkBranch"
@@ -96,7 +94,7 @@ data = {
 "true_next_id": "TalkBasic4"
 }
 
-[sub_resource type="Resource" id="Resource_wp5k6"]
+[sub_resource type="Resource" id="Resource_kp12f"]
 script = ExtResource("1_vdvr8")
 name = "TalkMessageList2"
 type = "TalkMessageList"
@@ -106,7 +104,7 @@ data = {
 "message_list": Array[String](["TalkMessage3"])
 }
 
-[sub_resource type="Resource" id="Resource_ht8cj"]
+[sub_resource type="Resource" id="Resource_hubr7"]
 script = ExtResource("1_vdvr8")
 name = "TalkMessage3"
 type = "TalkMessage"
@@ -119,31 +117,29 @@ data = {
 "lines": Array[String](["This is an example of flow convergence", "", ""])
 }
 
-[sub_resource type="Resource" id="Resource_f85xd"]
+[sub_resource type="Resource" id="Resource_q5i3q"]
 script = ExtResource("1_vdvr8")
 name = "TalkBasic4"
 type = "TalkBasic"
 position_offset = Vector2(2300, -20)
 data = {
-"end": false,
 "id": "TalkBasic4",
 "messages": "TalkMessageList3",
 "next_id": "End"
 }
 
-[sub_resource type="Resource" id="Resource_5jlrl"]
+[sub_resource type="Resource" id="Resource_o6bjo"]
 script = ExtResource("1_vdvr8")
 name = "TalkBasic3"
 type = "TalkBasic"
 position_offset = Vector2(2300, 140)
 data = {
-"end": false,
 "id": "TalkBasic3",
 "messages": "TalkMessageList4",
 "next_id": "End"
 }
 
-[sub_resource type="Resource" id="Resource_f3wkm"]
+[sub_resource type="Resource" id="Resource_wdshm"]
 script = ExtResource("1_vdvr8")
 name = "TalkMessageList4"
 type = "TalkMessageList"
@@ -153,7 +149,7 @@ data = {
 "message_list": Array[String](["TalkMessage5"])
 }
 
-[sub_resource type="Resource" id="Resource_7s20n"]
+[sub_resource type="Resource" id="Resource_c2sj5"]
 script = ExtResource("1_vdvr8")
 name = "TalkMessageList3"
 type = "TalkMessageList"
@@ -163,7 +159,7 @@ data = {
 "message_list": Array[String](["TalkMessage4"])
 }
 
-[sub_resource type="Resource" id="Resource_fsiy5"]
+[sub_resource type="Resource" id="Resource_vkyd3"]
 script = ExtResource("1_vdvr8")
 name = "TalkMessage4"
 type = "TalkMessage"
@@ -176,7 +172,7 @@ data = {
 "lines": Array[String](["This is an example of branching", "You chose choice 1", ""])
 }
 
-[sub_resource type="Resource" id="Resource_js5ks"]
+[sub_resource type="Resource" id="Resource_olno1"]
 script = ExtResource("1_vdvr8")
 name = "TalkMessage5"
 type = "TalkMessage"
@@ -189,7 +185,7 @@ data = {
 "lines": Array[String](["This is an example of branching", "You chose choice 2", ""])
 }
 
-[sub_resource type="Resource" id="Resource_rj88l"]
+[sub_resource type="Resource" id="Resource_7mtg7"]
 script = ExtResource("1_vdvr8")
 name = "TalkMessage"
 type = "TalkMessage"
@@ -202,7 +198,7 @@ data = {
 "lines": Array[String](["This is an example question. This chain was started with a start node", "The maximum length of each line is 70 characters", "With a maximum of three lines per message"])
 }
 
-[sub_resource type="Resource" id="Resource_6j4cr"]
+[sub_resource type="Resource" id="Resource_8cueb"]
 script = ExtResource("1_vdvr8")
 name = "TalkChoice"
 type = "TalkChoice"
@@ -215,12 +211,12 @@ data = {
 "3156": "This is a choice. Lets call it Choice 1"
 },
 "next_id_list": {
-"2947": "TalkSetFlag",
-"3156": "TalkSetFlag2"
+"2947": "TalkSetFlag2",
+"3156": "TalkSetFlag"
 }
 }
 
-[sub_resource type="Resource" id="Resource_80x88"]
+[sub_resource type="Resource" id="Resource_u5j2c"]
 script = ExtResource("1_vdvr8")
 name = "TalkEnd"
 type = "TalkEnd"
@@ -332,4 +328,4 @@ connections = Array[Dictionary]([{
 "to_node": &"TalkEnd",
 "to_port": 0
 }])
-nodes = [SubResource("Resource_348p5"), SubResource("Resource_h4t1o"), SubResource("Resource_g6lep"), SubResource("Resource_qm4uh"), SubResource("Resource_ig4ni"), SubResource("Resource_t7yxq"), SubResource("Resource_7j073"), SubResource("Resource_brynr"), SubResource("Resource_wp5k6"), SubResource("Resource_ht8cj"), SubResource("Resource_f85xd"), SubResource("Resource_5jlrl"), SubResource("Resource_f3wkm"), SubResource("Resource_7s20n"), SubResource("Resource_fsiy5"), SubResource("Resource_js5ks"), SubResource("Resource_rj88l"), SubResource("Resource_6j4cr"), SubResource("Resource_80x88")]
+nodes = [SubResource("Resource_gwue8"), SubResource("Resource_8nrg4"), SubResource("Resource_1cu2w"), SubResource("Resource_7hjgr"), SubResource("Resource_xjynr"), SubResource("Resource_cs1mr"), SubResource("Resource_ip7y8"), SubResource("Resource_gsgkl"), SubResource("Resource_kp12f"), SubResource("Resource_hubr7"), SubResource("Resource_q5i3q"), SubResource("Resource_o6bjo"), SubResource("Resource_wdshm"), SubResource("Resource_c2sj5"), SubResource("Resource_vkyd3"), SubResource("Resource_olno1"), SubResource("Resource_7mtg7"), SubResource("Resource_8cueb"), SubResource("Resource_u5j2c")]

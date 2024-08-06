@@ -10,10 +10,8 @@ class_name TalkBasic
 
 @export var messages: String = "-1"
 @export var next_id: String = "-1"
-@export var end: bool = false
 
 func _enter_tree() -> void:
-	$End/CheckBox.toggled.connect(set_end_state)
 	id = name
 
 func get_graph_element_from_name(p_name: StringName) -> GraphNode:
@@ -39,8 +37,3 @@ func set_messages(message_list_id: String) -> void:
 
 func set_next_id(p_next_id: String) -> void:
 	next_id = p_next_id
-
-func set_end_state(toggled_on: bool) -> void:
-	end = toggled_on
-	if $End/CheckBox.button_pressed != end:
-		$End/CheckBox.set_pressed_no_signal(end)
