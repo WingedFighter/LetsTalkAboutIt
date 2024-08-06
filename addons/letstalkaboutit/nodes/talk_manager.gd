@@ -51,7 +51,6 @@ func get_full_talk() -> Dictionary:
 		"TalkBasic":
 			var result = {"data": c_object.data}
 			if c_object.data.messages != "-1":
-				print(get_node_by_id(c_object.data.messages))
 				result["message_list_data"] = get_node_by_id(c_object.data.messages).data
 				if result.message_list_data.message_list.size() > 0:
 					result["message_data"] = []
@@ -77,6 +76,9 @@ func get_full_talk() -> Dictionary:
 			if c_object.data.has("flag_name") && c_object.data.has("flag_value"):
 				talk_state.set_flag(c_object.data.flag_name, c_object.data.flag_value)
 			return result
+		"TalkEnd":
+			var result = {"data": c_object.data}
+			return result
 	return {}
 
 func get_talk() -> NodeData:
@@ -98,6 +100,9 @@ func get_talk() -> NodeData:
 			return next_node
 		"TalkSetFlag":
 			set_current_talk_id(next_node.data.next_id)
+			return next_node
+		"TalkEnd":
+			set_current_talk_id("-2")
 			return next_node
 	return
 

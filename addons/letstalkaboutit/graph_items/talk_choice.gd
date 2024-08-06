@@ -41,7 +41,7 @@ func reset_choice_connections() -> void:
 		for connection in get_parent().get_connection_list():
 			if connection.from_node == name:
 				var to_node = get_graph_element_from_name(connection.to_node)
-				if to_node is TalkBasic || to_node is TalkChoice || to_node is TalkBranch || to_node is TalkSetFlag:
+				if to_node is TalkBasic || to_node is TalkChoice || to_node is TalkBranch || to_node is TalkSetFlag || to_node is TalkEnd:
 					get_parent().disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 					get_parent().connect_node(connection.from_node, choice_list.find(next_id_list.find_key(to_node.id)), connection.to_node, connection.to_port)
 
@@ -122,7 +122,6 @@ func add_new_choice(choice_id: String = "-1") -> void:
 	line_list_resource.notify_property_list_changed()
 
 	# Setup slots
-	print(choice_list.size())
 	set_slot(choice_list.size(), false, 0, Color(1.0, 1.0, 1.0), true, 0, Color(1.0, 1.0, 1.0))
 	call_deferred("reset_size")
 

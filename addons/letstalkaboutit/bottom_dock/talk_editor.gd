@@ -86,7 +86,7 @@ func on_connection_request(from_node: StringName, from_port: int, to_node: Strin
     var to_type = get_graph_element_type_as_string(to_child)
     for connection in graph.get_connection_list():
         if connection.to_node == to_node and connection.to_port == to_port:
-            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || "TalkSetFlag":
+            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                 if from_type == "TalkBasic":
                     if from_child.next_id != "-1":
                         return
@@ -110,7 +110,7 @@ func on_connection_request(from_node: StringName, from_port: int, to_node: Strin
     graph.connect_node(from_node, from_port, to_node, to_port)
     match(from_type):
         "TalkBasic":
-            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                 from_child.set_next_id(to_child.id)
         "TalkMessage":
             if to_type == "TalkMessageList":
@@ -119,16 +119,16 @@ func on_connection_request(from_node: StringName, from_port: int, to_node: Strin
             if to_type == "TalkBasic":
                 to_child.set_messages(from_child.id)
         "TalkChoice":
-            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                 from_child.set_next_id(to_child.id, from_port)
         "TalkBranch":
-            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                 from_child.set_next_id(to_child.id, from_port)
         "TalkSetFlag":
-            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                 from_child.set_next_id(to_child.id)
         "TalkStart":
-            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+            if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                 from_child.set_next_id(to_child.id)
 
 func on_add_index_pressed(index: int) -> void:
@@ -158,7 +158,7 @@ func delete_node(node: GraphNode) -> void:
                 var to_type = get_graph_element_type_as_string(to_child)
                 match(from_type):
                     "TalkBasic":
-                        if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+                        if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                             from_child.set_next_id("-1")
                     "TalkMessage":
                         if to_type == "TalkMessageList":
@@ -167,16 +167,16 @@ func delete_node(node: GraphNode) -> void:
                         if to_type == "TalkBasic":
                             to_child.set_messages("-1")
                     "TalkChoice":
-                        if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+                        if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                             from_child.set_next_id("-1", connection.from_port)
                     "TalkBranch":
-                        if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+                        if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                             from_child.set_next_id("-1", connection.from_port)
                     "TalkSetFlag":
-                        if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+                        if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                             from_child.set_next_id("-1")
                     "TalkStart":
-                        if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag":
+                        if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                             from_child.set_next_id("-1")
         node.free()
 
@@ -312,6 +312,8 @@ func save_graph_data(nodes: Array, connections: Array) -> void:
                 "TalkStart":
                     node_data.data.id = node.id
                     node_data.data.next_id = node.next_id
+                "TalkEnd":
+                    node_data.data.id = node.id
             node_data.position_offset = node.position_offset
             # node data
             n_graph_data.nodes.append(node_data)
@@ -349,4 +351,6 @@ func get_graph_element_type_as_string(node: GraphNode) -> String:
         return "TalkSetFlag"
     elif node is TalkStart:
         return "TalkStart"
+    elif node is TalkEnd:
+        return "TalkEnd"
     return ""

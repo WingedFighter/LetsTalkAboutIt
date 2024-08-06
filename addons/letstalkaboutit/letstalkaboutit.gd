@@ -15,6 +15,7 @@ const TalkMessage: PackedScene = preload("res://addons/letstalkaboutit/graph_ite
 const TalkChoice: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_choice.tscn")
 const TalkSetFlag: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_set_flag.tscn")
 const TalkStart: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_start.tscn")
+const TalkEnd: PackedScene = preload("res://addons/letstalkaboutit/graph_items/talk_end.tscn")
 
 # Custom Nodes
 const TalkManager: Script = preload("res://addons/letstalkaboutit/nodes/talk_manager.gd")
@@ -28,7 +29,8 @@ var graph_types = {
 	"TalkMessage": TalkMessage,
 	"TalkChoice": TalkChoice,
 	"TalkSetFlag": TalkSetFlag,
-	"TalkStart": TalkStart
+	"TalkStart": TalkStart,
+	"TalkEnd": TalkEnd
 }
 
 var talk_panel
