@@ -50,13 +50,11 @@ func get_full_talk() -> Dictionary:
 			return result
 		"TalkBasic":
 			var result = {"data": c_object.data}
-			if c_object.data.messages != "-1":
-				result["message_list_data"] = get_node_by_id(c_object.data.messages).data
-				if result.message_list_data.message_list.size() > 0:
-					result["message_data"] = []
-					for message_id in result.message_list_data.message_list:
-						var temp_message = get_node_by_id(message_id)
-						result.message_data.append(temp_message.data)
+			if c_object.data.message_list.size() > 0:
+				result["message_data"] = []
+				for message_id in c_object.data.message_list:
+					var temp_message = get_node_by_id(message_id)
+					result.message_data.append(temp_message.data)
 			return result
 		"TalkChoice":
 			var result = {"data": c_object.data}

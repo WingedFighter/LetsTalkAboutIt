@@ -131,11 +131,8 @@ func on_connection_request(from_node: StringName, from_port: int, to_node: Strin
             if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                 from_child.set_next_id(to_child.id)
         "TalkMessage":
-            if to_type == "TalkMessageList":
-                to_child.add_new_message(from_child.id)
-        "TalkMessageList":
             if to_type == "TalkBasic":
-                to_child.set_messages(from_child.id)
+                to_child.set_message(from_child.id, to_port)
         "TalkChoice":
             if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                 from_child.set_next_id(to_child.id, from_port)
@@ -180,11 +177,8 @@ func delete_node(node: GraphNode) -> void:
                         if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                             from_child.set_next_id("-1")
                     "TalkMessage":
-                        if to_type == "TalkMessageList":
-                            to_child.delete_message(from_child.id)
-                    "TalkMessageList":
                         if to_type == "TalkBasic":
-                            to_child.set_messages("-1")
+                            to_child.delete_message(from_child.id)
                     "TalkChoice":
                         if to_type == "TalkBasic" || to_type == "TalkChoice" || to_type == "TalkBranch" || to_type == "TalkSetFlag" || to_type == "TalkEnd":
                             from_child.set_next_id("-1", connection.from_port)
@@ -242,16 +236,14 @@ func init_graph(graph_data: GraphData) -> void:
         g_node.id = node.data.id
         match(node.type):
             "TalkBasic":
-                g_node.set_messages(node.data.messages)
+                for message in node.data.message_list:
+                    g_node.add_new_message(message)
             "TalkMessage":
                 g_node.set_line_id(node.data.line_id)
                 g_node.set_character_id(node.data.character_id)
                 g_node.set_expression(node.data.expression)
                 g_node.line_resource = TalkLinesResource.new()
                 g_node.set_lines(node.data.lines)
-            "TalkMessageList":
-                for message in node.data.message_list:
-                    g_node.add_new_message(message)
             "TalkChoice":
                 for choice in node.data.choice_list:
                     g_node.add_new_choice(choice)
@@ -305,16 +297,13 @@ func save_graph_data(nodes: Array, connections: Array) -> void:
                 "TalkBasic":
                     node_data.data.id = node.id
                     node_data.data.next_id = node.next_id
-                    node_data.data.messages = node.messages
+                    node_data.data.message_list = node.message_list
                 "TalkMessage":
                     node_data.data.id = node.id
                     node_data.data.line_id = node.line_id
                     node_data.data.character_id = node.character_id
                     node_data.data.expression = node.expression
                     node_data.data.lines = node.line_resource.lines
-                "TalkMessageList":
-                    node_data.data.id = node.id
-                    node_data.data.message_list = node.message_list
                 "TalkChoice":
                     node_data.data.id = node.id
                     node_data.data.choice_list = node.choice_list
@@ -364,8 +353,6 @@ func get_graph_element_type_as_string(node: GraphNode) -> String:
         return "TalkBasic"
     elif node is TalkMessage:
         return "TalkMessage"
-    elif node is TalkMessageList:
-        return "TalkMessageList"
     elif node is TalkChoice:
         return "TalkChoice"
     elif node is TalkSetFlag:
