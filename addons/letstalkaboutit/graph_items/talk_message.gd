@@ -37,7 +37,7 @@ func update_connections() -> void:
 		for connection in get_parent().get_connection_list():
 			if connection.from_node == name:
 				var to_node = get_graph_element_from_name(connection.to_node)
-				if to_node is TalkMessageList:
+				if to_node is TalkBasic:
 					to_node.udpate_existing_message(connection.to_port, id)
 
 func set_line_id(p_line_id: String) -> void:

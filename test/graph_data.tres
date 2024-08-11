@@ -1,85 +1,8 @@
-[gd_resource type="Resource" script_class="GraphData" load_steps=8 format=3 uid="uid://cay1t0t45me0x"]
+[gd_resource type="Resource" script_class="GraphData" load_steps=2 format=3 uid="uid://cay1t0t45me0x"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/node_data.gd" id="1_vdvr8"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/graph_data.gd" id="3_ejwwy"]
-
-[sub_resource type="Resource" id="Resource_wk6u8"]
-script = ExtResource("1_vdvr8")
-name = "TalkMessage"
-type = "TalkMessage"
-position_offset = Vector2(700, 120)
-data = {
-"character_id": "-1",
-"expression": 4,
-"id": "TalkMessage",
-"line_id": "-1",
-"lines": Array[String](["This is an example message.", "Each message is up to 3 lines long.", "Each line can have a maximum length of 70 characters."])
-}
-
-[sub_resource type="Resource" id="Resource_lhn6i"]
-script = ExtResource("1_vdvr8")
-name = "TalkMessage2"
-type = "TalkMessage"
-position_offset = Vector2(700, 240)
-data = {
-"character_id": "-1",
-"expression": 4,
-"id": "TalkMessage2",
-"line_id": "-1",
-"lines": Array[String](["Here is an example with an additional message", "", ""])
-}
-
-[sub_resource type="Resource" id="Resource_m7dcu"]
-script = ExtResource("1_vdvr8")
-name = "TalkBasic"
-type = "TalkBasic"
-position_offset = Vector2(1040, 60)
-data = {
-"id": "TalkBasic",
-"message_list": Array[String](["TalkMessage", "TalkMessage2"]),
-"next_id": "End"
-}
-
-[sub_resource type="Resource" id="Resource_ttwmh"]
-script = ExtResource("1_vdvr8")
-name = "TalkStart"
-type = "TalkStart"
-position_offset = Vector2(860, 40)
-data = {
-"id": "Start",
-"next_id": "TalkBasic"
-}
-
-[sub_resource type="Resource" id="Resource_li4gw"]
-script = ExtResource("1_vdvr8")
-name = "TalkEnd"
-type = "TalkEnd"
-position_offset = Vector2(1260, 60)
-data = {
-"id": "End"
-}
 
 [resource]
 script = ExtResource("3_ejwwy")
-connections = [{
-"from_node": &"TalkMessage",
-"from_port": 0,
-"to_node": &"TalkBasic",
-"to_port": 1
-}, {
-"from_node": &"TalkMessage2",
-"from_port": 0,
-"to_node": &"TalkBasic",
-"to_port": 2
-}, {
-"from_node": &"TalkStart",
-"from_port": 0,
-"to_node": &"TalkBasic",
-"to_port": 0
-}, {
-"from_node": &"TalkBasic",
-"from_port": 0,
-"to_node": &"TalkEnd",
-"to_port": 0
-}]
-nodes = [SubResource("Resource_wk6u8"), SubResource("Resource_lhn6i"), SubResource("Resource_m7dcu"), SubResource("Resource_ttwmh"), SubResource("Resource_li4gw")]
+connections = Array[Dictionary]([])
+nodes = []
