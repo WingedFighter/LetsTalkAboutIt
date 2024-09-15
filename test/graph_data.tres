@@ -1,8 +1,67 @@
-[gd_resource type="Resource" script_class="GraphData" load_steps=2 format=3 uid="uid://cay1t0t45me0x"]
+[gd_resource type="Resource" script_class="GraphData" load_steps=7 format=3 uid="uid://cay1t0t45me0x"]
 
+[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/node_data.gd" id="1_mxear"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/graph_data.gd" id="3_ejwwy"]
+
+[sub_resource type="Resource" id="Resource_5ya5k"]
+script = ExtResource("1_mxear")
+name = "TalkStart"
+type = "TalkStart"
+position_offset = Vector2(580, 100)
+data = {
+"id": "Start",
+"next_id": "TalkBasic"
+}
+
+[sub_resource type="Resource" id="Resource_cjngm"]
+script = ExtResource("1_mxear")
+name = "TalkBasic"
+type = "TalkBasic"
+position_offset = Vector2(749.755, 111.114)
+data = {
+"id": "TalkBasic",
+"message_list": Array[String](["TalkMessage"]),
+"next_id": "End"
+}
+
+[sub_resource type="Resource" id="Resource_6p8x4"]
+script = ExtResource("1_mxear")
+name = "TalkMessage"
+type = "TalkMessage"
+position_offset = Vector2(460, 220)
+data = {
+"character_id": "-1",
+"expression": 4,
+"id": "TalkMessage",
+"line_id": "-1",
+"lines": Array[String](["This is a display", "of some text", ""])
+}
+
+[sub_resource type="Resource" id="Resource_andjk"]
+script = ExtResource("1_mxear")
+name = "TalkEnd"
+type = "TalkEnd"
+position_offset = Vector2(940, 120)
+data = {
+"id": "End"
+}
 
 [resource]
 script = ExtResource("3_ejwwy")
-connections = Array[Dictionary]([])
-nodes = []
+connections = Array[Dictionary]([{
+"from_node": &"TalkStart",
+"from_port": 0,
+"to_node": &"TalkBasic",
+"to_port": 0
+}, {
+"from_node": &"TalkMessage",
+"from_port": 0,
+"to_node": &"TalkBasic",
+"to_port": 1
+}, {
+"from_node": &"TalkBasic",
+"from_port": 0,
+"to_node": &"TalkEnd",
+"to_port": 0
+}])
+nodes = [SubResource("Resource_5ya5k"), SubResource("Resource_cjngm"), SubResource("Resource_6p8x4"), SubResource("Resource_andjk")]

@@ -44,12 +44,12 @@ func get_full_talk() -> Dictionary:
 	var c_object = get_talk()
 	if !c_object:
 		return {}
+	var result = {"type": c_object.type}
+	result["data"] = c_object.data
 	match(c_object.type):
 		"TalkStart":
-			var result = {"data": c_object.data}
 			return result
 		"TalkBasic":
-			var result = {"data": c_object.data}
 			if c_object.data.message_list.size() > 0:
 				result["message_data"] = []
 				for message_id in c_object.data.message_list:
@@ -57,11 +57,9 @@ func get_full_talk() -> Dictionary:
 					result.message_data.append(temp_message.data)
 			return result
 		"TalkChoice":
-			var result = {"data": c_object.data}
 			result.lines_list = c_object.data.line_list
 			return result
 		"TalkBranch":
-			var result = {"data": c_object.data}
 			if c_object.data.has("flag_name") && talk_state.flags.has(c_object.data.flag_name):
 				if talk_state.get_flag(c_object.data.flag_name):
 					result["next_id"] = c_object.data.true_next_id
@@ -70,12 +68,10 @@ func get_full_talk() -> Dictionary:
 				set_current_talk_id(result["next_id"])
 			return result
 		"TalkSetFlag":
-			var result = {"data": c_object.data}
 			if c_object.data.has("flag_name") && c_object.data.has("flag_value"):
 				talk_state.set_flag(c_object.data.flag_name, c_object.data.flag_value)
 			return result
 		"TalkEnd":
-			var result = {"data": c_object.data}
 			return result
 	return {}
 

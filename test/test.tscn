@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://i7vwwcxkyii3"]
+[gd_scene load_steps=5 format=3 uid="uid://cnhso3186qvxg"]
 
 [ext_resource type="Script" path="res://test/test.gd" id="1_oxwfa"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_manager.gd" id="1_r1hvk"]

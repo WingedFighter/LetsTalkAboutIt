@@ -1,0 +1,122 @@
+[gd_scene load_steps=10 format=3 uid="uid://bw1ckmp2vlewj"]
+
+[ext_resource type="Script" path="res://example/talk_display.gd" id="1_1pmax"]
+[ext_resource type="Theme" uid="uid://dolvw3g0eshd6" path="res://example/default_ui.tres" id="1_kd5lp"]
+[ext_resource type="Texture2D" uid="uid://1n2vjc7li2hd" path="res://example/portraits/outerframe.png" id="2_xh4tr"]
+[ext_resource type="FontFile" uid="uid://bxe345a1o1y5h" path="res://example/fonts/Kenney Future Square.ttf" id="3_aah11"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_manager.gd" id="4_s1axc"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/ingame_data/talk_state.gd" id="5_tkd87"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wllcw"]
+font = ExtResource("3_aah11")
+
+[sub_resource type="LabelSettings" id="LabelSettings_afqk4"]
+font = ExtResource("3_aah11")
+font_size = 32
+
+[sub_resource type="Resource" id="Resource_ubb5r"]
+script = ExtResource("5_tkd87")
+current_talk = "Start"
+flags = {}
+
+[node name="TalkDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1pmax")
+
+[node name="NameContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 512.0
+offset_top = 307.0
+offset_right = 639.838
+offset_bottom = 341.0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_kd5lp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NameContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="NameContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Default Name"
+label_settings = SubResource("LabelSettings_wllcw")
+
+[node name="MarginContainer" type="MarginContainer" parent="NameContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 16
+
+[node name="ScreenMargins" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="GridContainer" type="GridContainer" parent="ScreenMargins"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="ScreenMargins/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer2" type="Control" parent="ScreenMargins/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TalkContainer" type="PanelContainer" parent="ScreenMargins/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_kd5lp")
+
+[node name="TalkMargins" type="MarginContainer" parent="ScreenMargins/GridContainer/TalkContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="TalkInteriorContainer" type="HBoxContainer" parent="ScreenMargins/GridContainer/TalkContainer/TalkMargins"]
+layout_mode = 2
+
+[node name="TalkTexture" type="TextureRect" parent="ScreenMargins/GridContainer/TalkContainer/TalkMargins/TalkInteriorContainer"]
+layout_mode = 2
+texture = ExtResource("2_xh4tr")
+expand_mode = 2
+
+[node name="TalkLabel" type="Label" parent="ScreenMargins/GridContainer/TalkContainer/TalkMargins/TalkInteriorContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Dummy Text"
+label_settings = SubResource("LabelSettings_afqk4")
+
+[node name="Choices" type="CenterContainer" parent="ScreenMargins"]
+visible = false
+layout_mode = 2
+
+[node name="TextAnimation" type="AnimationPlayer" parent="."]
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TalkManager" type="Node" parent="Control"]
+script = ExtResource("4_s1axc")
+graph_data_save_location = "res://test/graph_data.tres"
+talk_state_save_location = "res://test/talk_state.tres"
+talk_state = SubResource("Resource_ubb5r")
