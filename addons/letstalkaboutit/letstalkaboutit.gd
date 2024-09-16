@@ -18,6 +18,7 @@ const TalkEnd: PackedScene = preload("res://addons/letstalkaboutit/graph_items/t
 
 # Custom Nodes
 const TalkManager: Script = preload("res://addons/letstalkaboutit/nodes/talk_manager.gd")
+const TalkCharacter: Script = preload("res://addons/letstalkaboutit/nodes/talk_character.gd")
 
 var icon = preload("res://icon.svg")
 
@@ -36,6 +37,7 @@ var talk_basic_inspector
 
 func _enter_tree() -> void:
 	add_custom_type("TalkManager", "Node", TalkManager, icon)
+	add_custom_type("TalkCharacter", "Node", TalkCharacter, icon)
 	add_talk_basic_inspector()
 
 func _handles(object: Object) -> bool:

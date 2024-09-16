@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bw1ckmp2vlewj"]
+[gd_scene load_steps=11 format=3 uid="uid://bw1ckmp2vlewj"]
 
 [ext_resource type="Script" path="res://example/talk_display.gd" id="1_1pmax"]
 [ext_resource type="Theme" uid="uid://dolvw3g0eshd6" path="res://example/default_ui.tres" id="1_kd5lp"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://bxe345a1o1y5h" path="res://example/fonts/Kenney Future Square.ttf" id="3_aah11"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_manager.gd" id="4_s1axc"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/ingame_data/talk_state.gd" id="5_tkd87"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_character.gd" id="7_64avb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wllcw"]
 font = ExtResource("3_aah11")
@@ -120,3 +121,8 @@ script = ExtResource("4_s1axc")
 graph_data_save_location = "res://test/graph_data.tres"
 talk_state_save_location = "res://test/talk_state.tres"
 talk_state = SubResource("Resource_ubb5r")
+
+[node name="TalkCharacter" type="Node" parent="."]
+script = ExtResource("7_64avb")
+character_id = "dummy_test"
+character_name = "Dummy "

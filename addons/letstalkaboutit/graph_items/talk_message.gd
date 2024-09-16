@@ -11,18 +11,20 @@ class_name TalkMessage
 @export var line_id: String = "-1"
 @export var line_resource: TalkLinesResource = TalkLinesResource.new()
 @export var character_id: String = "-1"
-@export var expression: Speaker.MOOD = -1
+@export var expression: TalkCharacter.MOOD = -1
 
 func _enter_tree() -> void:
 	$Expression/OptionButton.clear()
-	for mood in Speaker.MOOD:
-		$Expression/OptionButton.add_item(mood, Speaker.MOOD[mood])
+	for mood in TalkCharacter.MOOD:
+		$Expression/OptionButton.add_item(mood, TalkCharacter.MOOD[mood])
 	if expression == -1:
-		expression = Speaker.MOOD.NEUTRAL
+		expression = TalkCharacter.MOOD.NEUTRAL
 	if $Expression/OptionButton.selected != expression:
 		$Expression/OptionButton.select(expression)
 	$Expression/OptionButton.item_selected.connect(expression_selected)
 	id = name
+	$Character/LineEdit.text_changed.connect(set_character_id)
+	$Character/LineEdit.text = character_id
 
 func get_graph_element_from_name(p_name: StringName) -> GraphNode:
 	var graph = get_parent()
@@ -43,11 +45,11 @@ func update_connections() -> void:
 func set_line_id(p_line_id: String) -> void:
 	line_id = p_line_id
 
-func set_character_id(p_character_id: String) -> void:
-	character_id = p_character_id
+func set_character_id(new_text: String) -> void:
+	character_id = new_text
 
 func expression_selected(index: int) -> void:
-	expression = Speaker.MOOD[$Expression/OptionButton.get_item_text(index)]
+	expression = TalkCharacter.MOOD[$Expression/OptionButton.get_item_text(index)]
 
 func set_expression(mood: int) -> void:
 	expression = mood

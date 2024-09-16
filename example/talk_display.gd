@@ -21,7 +21,6 @@ var test_animation_started: bool = false
 # Still todo:
 #  Add handle other talk nodes
 #  Add portrait loading
-#  Add characters
 
 func _ready() -> void:
     visible = false
@@ -29,13 +28,12 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
     if can_transition:
         if event.is_action_pressed("ui_accept"):
-            print("HEre")
             interaction($Control)
     else:
         if event.is_action_pressed("ui_accept"):
             interaction(current_interactable)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
     set_name_container_position()
 
 func set_name_container_position() -> void:
@@ -168,7 +166,7 @@ func display_message() -> void:
     setup_text_animation(current_message.lines)
     start_text_animation()
 
-func display_talk_choice(talk: Dictionary) -> void:
+func display_talk_choice(_talk: Dictionary) -> void:
     pass
 
 func talk_end() -> void:
@@ -191,5 +189,9 @@ func handle_talk(talk_manager: TalkManager) -> void:
         "TalkBasic":
             display_talk_basic(talk)
 
-func get_character_from_id(_character_id: String) -> Dictionary:
-    return {"character_name": "Test Name 1"}
+func get_character_from_id(character_id: String) -> TalkCharacter:
+    var character_nodes = get_tree().get_nodes_in_group("TalkCharacter")
+    for node in character_nodes:
+        if node.character_id == character_id:
+            return node
+    return TalkCharacter.new()
