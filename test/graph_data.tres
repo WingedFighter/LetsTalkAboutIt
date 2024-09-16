@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="GraphData" load_steps=7 format=3 uid="uid://cay1t0t45me0x"]
+[gd_resource type="Resource" script_class="GraphData" load_steps=11 format=3 uid="uid://cay1t0t45me0x"]
 
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/node_data.gd" id="1_mxear"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/graph_data.gd" id="3_ejwwy"]
 
-[sub_resource type="Resource" id="Resource_cl8rf"]
+[sub_resource type="Resource" id="Resource_4m3fk"]
 script = ExtResource("1_mxear")
 name = "TalkStart"
 type = "TalkStart"
@@ -13,7 +13,7 @@ data = {
 "next_id": "TalkBasic"
 }
 
-[sub_resource type="Resource" id="Resource_upwbq"]
+[sub_resource type="Resource" id="Resource_gfefj"]
 script = ExtResource("1_mxear")
 name = "TalkBasic"
 type = "TalkBasic"
@@ -21,19 +21,10 @@ position_offset = Vector2(749.755, 111.114)
 data = {
 "id": "TalkBasic",
 "message_list": Array[String](["TalkMessage"]),
-"next_id": "End"
+"next_id": "TalkChoice"
 }
 
-[sub_resource type="Resource" id="Resource_a0430"]
-script = ExtResource("1_mxear")
-name = "TalkEnd"
-type = "TalkEnd"
-position_offset = Vector2(940, 120)
-data = {
-"id": "End"
-}
-
-[sub_resource type="Resource" id="Resource_btg4p"]
+[sub_resource type="Resource" id="Resource_g37mn"]
 script = ExtResource("1_mxear")
 name = "TalkMessage"
 type = "TalkMessage"
@@ -44,6 +35,77 @@ data = {
 "id": "TalkMessage",
 "line_id": "-1",
 "lines": Array[String](["This is a display", "of some text", ""])
+}
+
+[sub_resource type="Resource" id="Resource_wrkgs"]
+script = ExtResource("1_mxear")
+name = "TalkChoice"
+type = "TalkChoice"
+position_offset = Vector2(1000, 60)
+data = {
+"choice_list": Array[String](["3829", "7976", "4017", "3393"]),
+"id": "TalkChoice",
+"line_list": {
+"3393": "Choice A",
+"3829": "Choice B",
+"4017": "Choice C",
+"7976": "Choice D"
+},
+"next_id_list": {
+"3393": "TalkBasic2",
+"3829": "TalkBasic2",
+"4017": "TalkBasic2",
+"7976": "TalkBasic2"
+}
+}
+
+[sub_resource type="Resource" id="Resource_slcow"]
+script = ExtResource("1_mxear")
+name = "TalkBasic2"
+type = "TalkBasic"
+position_offset = Vector2(1360, 40)
+data = {
+"id": "TalkBasic2",
+"message_list": Array[String](["TalkMessage2"]),
+"next_id": "TalkChoice2"
+}
+
+[sub_resource type="Resource" id="Resource_882y4"]
+script = ExtResource("1_mxear")
+name = "TalkMessage2"
+type = "TalkMessage"
+position_offset = Vector2(1060, 300)
+data = {
+"character_id": "-1",
+"expression": 4,
+"id": "TalkMessage2",
+"line_id": "-1",
+"lines": Array[String](["You've made a choice", "Try making another", ""])
+}
+
+[sub_resource type="Resource" id="Resource_jl8m2"]
+script = ExtResource("1_mxear")
+name = "TalkChoice2"
+type = "TalkChoice"
+position_offset = Vector2(1620, 40)
+data = {
+"choice_list": Array[String](["1907"]),
+"id": "TalkChoice2",
+"line_list": {
+"1907": "Haha there is no choice"
+},
+"next_id_list": {
+"1907": "End"
+}
+}
+
+[sub_resource type="Resource" id="Resource_pas7w"]
+script = ExtResource("1_mxear")
+name = "TalkEnd"
+type = "TalkEnd"
+position_offset = Vector2(1820, 60)
+data = {
+"id": "End"
 }
 
 [resource]
@@ -61,7 +123,42 @@ connections = Array[Dictionary]([{
 }, {
 "from_node": &"TalkBasic",
 "from_port": 0,
+"to_node": &"TalkChoice",
+"to_port": 0
+}, {
+"from_node": &"TalkChoice",
+"from_port": 0,
+"to_node": &"TalkBasic2",
+"to_port": 0
+}, {
+"from_node": &"TalkChoice",
+"from_port": 1,
+"to_node": &"TalkBasic2",
+"to_port": 0
+}, {
+"from_node": &"TalkChoice",
+"from_port": 2,
+"to_node": &"TalkBasic2",
+"to_port": 0
+}, {
+"from_node": &"TalkChoice",
+"from_port": 3,
+"to_node": &"TalkBasic2",
+"to_port": 0
+}, {
+"from_node": &"TalkMessage2",
+"from_port": 0,
+"to_node": &"TalkBasic2",
+"to_port": 1
+}, {
+"from_node": &"TalkBasic2",
+"from_port": 0,
+"to_node": &"TalkChoice2",
+"to_port": 0
+}, {
+"from_node": &"TalkChoice2",
+"from_port": 0,
 "to_node": &"TalkEnd",
 "to_port": 0
 }])
-nodes = [SubResource("Resource_cl8rf"), SubResource("Resource_upwbq"), SubResource("Resource_a0430"), SubResource("Resource_btg4p")]
+nodes = [SubResource("Resource_4m3fk"), SubResource("Resource_gfefj"), SubResource("Resource_g37mn"), SubResource("Resource_wrkgs"), SubResource("Resource_slcow"), SubResource("Resource_882y4"), SubResource("Resource_jl8m2"), SubResource("Resource_pas7w")]

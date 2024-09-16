@@ -27,7 +27,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_1pmax")
+
+[node name="Choices" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="NameContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -61,6 +72,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
@@ -68,21 +80,25 @@ theme_override_constants/margin_bottom = 32
 
 [node name="GridContainer" type="GridContainer" parent="ScreenMargins"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Spacer" type="Control" parent="ScreenMargins/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Spacer2" type="Control" parent="ScreenMargins/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="TalkContainer" type="PanelContainer" parent="ScreenMargins/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 theme = ExtResource("1_kd5lp")
 
 [node name="TalkMargins" type="MarginContainer" parent="ScreenMargins/GridContainer/TalkContainer"]
@@ -105,16 +121,13 @@ size_flags_vertical = 1
 text = "Dummy Text"
 label_settings = SubResource("LabelSettings_afqk4")
 
-[node name="Choices" type="CenterContainer" parent="ScreenMargins"]
-visible = false
-layout_mode = 2
-
 [node name="TextAnimation" type="AnimationPlayer" parent="."]
 
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="TalkManager" type="Node" parent="Control"]
 script = ExtResource("4_s1axc")
@@ -126,3 +139,4 @@ talk_state = SubResource("Resource_ubb5r")
 script = ExtResource("7_64avb")
 character_id = "dummy_test"
 character_name = "Dummy "
+character_base_panel = "res://example/portraits/Furry.png"

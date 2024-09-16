@@ -126,7 +126,10 @@ func add_new_choice(choice_id: String = "-1") -> void:
 	call_deferred("reset_size")
 
 func check_choice_set(port: int) -> bool:
-	return next_id_list[choice_list[port]] != "-1"
+	if next_id_list.has(choice_list[port]):
+		return next_id_list[choice_list[port]] != "-1"
+	else:
+		return false
 
 func set_next_id(next_id: String, port: int) -> void:
 	next_id_list[choice_list[port]] = next_id
