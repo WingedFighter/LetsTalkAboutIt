@@ -2,19 +2,20 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bxe345a1o1y5h"
-path="res://.godot/imported/Kenney Future Square.ttf-a1364236f2af0175b1922d3b06279c27.fontdata"
+uid="uid://d0yfh7fsyox85"
+path="res://.godot/imported/Kenney Thick.ttf-667fe0587f9c115197753e7cd35cd449.fontdata"
 
 [deps]
 
-source_file="res://example/fonts/Kenney Future Square.ttf"
-dest_files=["res://.godot/imported/Kenney Future Square.ttf-a1364236f2af0175b1922d3b06279c27.fontdata"]
+source_file="res://talk_display/fonts/Kenney Thick.ttf"
+dest_files=["res://.godot/imported/Kenney Thick.ttf-667fe0587f9c115197753e7cd35cd449.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
@@ -31,8 +32,7 @@ preload=[{
 "chars": [],
 "glyphs": [],
 "name": "New Configuration",
-"size": Vector2i(16, 0),
-"variation_embolden": 0.0
+"size": Vector2i(16, 0)
 }]
 language_support={}
 script_support={}

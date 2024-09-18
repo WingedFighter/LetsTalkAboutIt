@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nohehgwsti3c"
-path="res://.godot/imported/medium_square.png-580c764f4cd59051b5515f9ebe5ddd01.ctex"
+uid="uid://d2hwkysf6iomc"
+path="res://.godot/imported/basic_pop_frame_blue.png-e3d6a714455b2ec5af125e60b703188b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://example/panel_contents/medium_square.png"
-dest_files=["res://.godot/imported/medium_square.png-580c764f4cd59051b5515f9ebe5ddd01.ctex"]
+source_file="res://talk_display/panels/basic_pop_frame_blue.png"
+dest_files=["res://.godot/imported/basic_pop_frame_blue.png-e3d6a714455b2ec5af125e60b703188b.ctex"]
 
 [params]
 

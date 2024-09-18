@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vrusseonbfl3"
-path="res://.godot/imported/button_blue.png-51448cdae7171c0a9a54445ef0608b94.ctex"
+uid="uid://x33vumckl26f"
+path="res://.godot/imported/basic_tab_blue.png-4e680beb80b40d5dce258ef86b16b729.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://example/panel_contents/buttons/button_blue.png"
-dest_files=["res://.godot/imported/button_blue.png-51448cdae7171c0a9a54445ef0608b94.ctex"]
+source_file="res://talk_display/tabs/basic_tab_blue.png"
+dest_files=["res://.godot/imported/basic_tab_blue.png-4e680beb80b40d5dce258ef86b16b729.ctex"]
 
 [params]
 

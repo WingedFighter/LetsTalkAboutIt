@@ -2,7 +2,7 @@ extends Control
 
 @export_range(0.01, 0.1) var text_speed: float = .05
 @export_range(0.01, 0.1) var skip_buffer: float = .05
-@export var default_theme: Theme = preload("res://example/default_ui.tres")
+@export var default_theme: Theme = preload("res://talk_display/default_ui.tres")
 
 @onready var talk_container: PanelContainer = $ScreenMargins/GridContainer/TalkContainer
 @onready var name_container: PanelContainer = $NameContainer
@@ -19,9 +19,6 @@ var current_talk_messages: Array
 var current_message_index: int
 
 var test_animation_started: bool = false
-
-# Still todo:
-#  Add handle other talk nodes
 
 func _ready() -> void:
 	hide_basic_talk()

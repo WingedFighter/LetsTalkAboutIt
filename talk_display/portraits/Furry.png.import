@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1n2vjc7li2hd"
-path="res://.godot/imported/outerframe.png-ba0986a0e058beeb3fa31e81b3a0b9ee.ctex"
+uid="uid://c7suylwiusa71"
+path="res://.godot/imported/Furry.png-412541fcde29b3c32f05d4fb28e34c03.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://example/portraits/outerframe.png"
-dest_files=["res://.godot/imported/outerframe.png-ba0986a0e058beeb3fa31e81b3a0b9ee.ctex"]
+source_file="res://talk_display/portraits/Furry.png"
+dest_files=["res://.godot/imported/Furry.png-412541fcde29b3c32f05d4fb28e34c03.ctex"]
 
 [params]
 

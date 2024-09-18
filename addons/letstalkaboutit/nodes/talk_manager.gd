@@ -65,12 +65,13 @@ func get_full_talk() -> Dictionary:
 					result["next_id"] = c_object.data.true_next_id
 				else:
 					result["next_id"] = c_object.data.false_next_id
-				set_current_talk_id(result["next_id"])
-			return result
+			set_current_talk_id(result["next_id"])
+			return get_full_talk()
 		"TalkSetFlag":
 			if c_object.data.has("flag_name") && c_object.data.has("flag_value"):
 				talk_state.set_flag(c_object.data.flag_name, c_object.data.flag_value)
-			return result
+			set_current_talk_id(c_object.data.next_id)
+			return get_full_talk()
 		"TalkEnd":
 			return result
 	return {}
@@ -93,7 +94,6 @@ func get_talk() -> NodeData:
 		"TalkBranch":
 			return next_node
 		"TalkSetFlag":
-			set_current_talk_id(next_node.data.next_id)
 			return next_node
 		"TalkEnd":
 			set_current_talk_id("-2")

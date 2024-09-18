@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gx0ul743jana"
-path="res://.godot/imported/checked_box.png-145f653525f0c41bc1af7724b4f5565d.ctex"
+uid="uid://cs03nmuw1i8at"
+path="res://.godot/imported/small_square.png-05b6417ac075a416cea535f159107b06.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://example/panel_contents/buttons/checked_box.png"
-dest_files=["res://.godot/imported/checked_box.png-145f653525f0c41bc1af7724b4f5565d.ctex"]
+source_file="res://talk_display/panel_contents/small_square.png"
+dest_files=["res://.godot/imported/small_square.png-05b6417ac075a416cea535f159107b06.ctex"]
 
 [params]
 

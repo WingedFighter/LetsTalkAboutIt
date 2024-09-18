@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ufcttv6gqi12"
-path="res://.godot/imported/basic_tab_yellow.png-d25a7fb7c68b6dfd4b314e70681b1a20.ctex"
+path="res://.godot/imported/basic_tab_yellow.png-7b858a7dc0aeef855df6b9aa8d720db9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://example/tabs/basic_tab_yellow.png"
-dest_files=["res://.godot/imported/basic_tab_yellow.png-d25a7fb7c68b6dfd4b314e70681b1a20.ctex"]
+source_file="res://talk_display/tabs/basic_tab_yellow.png"
+dest_files=["res://.godot/imported/basic_tab_yellow.png-7b858a7dc0aeef855df6b9aa8d720db9.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bj54ieol3elm0"
-path="res://.godot/imported/basic_tab_green.png-7f349655160c14ba5bbeaaf9fee8bfb7.ctex"
+uid="uid://b3cxlv8kf56id"
+path="res://.godot/imported/white_flat_frame_blue.png-8ad56cb025202419ca66033ba835c8a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://example/tabs/basic_tab_green.png"
-dest_files=["res://.godot/imported/basic_tab_green.png-7f349655160c14ba5bbeaaf9fee8bfb7.ctex"]
+source_file="res://talk_display/panel_contents/white_flat_frame_blue.png"
+dest_files=["res://.godot/imported/white_flat_frame_blue.png-8ad56cb025202419ca66033ba835c8a2.ctex"]
 
 [params]
 

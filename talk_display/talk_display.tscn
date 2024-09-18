@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://bw1ckmp2vlewj"]
 
-[ext_resource type="Script" path="res://example/talk_display.gd" id="1_1pmax"]
-[ext_resource type="Theme" uid="uid://dolvw3g0eshd6" path="res://example/default_ui.tres" id="1_kd5lp"]
-[ext_resource type="Texture2D" uid="uid://1n2vjc7li2hd" path="res://example/portraits/outerframe.png" id="2_xh4tr"]
-[ext_resource type="FontFile" uid="uid://bxe345a1o1y5h" path="res://example/fonts/Kenney Future Square.ttf" id="3_aah11"]
+[ext_resource type="Script" path="res://talk_display/talk_display.gd" id="1_1pmax"]
+[ext_resource type="Theme" uid="uid://dolvw3g0eshd6" path="res://talk_display/default_ui.tres" id="1_kd5lp"]
+[ext_resource type="Texture2D" uid="uid://1n2vjc7li2hd" path="res://talk_display/portraits/outerframe.png" id="2_xh4tr"]
+[ext_resource type="FontFile" uid="uid://bxe345a1o1y5h" path="res://talk_display/fonts/Kenney Future Square.ttf" id="3_aah11"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_manager.gd" id="4_s1axc"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/ingame_data/talk_state.gd" id="5_tkd87"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_character.gd" id="7_64avb"]

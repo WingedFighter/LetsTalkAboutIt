@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7suylwiusa71"
-path="res://.godot/imported/Furry.png-d2e166cc94bfe60705e5e151ba3a71aa.ctex"
+uid="uid://vrusseonbfl3"
+path="res://.godot/imported/button_blue.png-9390b007c2521ccfa1d4f50b7fa19c75.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://example/portraits/Furry.png"
-dest_files=["res://.godot/imported/Furry.png-d2e166cc94bfe60705e5e151ba3a71aa.ctex"]
+source_file="res://talk_display/panel_contents/buttons/button_blue.png"
+dest_files=["res://.godot/imported/button_blue.png-9390b007c2521ccfa1d4f50b7fa19c75.ctex"]
 
 [params]
 

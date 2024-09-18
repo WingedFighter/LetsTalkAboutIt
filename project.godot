@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Let's Talk About It"
-run/main_scene="res://example/talk_display.tscn"
+run/main_scene="res://talk_display/talk_display.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 

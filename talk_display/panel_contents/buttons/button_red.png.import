@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2hwkysf6iomc"
-path="res://.godot/imported/basic_pop_frame_blue.png-619a17104d6a5e6d4baecc2efd49d487.ctex"
+uid="uid://nprl56sivnf2"
+path="res://.godot/imported/button_red.png-58dfe53ae998be6dabfc0192c6109cd1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://example/panels/basic_pop_frame_blue.png"
-dest_files=["res://.godot/imported/basic_pop_frame_blue.png-619a17104d6a5e6d4baecc2efd49d487.ctex"]
+source_file="res://talk_display/panel_contents/buttons/button_red.png"
+dest_files=["res://.godot/imported/button_red.png-58dfe53ae998be6dabfc0192c6109cd1.ctex"]
 
 [params]
 
