@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vrusseonbfl3"
-path="res://.godot/imported/button_blue.png-9390b007c2521ccfa1d4f50b7fa19c75.ctex"
+uid="uid://1n2vjc7li2hd"
+path="res://.godot/imported/outerframe.png-ed4146dc53ce7b4918f4dbb1744ff5f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://talk_display/panel_contents/buttons/button_blue.png"
-dest_files=["res://.godot/imported/button_blue.png-9390b007c2521ccfa1d4f50b7fa19c75.ctex"]
+source_file="res://addons/letstalkaboutit/nodes/talk_display/portraits/outerframe.png"
+dest_files=["res://.godot/imported/outerframe.png-ed4146dc53ce7b4918f4dbb1744ff5f8.ctex"]
 
 [params]
 

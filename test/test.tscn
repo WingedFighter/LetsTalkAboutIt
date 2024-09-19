@@ -1,19 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnhso3186qvxg"]
+[gd_scene load_steps=7 format=3 uid="uid://cnhso3186qvxg"]
 
 [ext_resource type="Script" path="res://test/test.gd" id="1_oxwfa"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_manager.gd" id="1_r1hvk"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/ingame_data/talk_state.gd" id="4_ogikd"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_character.gd" id="4_xo2of"]
+[ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_display/talk_display.gd" id="5_ap8yq"]
 
-[sub_resource type="Resource" id="Resource_gbpq7"]
+[sub_resource type="Resource" id="Resource_vl3hk"]
 script = ExtResource("4_ogikd")
 current_talk = "Start"
 flags = {}
 
-[node name="Test" type="Node2D"]
+[node name="Test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_oxwfa")
 
 [node name="TalkManager" type="Node" parent="."]
 script = ExtResource("1_r1hvk")
 graph_data_save_location = "res://test/graph_data.tres"
 talk_state_save_location = "res://test/talk_state.tres"
-talk_state = SubResource("Resource_gbpq7")
+talk_state = SubResource("Resource_vl3hk")
+
+[node name="TalkCharacter" type="Node" parent="."]
+script = ExtResource("4_xo2of")
+character_id = "dummy_test"
+character_name = "Dummy "
+character_base_panel = "res://addons/letstalkaboutit/nodes/talk_display/portraits/Furry.png"
+
+[node name="TalkDisplay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+script = ExtResource("5_ap8yq")

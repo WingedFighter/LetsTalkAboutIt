@@ -1,19 +1,23 @@
 extends Control
+class_name TalkDisplay
 
 @export_range(0.01, 0.1) var text_speed: float = .05
 @export_range(0.01, 0.1) var skip_buffer: float = .05
-@export var default_theme: Theme = preload("res://talk_display/default_ui.tres")
+@export var default_theme: Theme = preload("res://addons/letstalkaboutit/nodes/talk_display/default_ui.tres")
+@export var default_font: Font = preload("res://addons/letstalkaboutit/nodes/talk_display/fonts/Kenney Future Square.ttf")
+@export var default_texture: CompressedTexture2D = preload("res://addons/letstalkaboutit/nodes/talk_display/portraits/outerframe.png")
 
-@onready var talk_container: PanelContainer = $ScreenMargins/GridContainer/TalkContainer
-@onready var name_container: PanelContainer = $NameContainer
-@onready var screen_margins: MarginContainer = $ScreenMargins
-@onready var text_animation_player: AnimationPlayer = $TextAnimation
+var choices_container: VBoxContainer
+var name_container: PanelContainer
+var talk_container: PanelContainer
+var screen_margins: MarginContainer
+var text_animation_player: AnimationPlayer
 
 var can_transition: bool = true
 var is_choosing: bool = false
+
 var current_text: String
 var current_interactable: Node
-
 var current_talk_type: String
 var current_talk_messages: Array
 var current_message_index: int
@@ -21,18 +25,144 @@ var current_message_index: int
 var test_animation_started: bool = false
 
 func _ready() -> void:
+	set_anchors_and_offsets_preset(LayoutPreset.PRESET_FULL_RECT)
+	choices_container = create_choices_container()
+	name_container = create_name_container()
+	talk_container = create_talk_container()
+	screen_margins = get_screen_margins()
+	text_animation_player = AnimationPlayer.new()
+	add_child(text_animation_player)
 	hide_basic_talk()
-
-func _input(event: InputEvent) -> void:
-	if can_transition:
-		if event.is_action_pressed("ui_accept"):
-			interaction($Control)
-	else:
-		if !is_choosing && event.is_action_pressed("ui_accept"):
-			interaction(current_interactable)
 
 func _process(_delta: float) -> void:
 	set_name_container_position()
+
+func create_choices_container() -> VBoxContainer:
+	var center_container := CenterContainer.new()
+	add_child(center_container)
+
+	center_container.set_anchors_and_offsets_preset(LayoutPreset.PRESET_FULL_RECT)
+	center_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var c_container = VBoxContainer.new()
+	center_container.add_child(c_container)
+
+	c_container.name = "ChoicesContainer"
+	c_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	return c_container
+
+func create_name_container() -> PanelContainer:
+	var n_container = PanelContainer.new()
+	add_child(n_container)
+
+	n_container.name = "NameContainer"
+	n_container.set_theme(default_theme)
+	n_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var n_vbox := VBoxContainer.new()
+	n_container.add_child(n_vbox)
+
+	n_vbox.name = "VBoxContainer"
+	n_vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var n_label := Label.new()
+	n_vbox.add_child(n_label)
+
+	n_label.name = "NameLabel"
+	n_label.text = "Default Name"
+	n_label.label_settings = LabelSettings.new()
+	n_label.label_settings.font = default_font
+	n_label.label_settings.font_size = 16
+	n_label.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	n_label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	n_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var n_margin := MarginContainer.new()
+	n_vbox.add_child(n_margin)
+
+	n_margin.add_theme_constant_override("margin_bottom", 16)
+	n_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	return n_container
+
+func create_talk_container() -> PanelContainer:
+	var s_margin = MarginContainer.new()
+	add_child(s_margin)
+
+	s_margin.name = "ScreenMargins"
+	s_margin.set_anchors_and_offsets_preset(LayoutPreset.PRESET_FULL_RECT)
+	s_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	s_margin.add_theme_constant_override("margin_left", 32)
+	s_margin.add_theme_constant_override("margin_top", 32)
+	s_margin.add_theme_constant_override("margin_right", 32)
+	s_margin.add_theme_constant_override("margin_bottom", 32)
+
+	var grid_container := GridContainer.new()
+	s_margin.add_child(grid_container)
+
+	grid_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var spacer_1 := Control.new()
+	grid_container.add_child(spacer_1)
+
+	spacer_1.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	spacer_1.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	spacer_1.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var spacer_2 := Control.new()
+	grid_container.add_child(spacer_2)
+
+	spacer_2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	spacer_2.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	spacer_2.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var t_container := PanelContainer.new()
+	grid_container.add_child(t_container)
+
+	t_container.name = "TalkContainer"
+	t_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	t_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	t_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	t_container.set_theme(default_theme)
+
+	var t_margins := MarginContainer.new()
+	t_container.add_child(t_margins)
+
+	t_margins.name = "TalkMargins"
+	t_margins.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	t_margins.add_theme_constant_override("margin_left", 6)
+	t_margins.add_theme_constant_override("margin_bottom", 4)
+
+	var t_interior := HBoxContainer.new()
+	t_margins.add_child(t_interior)
+
+	t_interior.name = "TalkInteriorContainer"
+	t_interior.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var t_texture := TextureRect.new()
+	t_interior.add_child(t_texture)
+
+	t_texture.name = "TalkTexture"
+	t_texture.texture = default_texture
+	t_texture.expand_mode = TextureRect.EXPAND_FIT_WIDTH
+
+	var t_label := Label.new()
+	t_interior.add_child(t_label)
+
+	t_label.name = "TalkLabel"
+	t_label.text = "Default Text"
+	t_label.label_settings = LabelSettings.new()
+	t_label.label_settings.font = default_font
+	t_label.label_settings.font_size = 32
+	t_label.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	t_label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	t_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	return t_container
+
+func get_screen_margins() -> MarginContainer:
+	return get_node("ScreenMargins")
 
 func show_basic_talk() -> void:
 	screen_margins.visible = true
@@ -216,7 +346,7 @@ func get_character_from_id(character_id: String) -> TalkCharacter:
 
 func add_choice(choice_text: String, next_id: String, talk_manager: TalkManager) -> Button:
 	var button_to_add = Button.new()
-	$Choices.add_child(button_to_add)
+	choices_container.add_child(button_to_add)
 	button_to_add.add_to_group("TalkChoiceButtons")
 	button_to_add.set_theme(default_theme)
 	button_to_add.add_theme_font_size_override("font_size", 48)

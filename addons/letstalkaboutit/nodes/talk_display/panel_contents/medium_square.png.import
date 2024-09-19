@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m56idlrkn5ui"
-path="res://.godot/imported/unchecked_box.png-89c013ace95033c47c8551642189988f.ctex"
+uid="uid://nohehgwsti3c"
+path="res://.godot/imported/medium_square.png-476e06cedcd07c351b0669b5db1ea287.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://talk_display/panel_contents/buttons/unchecked_box.png"
-dest_files=["res://.godot/imported/unchecked_box.png-89c013ace95033c47c8551642189988f.ctex"]
+source_file="res://addons/letstalkaboutit/nodes/talk_display/panel_contents/medium_square.png"
+dest_files=["res://.godot/imported/medium_square.png-476e06cedcd07c351b0669b5db1ea287.ctex"]
 
 [params]
 

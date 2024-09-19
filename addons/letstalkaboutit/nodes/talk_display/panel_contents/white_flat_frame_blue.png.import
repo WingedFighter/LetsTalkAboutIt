@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3cxlv8kf56id"
-path="res://.godot/imported/white_flat_frame_blue.png-8ad56cb025202419ca66033ba835c8a2.ctex"
+path="res://.godot/imported/white_flat_frame_blue.png-7af0f4fa57949a9f0f67c8ab2985724a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://talk_display/panel_contents/white_flat_frame_blue.png"
-dest_files=["res://.godot/imported/white_flat_frame_blue.png-8ad56cb025202419ca66033ba835c8a2.ctex"]
+source_file="res://addons/letstalkaboutit/nodes/talk_display/panel_contents/white_flat_frame_blue.png"
+dest_files=["res://.godot/imported/white_flat_frame_blue.png-7af0f4fa57949a9f0f67c8ab2985724a.ctex"]
 
 [params]
 

@@ -1,14 +1,11 @@
-extends Node2D
+extends Control
 
 var reached_end: bool = false
 
-func _process(_delta: float) -> void:
-	while(!reached_end):
-		var talk = $TalkManager.get_full_talk()
-		print(talk)
-		if !talk:
-			get_tree().quit()
-		if talk.data.id == "End":
-			reached_end = true
-		if talk.data.has("next_id_list"):
-			$TalkManager.set_current_talk_id(talk.data.next_id_list[talk.data.next_id_list.keys()[0]])
+func _input(event: InputEvent) -> void:
+	if $TalkDisplay.can_transition:
+		if event.is_action_pressed("ui_accept"):
+			$TalkDisplay.interaction(self)
+	else:
+		if !$TalkDisplay.is_choosing && event.is_action_pressed("ui_accept"):
+			$TalkDisplay.interaction($TalkDisplay.current_interactable)

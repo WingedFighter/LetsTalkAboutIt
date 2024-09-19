@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7suylwiusa71"
-path="res://.godot/imported/Furry.png-412541fcde29b3c32f05d4fb28e34c03.ctex"
+uid="uid://bj54ieol3elm0"
+path="res://.godot/imported/basic_tab_green.png-e1f0c4aa0cd842b05c84ccbb5dff53df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://talk_display/portraits/Furry.png"
-dest_files=["res://.godot/imported/Furry.png-412541fcde29b3c32f05d4fb28e34c03.ctex"]
+source_file="res://addons/letstalkaboutit/nodes/talk_display/tabs/basic_tab_green.png"
+dest_files=["res://.godot/imported/basic_tab_green.png-e1f0c4aa0cd842b05c84ccbb5dff53df.ctex"]
 
 [params]
 
