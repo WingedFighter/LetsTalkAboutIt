@@ -3,7 +3,7 @@ class_name TalkCharacter
 
 @export var character_id: String = "default"
 @export var character_name: String = "Default"
-@export var character_base_panel: String 
+@export var character_base_panel: Texture2D 
 
 enum MOOD {
     SAD,

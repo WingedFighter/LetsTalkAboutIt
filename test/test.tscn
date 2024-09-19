@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnhso3186qvxg"]
+[gd_scene load_steps=8 format=3 uid="uid://cnhso3186qvxg"]
 
 [ext_resource type="Script" path="res://test/test.gd" id="1_oxwfa"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_manager.gd" id="1_r1hvk"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/ingame_data/talk_state.gd" id="4_ogikd"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_character.gd" id="4_xo2of"]
+[ext_resource type="Texture2D" uid="uid://c7suylwiusa71" path="res://addons/letstalkaboutit/nodes/talk_display/portraits/Furry.png" id="5_0khy8"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_display/talk_display.gd" id="5_ap8yq"]
 
 [sub_resource type="Resource" id="Resource_vl3hk"]
@@ -30,7 +31,7 @@ talk_state = SubResource("Resource_vl3hk")
 script = ExtResource("4_xo2of")
 character_id = "dummy_test"
 character_name = "Dummy "
-character_base_panel = "res://addons/letstalkaboutit/nodes/talk_display/portraits/Furry.png"
+character_base_panel = ExtResource("5_0khy8")
 
 [node name="TalkDisplay" type="Control" parent="."]
 layout_mode = 1

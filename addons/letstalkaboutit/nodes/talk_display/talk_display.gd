@@ -204,9 +204,9 @@ func get_talk_manager(i_node: Node) -> TalkManager:
 func set_name_label(name_text: String) -> void:
 	name_container.get_node("VBoxContainer/NameLabel").text = name_text
 
-func set_talk_texture(icon_path: String) -> void:
-	if icon_path && len(icon_path) > 0:
-		talk_container.get_node("TalkMargins/TalkInteriorContainer/TalkTexture").texture = load(icon_path)
+func set_talk_texture(texture: Texture2D) -> void:
+	if texture:
+		talk_container.get_node("TalkMargins/TalkInteriorContainer/TalkTexture").texture = texture
 
 func set_text_animation(talk_text: Array) -> void:
 	destroy_text_animation()
