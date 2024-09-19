@@ -31,8 +31,8 @@ func load_talk_state() -> void:
 
 func save_talk_state() -> void:
 	if talk_state:
-		if ResourceSaver.save(graph_data, talk_state_save_location) == OK:
-			print("TalkBasic State Saved")
+		if ResourceSaver.save(graph_data, talk_state_save_location) != OK:
+			print("Error saving state")
 
 func get_node_by_id(p_id: String) -> NodeData:
 	for node in graph_data.nodes:
@@ -78,7 +78,6 @@ func get_full_talk() -> Dictionary:
 
 func get_talk() -> NodeData:
 	if get_current_talk_id() == "-1":
-		print("Waiting on Choice Input")
 		return
 	var next_node = get_node_by_id(get_current_talk_id())
 	match(next_node.type):

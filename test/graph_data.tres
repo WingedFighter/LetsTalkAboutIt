@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/node_data.gd" id="1_mxear"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/graph_data.gd" id="3_ejwwy"]
 
-[sub_resource type="Resource" id="Resource_qd6n0"]
+[sub_resource type="Resource" id="Resource_1eabo"]
 script = ExtResource("1_mxear")
 name = "TalkStart"
 type = "TalkStart"
@@ -13,7 +13,7 @@ data = {
 "next_id": "TalkBasic"
 }
 
-[sub_resource type="Resource" id="Resource_x7igh"]
+[sub_resource type="Resource" id="Resource_bd6u3"]
 script = ExtResource("1_mxear")
 name = "TalkBasic"
 type = "TalkBasic"
@@ -24,7 +24,7 @@ data = {
 "next_id": "TalkChoice"
 }
 
-[sub_resource type="Resource" id="Resource_lk4jx"]
+[sub_resource type="Resource" id="Resource_l7idf"]
 script = ExtResource("1_mxear")
 name = "TalkEnd"
 type = "TalkEnd"
@@ -33,7 +33,7 @@ data = {
 "id": "End"
 }
 
-[sub_resource type="Resource" id="Resource_uchyb"]
+[sub_resource type="Resource" id="Resource_0yasy"]
 script = ExtResource("1_mxear")
 name = "TalkChoice2"
 type = "TalkChoice"
@@ -49,7 +49,7 @@ data = {
 }
 }
 
-[sub_resource type="Resource" id="Resource_5iguq"]
+[sub_resource type="Resource" id="Resource_4wsa3"]
 script = ExtResource("1_mxear")
 name = "TalkMessage"
 type = "TalkMessage"
@@ -62,7 +62,7 @@ data = {
 "lines": Array[String](["This is a display", "of some text", ""])
 }
 
-[sub_resource type="Resource" id="Resource_tu4fj"]
+[sub_resource type="Resource" id="Resource_3ra40"]
 script = ExtResource("1_mxear")
 name = "TalkChoice"
 type = "TalkChoice"
@@ -84,7 +84,7 @@ data = {
 }
 }
 
-[sub_resource type="Resource" id="Resource_x842g"]
+[sub_resource type="Resource" id="Resource_d6f23"]
 script = ExtResource("1_mxear")
 name = "TalkBasic2"
 type = "TalkBasic"
@@ -95,7 +95,7 @@ data = {
 "next_id": "TalkChoice2"
 }
 
-[sub_resource type="Resource" id="Resource_l2k7x"]
+[sub_resource type="Resource" id="Resource_t7y62"]
 script = ExtResource("1_mxear")
 name = "TalkSetFlag"
 type = "TalkSetFlag"
@@ -107,7 +107,7 @@ data = {
 "next_id": "End"
 }
 
-[sub_resource type="Resource" id="Resource_o7vpk"]
+[sub_resource type="Resource" id="Resource_0a62q"]
 script = ExtResource("1_mxear")
 name = "TalkMessage2"
 type = "TalkMessage"
@@ -178,4 +178,4 @@ connections = Array[Dictionary]([{
 "to_node": &"TalkSetFlag",
 "to_port": 0
 }])
-nodes = [SubResource("Resource_qd6n0"), SubResource("Resource_x7igh"), SubResource("Resource_lk4jx"), SubResource("Resource_uchyb"), SubResource("Resource_5iguq"), SubResource("Resource_tu4fj"), SubResource("Resource_x842g"), SubResource("Resource_l2k7x"), SubResource("Resource_o7vpk")]
+nodes = [SubResource("Resource_1eabo"), SubResource("Resource_bd6u3"), SubResource("Resource_l7idf"), SubResource("Resource_0yasy"), SubResource("Resource_4wsa3"), SubResource("Resource_3ra40"), SubResource("Resource_d6f23"), SubResource("Resource_t7y62"), SubResource("Resource_0a62q")]

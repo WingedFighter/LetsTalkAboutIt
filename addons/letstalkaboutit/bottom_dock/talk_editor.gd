@@ -147,7 +147,6 @@ func on_connection_request(from_node: StringName, from_port: int, to_node: Strin
                 from_child.set_next_id(to_child.id)
 
 func on_add_index_pressed(index: int, p_offset: bool = false) -> void:
-    print(add_index)
     add_new_graph_node(add_index[index], p_offset)
 
 func delete_captured(nodes: Array[StringName]) -> void:
@@ -329,7 +328,6 @@ func save_graph_data(nodes: Array, connections: Array) -> void:
             n_graph_data.nodes.append(node_data)
     if ResourceSaver.save(n_graph_data, graph_save_location) == OK:
         graph_data = graph_data
-        print("Saved")
     else:
         print ("Error saving data")
 
@@ -338,7 +336,6 @@ func load_graph_data() -> void:
         var g_data = ResourceLoader.load(graph_save_location)
         if g_data is GraphData:
             graph_data = g_data
-            print("Loaded graph data")
         else:
             graph_data = GraphData.new()
     else:
