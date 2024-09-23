@@ -3,9 +3,9 @@ extends Control
 var reached_end: bool = false
 
 func _input(event: InputEvent) -> void:
-	if $TalkDisplay.can_transition:
+	if $CanvasLayer/TalkDisplay.can_transition:
 		if event.is_action_pressed("ui_accept"):
-			$TalkDisplay.interaction(self)
+			$CanvasLayer/TalkDisplay.interaction(self)
 	else:
-		if !$TalkDisplay.is_choosing && event.is_action_pressed("ui_accept"):
-			$TalkDisplay.interaction($TalkDisplay.current_interactable)
+		if !$CanvasLayer/TalkDisplay.is_choosing && event.is_action_pressed("ui_accept"):
+			$CanvasLayer/TalkDisplay.interaction($CanvasLayer/TalkDisplay.current_interactable)

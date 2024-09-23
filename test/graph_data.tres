@@ -1,128 +1,119 @@
-[gd_resource type="Resource" script_class="GraphData" load_steps=12 format=3 uid="uid://cay1t0t45me0x"]
+[gd_resource type="Resource" script_class="GraphData" load_steps=11 format=3 uid="uid://cay1t0t45me0x"]
 
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/node_data.gd" id="1_mxear"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/graph_data.gd" id="3_ejwwy"]
 
-[sub_resource type="Resource" id="Resource_0rd26"]
+[sub_resource type="Resource" id="Resource_hi5rf"]
 script = ExtResource("1_mxear")
 name = "TalkStart"
 type = "TalkStart"
-position_offset = Vector2(580, 100)
+position_offset = Vector2(20, -20)
 data = {
-"id": "Start",
+"id": "StartDefault",
 "next_id": "TalkBasic"
 }
 
-[sub_resource type="Resource" id="Resource_vtn8w"]
+[sub_resource type="Resource" id="Resource_idve3"]
 script = ExtResource("1_mxear")
 name = "TalkBasic"
 type = "TalkBasic"
-position_offset = Vector2(749.755, 111.114)
+position_offset = Vector2(300, -20)
 data = {
 "id": "TalkBasic",
 "message_list": Array[String](["TalkMessage"]),
 "next_id": "TalkChoice"
 }
 
-[sub_resource type="Resource" id="Resource_f43ql"]
+[sub_resource type="Resource" id="Resource_tkytj"]
 script = ExtResource("1_mxear")
-name = "TalkEnd"
-type = "TalkEnd"
-position_offset = Vector2(2140, 60)
-data = {
-"id": "End"
-}
-
-[sub_resource type="Resource" id="Resource_cbfbe"]
-script = ExtResource("1_mxear")
-name = "TalkChoice2"
+name = "TalkChoice"
 type = "TalkChoice"
-position_offset = Vector2(1580, 20)
+position_offset = Vector2(560, -40)
 data = {
-"choice_list": Array[String](["9175"]),
-"id": "TalkChoice2",
+"choice_list": Array[String](["2535", "32", "5109", "473"]),
+"id": "TalkChoice",
 "line_list": {
-"9175": "HAHA There is no choice"
+"2535": "Choice A",
+"32": "Choice B",
+"473": "Choice D",
+"5109": "Choice C"
 },
 "next_id_list": {
-"9175": "TalkSetFlag"
+"2535": "TalkBasic2",
+"32": "TalkBasic2",
+"473": "TalkBasic2",
+"5109": "TalkBasic2"
 }
 }
 
-[sub_resource type="Resource" id="Resource_been5"]
+[sub_resource type="Resource" id="Resource_jm5mm"]
 script = ExtResource("1_mxear")
 name = "TalkMessage"
 type = "TalkMessage"
-position_offset = Vector2(380, 220)
+position_offset = Vector2(-440, 60)
 data = {
+"background": "res://addons/letstalkaboutit/nodes/talk_display/apocalypse2.png",
 "character_id": "dummy_test",
 "expression": 4,
 "id": "TalkMessage",
 "line_id": "-1",
-"lines": Array[String](["This is a display", "of some text", ""])
+"lines": Array[String](["This is an example of the conversation flow", "which can be split up among three lines", "Isn't that cool?"])
 }
 
-[sub_resource type="Resource" id="Resource_8ltfe"]
-script = ExtResource("1_mxear")
-name = "TalkChoice"
-type = "TalkChoice"
-position_offset = Vector2(1000, 60)
-data = {
-"choice_list": Array[String](["3829", "7976", "4017", "3393"]),
-"id": "TalkChoice",
-"line_list": {
-"3393": "Choice A",
-"3829": "Choice B",
-"4017": "Choice C",
-"7976": "Choice D"
-},
-"next_id_list": {
-"3393": "TalkBasic2",
-"3829": "TalkBasic2",
-"4017": "TalkBasic2",
-"7976": "TalkBasic2"
-}
-}
-
-[sub_resource type="Resource" id="Resource_h4853"]
+[sub_resource type="Resource" id="Resource_8osrp"]
 script = ExtResource("1_mxear")
 name = "TalkBasic2"
 type = "TalkBasic"
-position_offset = Vector2(1360, 40)
+position_offset = Vector2(800, -20)
 data = {
 "id": "TalkBasic2",
 "message_list": Array[String](["TalkMessage2"]),
 "next_id": "TalkChoice2"
 }
 
-[sub_resource type="Resource" id="Resource_rd2a4"]
-script = ExtResource("1_mxear")
-name = "TalkSetFlag"
-type = "TalkSetFlag"
-position_offset = Vector2(1800, 60)
-data = {
-"flag_name": "default_flag_name",
-"flag_value": false,
-"id": "TalkSetFlag",
-"next_id": "End"
-}
-
-[sub_resource type="Resource" id="Resource_ym4gk"]
+[sub_resource type="Resource" id="Resource_kuu2b"]
 script = ExtResource("1_mxear")
 name = "TalkMessage2"
 type = "TalkMessage"
-position_offset = Vector2(1060, 300)
+position_offset = Vector2(380, 220)
 data = {
+"background": "none",
 "character_id": "-1",
 "expression": 4,
 "id": "TalkMessage2",
 "line_id": "-1",
-"lines": Array[String](["You've made a choice", "Try making another", ""])
+"lines": Array[String](["Make another choice", "", ""])
+}
+
+[sub_resource type="Resource" id="Resource_d06bx"]
+script = ExtResource("1_mxear")
+name = "TalkChoice2"
+type = "TalkChoice"
+position_offset = Vector2(1020, -80)
+data = {
+"choice_list": Array[String](["3708"]),
+"id": "TalkChoice2",
+"line_list": {
+"3708": "HAHA there is no choice"
+},
+"next_id_list": {
+"3708": "End"
+}
+}
+
+[sub_resource type="Resource" id="Resource_htcrl"]
+script = ExtResource("1_mxear")
+name = "TalkEnd"
+type = "TalkEnd"
+position_offset = Vector2(1240, -60)
+data = {
+"id": "End",
+"next_start": "StartDefault"
 }
 
 [resource]
 script = ExtResource("3_ejwwy")
-connections = Array[Dictionary]([{
+connections = [{
 "from_node": &"TalkStart",
 "from_port": 0,
 "to_node": &"TalkBasic",
@@ -137,6 +128,11 @@ connections = Array[Dictionary]([{
 "from_port": 0,
 "to_node": &"TalkChoice",
 "to_port": 0
+}, {
+"from_node": &"TalkMessage2",
+"from_port": 0,
+"to_node": &"TalkBasic2",
+"to_port": 1
 }, {
 "from_node": &"TalkChoice",
 "from_port": 0,
@@ -158,16 +154,6 @@ connections = Array[Dictionary]([{
 "to_node": &"TalkBasic2",
 "to_port": 0
 }, {
-"from_node": &"TalkMessage2",
-"from_port": 0,
-"to_node": &"TalkBasic2",
-"to_port": 1
-}, {
-"from_node": &"TalkSetFlag",
-"from_port": 0,
-"to_node": &"TalkEnd",
-"to_port": 0
-}, {
 "from_node": &"TalkBasic2",
 "from_port": 0,
 "to_node": &"TalkChoice2",
@@ -175,7 +161,7 @@ connections = Array[Dictionary]([{
 }, {
 "from_node": &"TalkChoice2",
 "from_port": 0,
-"to_node": &"TalkSetFlag",
+"to_node": &"TalkEnd",
 "to_port": 0
-}])
-nodes = [SubResource("Resource_0rd26"), SubResource("Resource_vtn8w"), SubResource("Resource_f43ql"), SubResource("Resource_cbfbe"), SubResource("Resource_been5"), SubResource("Resource_8ltfe"), SubResource("Resource_h4853"), SubResource("Resource_rd2a4"), SubResource("Resource_ym4gk")]
+}]
+nodes = [SubResource("Resource_hi5rf"), SubResource("Resource_idve3"), SubResource("Resource_tkytj"), SubResource("Resource_jm5mm"), SubResource("Resource_8osrp"), SubResource("Resource_kuu2b"), SubResource("Resource_d06bx"), SubResource("Resource_htcrl")]

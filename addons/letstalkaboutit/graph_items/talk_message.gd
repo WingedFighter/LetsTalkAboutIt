@@ -12,6 +12,7 @@ class_name TalkMessage
 @export var line_resource: TalkLinesResource = TalkLinesResource.new()
 @export var character_id: String = "-1"
 @export var expression: TalkCharacter.MOOD = -1
+@export var background: String = "none"
 
 func _enter_tree() -> void:
 	$Expression/OptionButton.clear()
@@ -25,6 +26,8 @@ func _enter_tree() -> void:
 	id = name
 	$Character/LineEdit.text_changed.connect(set_character_id)
 	$Character/LineEdit.text = character_id
+	$Background/LineEdit.text_changed.connect(set_background)
+	$Background/LineEdit.text = background
 
 func get_graph_element_from_name(p_name: StringName) -> GraphNode:
 	var graph = get_parent()
@@ -58,3 +61,6 @@ func set_expression(mood: int) -> void:
 
 func set_lines(p_lines: Array[String]) -> void:
 	line_resource.lines = p_lines
+
+func set_background(p_background: String) -> void:
+	background = p_background

@@ -36,6 +36,15 @@ slot/2/right_type = 0
 slot/2/right_color = Color(1, 1, 1, 1)
 slot/2/right_icon = null
 slot/2/draw_stylebox = true
+slot/3/left_enabled = false
+slot/3/left_type = 0
+slot/3/left_color = Color(1, 1, 1, 1)
+slot/3/left_icon = null
+slot/3/right_enabled = false
+slot/3/right_type = 0
+slot/3/right_color = Color(1, 1, 1, 1)
+slot/3/right_icon = null
+slot/3/draw_stylebox = true
 script = ExtResource("1_skib8")
 id = "TalkMessage"
 line_resource = SubResource("Resource_orx1e")
@@ -55,7 +64,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Character"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 text = "Character"
 horizontal_alignment = 1
 
@@ -74,6 +83,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Expression"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "Expression"
 
 [node name="Control" type="Control" parent="Expression"]
@@ -93,3 +103,22 @@ popup/item_3/text = "SURPRISED"
 popup/item_3/id = 3
 popup/item_4/text = "NEUTRAL"
 popup/item_4/id = 4
+
+[node name="Background" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Background"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Background"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="Background"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="Background"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "none"
+expand_to_text_length = true

@@ -8,8 +8,17 @@ class_name TalkEnd
 		if id != "End":
 			update_connections()
 
+@export var next_start: String = "Start"
+
 func _enter_tree() -> void:
+	$End/LineEdit.text_changed.connect(set_next_start)
+	$End/LineEdit.text = next_start
 	reset_size()
+
+func set_next_start(n_start: String) -> void:
+	next_start = n_start
+	if $End/LineEdit.text != next_start:
+		$End/LineEdit.text = next_start
 
 func get_graph_element_from_name(p_name: StringName) -> GraphNode:
 	var graph = get_parent()

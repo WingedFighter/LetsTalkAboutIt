@@ -11,6 +11,7 @@ var choices_container: VBoxContainer
 var name_container: PanelContainer
 var talk_container: PanelContainer
 var screen_margins: MarginContainer
+var background_texture: TextureRect
 var text_animation_player: AnimationPlayer
 
 var can_transition: bool = true
@@ -30,12 +31,25 @@ func _ready() -> void:
 	name_container = create_name_container()
 	talk_container = create_talk_container()
 	screen_margins = get_screen_margins()
+	background_texture = create_background_texture()
 	text_animation_player = AnimationPlayer.new()
 	add_child(text_animation_player)
 	hide_basic_talk()
 
 func _process(_delta: float) -> void:
 	set_name_container_position()
+
+func create_background_texture() -> TextureRect:
+	var b_texture := TextureRect.new()
+	add_child(b_texture)
+
+	b_texture.name = "BackgroundTexture"
+	b_texture.set_anchors_and_offsets_preset(LayoutPreset.PRESET_FULL_RECT)
+	b_texture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	b_texture.expand_mode = TextureRect.EXPAND_FIT_WIDTH
+	b_texture.z_index = -1
+
+	return b_texture
 
 func create_choices_container() -> VBoxContainer:
 	var center_container := CenterContainer.new()
@@ -98,27 +112,21 @@ func create_talk_container() -> PanelContainer:
 	s_margin.add_theme_constant_override("margin_right", 32)
 	s_margin.add_theme_constant_override("margin_bottom", 32)
 
-	var grid_container := GridContainer.new()
-	s_margin.add_child(grid_container)
+	var main_container := VBoxContainer.new()
+	s_margin.add_child(main_container)
 
-	grid_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	main_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	var spacer_1 := Control.new()
-	grid_container.add_child(spacer_1)
-
-	spacer_1.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	spacer_1.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	spacer_1.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
-	var spacer_2 := Control.new()
-	grid_container.add_child(spacer_2)
-
-	spacer_2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	spacer_2.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	spacer_2.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var spacer := Control.new()
+	main_container.add_child(spacer)
+	
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	spacer.size_flags_stretch_ratio = 2.0
 
 	var t_container := PanelContainer.new()
-	grid_container.add_child(t_container)
+	main_container.add_child(t_container)
 
 	t_container.name = "TalkContainer"
 	t_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -167,10 +175,12 @@ func get_screen_margins() -> MarginContainer:
 func show_basic_talk() -> void:
 	screen_margins.visible = true
 	name_container.visible = true
+	background_texture.visible = true
 
 func hide_basic_talk() -> void:
 	screen_margins.visible = false
 	name_container.visible = false
+	background_texture.visible = false
 
 func get_basic_talk_visibility() -> bool:
 	return screen_margins.visible && name_container.visible
@@ -308,8 +318,16 @@ func display_message() -> void:
 	set_name_label(character.character_name)
 	set_talk_texture(character.character_base_panel)
 	set_text_animation(current_message.lines)
+	set_background(current_message.background)
 	start_text_animation()
 
+func set_background(background_path: String) -> void:
+	if background_path == "none":
+		background_texture.texture = null
+	else:
+		background_texture.texture = load(background_path)
+		background_texture.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
+	
 func display_talk_choice(talk: Dictionary, talk_manager: TalkManager) -> void:
 	is_choosing = true
 	if get_basic_talk_visibility():

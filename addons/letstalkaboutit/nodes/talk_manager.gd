@@ -3,6 +3,7 @@ class_name TalkManager
 
 @export var graph_data_save_location: String = "res://graph_data.tres"
 @export var talk_state_save_location: String = "res://talk_state.tres"
+@export var starting_conversation: String = "Start"
 
 @export var graph_data: GraphData
 @export var talk_state: TalkState
@@ -28,6 +29,7 @@ func load_talk_state() -> void:
 				talk_state = c_data
 		else:
 			talk_state = TalkState.new()
+			talk_state.current_talk = starting_conversation
 
 func save_talk_state() -> void:
 	if talk_state:
@@ -95,7 +97,7 @@ func get_talk() -> NodeData:
 		"TalkSetFlag":
 			return next_node
 		"TalkEnd":
-			set_current_talk_id("-2")
+			set_current_talk_id(next_node.data.next_start)
 			return next_node
 	return
 
