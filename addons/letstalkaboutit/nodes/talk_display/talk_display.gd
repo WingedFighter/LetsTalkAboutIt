@@ -364,7 +364,7 @@ func display_talk_choice(talk: Dictionary, talk_manager: TalkManager) -> void:
 		add_choice(talk.data.line_list[choice], talk.data.next_id_list[choice], talk_manager)
 
 func talk_end() -> void:
-	pass
+	destroy_text_animation()
 
 func handle_talk(talk_manager: TalkManager) -> void:
 	var talk: Dictionary = talk_manager.get_full_talk()
