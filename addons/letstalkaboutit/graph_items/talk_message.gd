@@ -11,21 +11,15 @@ class_name TalkMessage
 @export var line_id: String = "-1"
 @export var line_resource: TalkLinesResource = TalkLinesResource.new()
 @export var character_id: String = "-1"
-@export var expression: TalkCharacter.MOOD = -1
+@export var overlay: String = "none"
 @export var background: String = "none"
 
 func _enter_tree() -> void:
-	$Expression/OptionButton.clear()
-	for mood in TalkCharacter.MOOD:
-		$Expression/OptionButton.add_item(mood, TalkCharacter.MOOD[mood])
-	if expression == -1:
-		expression = TalkCharacter.MOOD.NEUTRAL
-	if $Expression/OptionButton.selected != expression:
-		$Expression/OptionButton.select(expression)
-	$Expression/OptionButton.item_selected.connect(expression_selected)
 	id = name
 	$Character/LineEdit.text_changed.connect(set_character_id)
 	$Character/LineEdit.text = character_id
+	$Overlay/LineEdit.text_changed.connect(set_overlay)
+	$Overlay/LineEdit.text = overlay
 	$Background/LineEdit.text_changed.connect(set_background)
 	$Background/LineEdit.text = background
 
@@ -51,13 +45,10 @@ func set_line_id(p_line_id: String) -> void:
 func set_character_id(new_text: String) -> void:
 	character_id = new_text
 
-func expression_selected(index: int) -> void:
-	expression = TalkCharacter.MOOD[$Expression/OptionButton.get_item_text(index)]
-
-func set_expression(mood: int) -> void:
-	expression = mood
-	if $Expression/OptionButton.item_count > mood:
-		$Expression/OptionButton.select(mood)
+func set_overlay(p_overlay: String) -> void:
+	overlay = p_overlay
+	if $Overlay/LineEdit.text != overlay:
+		$Overlay/LineEdit.text = overlay
 
 func set_lines(p_lines: Array[String]) -> void:
 	line_resource.lines = p_lines

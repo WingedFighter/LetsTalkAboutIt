@@ -48,7 +48,6 @@ slot/3/draw_stylebox = true
 script = ExtResource("1_skib8")
 id = "TalkMessage"
 line_resource = SubResource("Resource_orx1e")
-expression = 4
 
 [node name="Message" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -78,38 +77,30 @@ size_flags_horizontal = 10
 text = "-1"
 expand_to_text_length = true
 
-[node name="Expression" type="HBoxContainer" parent="."]
+[node name="Overlay" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Expression"]
+[node name="Label" type="Label" parent="Overlay"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Expression"
+text = "Overlay"
 
-[node name="Control" type="Control" parent="Expression"]
+[node name="Control" type="Control" parent="Overlay"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OptionButton" type="OptionButton" parent="Expression"]
+[node name="LineEdit" type="LineEdit" parent="Overlay"]
 layout_mode = 2
-selected = 4
-item_count = 5
-popup/item_0/text = "SAD"
-popup/item_1/text = "HAPPY"
-popup/item_1/id = 1
-popup/item_2/text = "ANGRY"
-popup/item_2/id = 2
-popup/item_3/text = "SURPRISED"
-popup/item_3/id = 3
-popup/item_4/text = "NEUTRAL"
-popup/item_4/id = 4
+size_flags_horizontal = 10
+text = "none"
+expand_to_text_length = true
 
 [node name="Background" type="HBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Background"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 text = "Background"
 horizontal_alignment = 1
 

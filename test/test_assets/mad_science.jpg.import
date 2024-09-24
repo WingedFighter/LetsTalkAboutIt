@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7suylwiusa71"
-path="res://.godot/imported/Furry.png-4f787134e998f306b65455fdfea53f74.ctex"
+uid="uid://3qhhsujotx00"
+path="res://.godot/imported/mad_science.jpg-5501ba3734fd2d8b97b41f59a01430ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/letstalkaboutit/nodes/talk_display/portraits/Furry.png"
-dest_files=["res://.godot/imported/Furry.png-4f787134e998f306b65455fdfea53f74.ctex"]
+source_file="res://test/test_assets/mad_science.jpg"
+dest_files=["res://.godot/imported/mad_science.jpg-5501ba3734fd2d8b97b41f59a01430ab.ctex"]
 
 [params]
 

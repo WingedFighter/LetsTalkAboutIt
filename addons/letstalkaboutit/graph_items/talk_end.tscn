@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_end.gd" id="1_sg7iw"]
 
 [node name="TalkEnd" type="GraphNode"]
-offset_right = 9.0
+offset_right = 38.0
 offset_bottom = 55.0
 title = "End"
 slot/0/left_enabled = true

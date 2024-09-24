@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://test/test.gd" id="1_oxwfa"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_manager.gd" id="1_r1hvk"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_character.gd" id="4_xo2of"]
-[ext_resource type="Texture2D" uid="uid://c7suylwiusa71" path="res://addons/letstalkaboutit/nodes/talk_display/portraits/Furry.png" id="5_0khy8"]
+[ext_resource type="Texture2D" uid="uid://c7suylwiusa71" path="res://test/test_assets/Furry.png" id="5_0khy8"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/nodes/talk_display/talk_display.gd" id="5_ap8yq"]
 
 [node name="Test" type="Control"]

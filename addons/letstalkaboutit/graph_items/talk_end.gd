@@ -11,6 +11,7 @@ class_name TalkEnd
 @export var next_start: String = "Start"
 
 func _enter_tree() -> void:
+	id = name
 	$End/LineEdit.text_changed.connect(set_next_start)
 	$End/LineEdit.text = next_start
 	reset_size()

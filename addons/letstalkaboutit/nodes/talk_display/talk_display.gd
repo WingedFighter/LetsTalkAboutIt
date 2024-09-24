@@ -167,6 +167,26 @@ func create_talk_container() -> PanelContainer:
 	t_label.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	t_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
+	var t_interior_overlay := HBoxContainer.new()
+	t_margins.add_child(t_interior_overlay)
+
+	t_interior_overlay.name = "TalkInteriorOverlayContainer"
+	t_interior_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	var t_overlay_texture := TextureRect.new()
+	t_interior_overlay.add_child(t_overlay_texture)
+
+	t_overlay_texture.name = "TalkTextureOverlay"
+	t_overlay_texture.expand_mode = TextureRect.EXPAND_FIT_WIDTH
+
+	var t_overlay_spacer := Control.new()
+	t_interior_overlay.add_child(t_overlay_spacer)
+
+	t_overlay_spacer.name = "TalkInteriorOverlaySpacer"
+	t_overlay_spacer.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	t_overlay_spacer.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	t_overlay_spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
 	return t_container
 
 func get_screen_margins() -> MarginContainer:
@@ -319,6 +339,7 @@ func display_message() -> void:
 	set_talk_texture(character.character_base_panel)
 	set_text_animation(current_message.lines)
 	set_background(current_message.background)
+	set_overlay(current_message.overlay)
 	start_text_animation()
 
 func set_background(background_path: String) -> void:
@@ -327,6 +348,13 @@ func set_background(background_path: String) -> void:
 	else:
 		background_texture.texture = load(background_path)
 		background_texture.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
+
+func set_overlay(overlay_path: String) -> void:
+	var overlay = talk_container.get_node("TalkMargins/TalkInteriorOverlayContainer/TalkTextureOverlay")
+	if overlay_path == "none":
+		overlay.texture = null
+	else:
+		overlay.texture = load(overlay_path)
 	
 func display_talk_choice(talk: Dictionary, talk_manager: TalkManager) -> void:
 	is_choosing = true

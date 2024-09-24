@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="GraphData" load_steps=11 format=3 uid="uid://cay1t0t45me0x"]
+[gd_resource type="Resource" script_class="GraphData" load_steps=15 format=3 uid="uid://cay1t0t45me0x"]
 
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/node_data.gd" id="1_mxear"]
 [ext_resource type="Script" path="res://addons/letstalkaboutit/graph_data/graph_data.gd" id="3_ejwwy"]
 
-[sub_resource type="Resource" id="Resource_hi5rf"]
+[sub_resource type="Resource" id="Resource_28aqw"]
 script = ExtResource("1_mxear")
 name = "TalkStart"
 type = "TalkStart"
@@ -13,7 +13,7 @@ data = {
 "next_id": "TalkBasic"
 }
 
-[sub_resource type="Resource" id="Resource_idve3"]
+[sub_resource type="Resource" id="Resource_iss2r"]
 script = ExtResource("1_mxear")
 name = "TalkBasic"
 type = "TalkBasic"
@@ -24,7 +24,7 @@ data = {
 "next_id": "TalkChoice"
 }
 
-[sub_resource type="Resource" id="Resource_tkytj"]
+[sub_resource type="Resource" id="Resource_q1jga"]
 script = ExtResource("1_mxear")
 name = "TalkChoice"
 type = "TalkChoice"
@@ -46,21 +46,21 @@ data = {
 }
 }
 
-[sub_resource type="Resource" id="Resource_jm5mm"]
+[sub_resource type="Resource" id="Resource_n0amf"]
 script = ExtResource("1_mxear")
 name = "TalkMessage"
 type = "TalkMessage"
 position_offset = Vector2(-440, 60)
 data = {
-"background": "res://addons/letstalkaboutit/nodes/talk_display/apocalypse2.png",
+"background": "res://test/test_assets/apocalypse2.png",
 "character_id": "dummy_test",
-"expression": 4,
 "id": "TalkMessage",
 "line_id": "-1",
-"lines": Array[String](["This is an example of the conversation flow", "which can be split up among three lines", "Isn't that cool?"])
+"lines": Array[String](["This is an example of the conversation flow", "which can be split up among three lines", "Isn't that cool?"]),
+"overlay": "none"
 }
 
-[sub_resource type="Resource" id="Resource_8osrp"]
+[sub_resource type="Resource" id="Resource_p6l8i"]
 script = ExtResource("1_mxear")
 name = "TalkBasic2"
 type = "TalkBasic"
@@ -71,7 +71,7 @@ data = {
 "next_id": "TalkChoice2"
 }
 
-[sub_resource type="Resource" id="Resource_kuu2b"]
+[sub_resource type="Resource" id="Resource_2b22i"]
 script = ExtResource("1_mxear")
 name = "TalkMessage2"
 type = "TalkMessage"
@@ -79,13 +79,13 @@ position_offset = Vector2(380, 220)
 data = {
 "background": "none",
 "character_id": "-1",
-"expression": 4,
 "id": "TalkMessage2",
 "line_id": "-1",
-"lines": Array[String](["Make another choice", "", ""])
+"lines": Array[String](["Make another choice", "", ""]),
+"overlay": "none"
 }
 
-[sub_resource type="Resource" id="Resource_d06bx"]
+[sub_resource type="Resource" id="Resource_py6mr"]
 script = ExtResource("1_mxear")
 name = "TalkChoice2"
 type = "TalkChoice"
@@ -97,32 +97,72 @@ data = {
 "3708": "HAHA there is no choice"
 },
 "next_id_list": {
-"3708": "End"
+"3708": "TalkEnd"
 }
 }
 
-[sub_resource type="Resource" id="Resource_htcrl"]
+[sub_resource type="Resource" id="Resource_a4qw0"]
+script = ExtResource("1_mxear")
+name = "TalkBasic3"
+type = "TalkBasic"
+position_offset = Vector2(120, 480)
+data = {
+"id": "TalkBasic3",
+"message_list": Array[String](["TalkMessage3"]),
+"next_id": "TalkEnd2"
+}
+
+[sub_resource type="Resource" id="Resource_4pfca"]
+script = ExtResource("1_mxear")
+name = "TalkStart2"
+type = "TalkStart"
+position_offset = Vector2(-160, 480)
+data = {
+"id": "StartSecond",
+"next_id": "TalkBasic3"
+}
+
+[sub_resource type="Resource" id="Resource_1pves"]
+script = ExtResource("1_mxear")
+name = "TalkMessage3"
+type = "TalkMessage"
+position_offset = Vector2(-440, 600)
+data = {
+"background": "res://test/test_assets/mad_science.jpg",
+"character_id": "dummy_test",
+"id": "TalkMessage3",
+"line_id": "-1",
+"lines": Array[String](["This is an example of moving to a ", "different conversation,", "after this it will loop back to the original one"]),
+"overlay": "res://test/test_assets/narrator.png"
+}
+
+[sub_resource type="Resource" id="Resource_b1vmr"]
+script = ExtResource("1_mxear")
+name = "TalkEnd2"
+type = "TalkEnd"
+position_offset = Vector2(400, 480)
+data = {
+"id": "TalkEnd2",
+"next_start": "StartDefault"
+}
+
+[sub_resource type="Resource" id="Resource_terhw"]
 script = ExtResource("1_mxear")
 name = "TalkEnd"
 type = "TalkEnd"
-position_offset = Vector2(1240, -60)
+position_offset = Vector2(1240, -80)
 data = {
-"id": "End",
-"next_start": "StartDefault"
+"id": "TalkEnd",
+"next_start": "StartSecond"
 }
 
 [resource]
 script = ExtResource("3_ejwwy")
-connections = [{
+connections = Array[Dictionary]([{
 "from_node": &"TalkStart",
 "from_port": 0,
 "to_node": &"TalkBasic",
 "to_port": 0
-}, {
-"from_node": &"TalkMessage",
-"from_port": 0,
-"to_node": &"TalkBasic",
-"to_port": 1
 }, {
 "from_node": &"TalkBasic",
 "from_port": 0,
@@ -159,9 +199,29 @@ connections = [{
 "to_node": &"TalkChoice2",
 "to_port": 0
 }, {
+"from_node": &"TalkStart2",
+"from_port": 0,
+"to_node": &"TalkBasic3",
+"to_port": 0
+}, {
+"from_node": &"TalkMessage",
+"from_port": 0,
+"to_node": &"TalkBasic",
+"to_port": 0
+}, {
+"from_node": &"TalkMessage3",
+"from_port": 0,
+"to_node": &"TalkBasic3",
+"to_port": 1
+}, {
+"from_node": &"TalkBasic3",
+"from_port": 0,
+"to_node": &"TalkEnd2",
+"to_port": 0
+}, {
 "from_node": &"TalkChoice2",
 "from_port": 0,
 "to_node": &"TalkEnd",
 "to_port": 0
-}]
-nodes = [SubResource("Resource_hi5rf"), SubResource("Resource_idve3"), SubResource("Resource_tkytj"), SubResource("Resource_jm5mm"), SubResource("Resource_8osrp"), SubResource("Resource_kuu2b"), SubResource("Resource_d06bx"), SubResource("Resource_htcrl")]
+}])
+nodes = [SubResource("Resource_28aqw"), SubResource("Resource_iss2r"), SubResource("Resource_q1jga"), SubResource("Resource_n0amf"), SubResource("Resource_p6l8i"), SubResource("Resource_2b22i"), SubResource("Resource_py6mr"), SubResource("Resource_a4qw0"), SubResource("Resource_4pfca"), SubResource("Resource_1pves"), SubResource("Resource_b1vmr"), SubResource("Resource_terhw")]

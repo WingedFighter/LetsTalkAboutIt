@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e3upykf38dbd"
-path="res://.godot/imported/apocalypse2.png-aba7db75119e01548f5c38f38c8d23e1.ctex"
+uid="uid://c7suylwiusa71"
+path="res://.godot/imported/Furry.png-6116cba9eebf6d212965f31317771842.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/letstalkaboutit/nodes/talk_display/apocalypse2.png"
-dest_files=["res://.godot/imported/apocalypse2.png-aba7db75119e01548f5c38f38c8d23e1.ctex"]
+source_file="res://test/test_assets/Furry.png"
+dest_files=["res://.godot/imported/Furry.png-6116cba9eebf6d212965f31317771842.ctex"]
 
 [params]
 

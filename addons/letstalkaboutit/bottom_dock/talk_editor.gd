@@ -240,8 +240,8 @@ func init_graph(graph_data: GraphData) -> void:
             "TalkMessage":
                 g_node.set_line_id(node.data.line_id)
                 g_node.set_character_id(node.data.character_id)
-                g_node.set_expression(node.data.expression)
                 g_node.line_resource = TalkLinesResource.new()
+                g_node.set_overlay(node.data.overlay)
                 g_node.set_lines(node.data.lines)
                 g_node.set_background(node.data.background)
             "TalkChoice":
@@ -304,7 +304,7 @@ func save_graph_data(nodes: Array, connections: Array) -> void:
                     node_data.data.id = node.id
                     node_data.data.line_id = node.line_id
                     node_data.data.character_id = node.character_id
-                    node_data.data.expression = node.expression
+                    node_data.data.overlay = node.overlay
                     node_data.data.lines = node.line_resource.lines
                     node_data.data.background = node.background
                 "TalkChoice":
