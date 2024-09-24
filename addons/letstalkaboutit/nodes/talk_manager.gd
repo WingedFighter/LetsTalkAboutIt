@@ -97,7 +97,6 @@ func get_talk() -> NodeData:
 		"TalkSetFlag":
 			return next_node
 		"TalkEnd":
-			print(next_node.data.next_start)
 			set_current_talk_id(next_node.data.next_start)
 			return next_node
 	return
