@@ -8,6 +8,8 @@ class_name TalkManager
 @export var graph_data: GraphData
 @export var talk_state: TalkState
 
+signal conversation_end(node)
+
 func _ready() -> void:
 	load_graph_data()
 	load_talk_state()
@@ -98,6 +100,7 @@ func get_talk() -> NodeData:
 			return next_node
 		"TalkEnd":
 			set_current_talk_id(next_node.data.next_start)
+			conversation_end.emit(self)
 			return next_node
 	return
 
