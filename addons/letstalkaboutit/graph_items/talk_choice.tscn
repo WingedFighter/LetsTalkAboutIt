@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://c5ios6xl7sc4m"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_choice.gd" id="1_ju5wr"]
-[ext_resource type="Script" path="res://addons/letstalkaboutit/ingame_data/talk_list.gd" id="2_13pso"]
-[ext_resource type="Script" path="res://addons/letstalkaboutit/ingame_data/talk_lines.gd" id="2_vbo25"]
+[ext_resource type="Script" uid="uid://bkku4s62wqm58" path="res://addons/letstalkaboutit/graph_items/talk_choice.gd" id="1_ju5wr"]
+[ext_resource type="Script" uid="uid://dhgpsuehu8fvg" path="res://addons/letstalkaboutit/ingame_data/talk_list.gd" id="2_13pso"]
+[ext_resource type="Script" uid="uid://bdxn37w0k71bw" path="res://addons/letstalkaboutit/ingame_data/talk_lines.gd" id="2_vbo25"]
 
 [sub_resource type="Resource" id="Resource_iqq7o"]
 script = ExtResource("2_vbo25")
@@ -21,6 +21,7 @@ script = ExtResource("2_vbo25")
 lines = Array[String]([""])
 
 [sub_resource type="Resource" id="Resource_bqw6e"]
+resource_local_to_scene = true
 script = ExtResource("2_13pso")
 lines_list = {
 "2290": "",
@@ -55,7 +56,7 @@ slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
 script = ExtResource("1_ju5wr")
-id = "TalkChoice_2398"
+id = "TalkChoice"
 line_list_resource = SubResource("Resource_bqw6e")
 
 [node name="Add" type="Button" parent="."]

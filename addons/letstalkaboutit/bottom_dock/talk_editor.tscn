@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5k58b6tpgxtk"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/bottom_dock/talk_editor.gd" id="1_gfx30"]
+[ext_resource type="Script" uid="uid://c4a0grrqrnjvq" path="res://addons/letstalkaboutit/bottom_dock/talk_editor.gd" id="1_gfx30"]
 
 [node name="TalkEditor" type="Control" groups=["ConvoScreen"]]
 layout_mode = 3

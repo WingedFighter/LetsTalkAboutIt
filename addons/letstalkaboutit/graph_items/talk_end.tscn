@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ck44pcquefuux"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_end.gd" id="1_sg7iw"]
+[ext_resource type="Script" uid="uid://e3ggl6y4cs0i" path="res://addons/letstalkaboutit/graph_items/talk_end.gd" id="1_sg7iw"]
 
 [node name="TalkEnd" type="GraphNode"]
 offset_right = 38.0

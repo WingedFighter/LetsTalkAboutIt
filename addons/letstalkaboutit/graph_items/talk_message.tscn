@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://csxtylons4juu"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_message.gd" id="1_skib8"]
-[ext_resource type="Script" path="res://addons/letstalkaboutit/ingame_data/talk_lines.gd" id="2_3c685"]
+[ext_resource type="Script" uid="uid://b4py00oho1bo4" path="res://addons/letstalkaboutit/graph_items/talk_message.gd" id="1_skib8"]
+[ext_resource type="Script" uid="uid://bdxn37w0k71bw" path="res://addons/letstalkaboutit/ingame_data/talk_lines.gd" id="2_3c685"]
 
 [sub_resource type="Resource" id="Resource_orx1e"]
 script = ExtResource("2_3c685")

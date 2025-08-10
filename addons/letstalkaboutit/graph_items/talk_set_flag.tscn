@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cg0ye35prm6jt"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_set_flag.gd" id="1_bsrde"]
+[ext_resource type="Script" uid="uid://cy5e616q5fg2m" path="res://addons/letstalkaboutit/graph_items/talk_set_flag.gd" id="1_bsrde"]
 
 [node name="TalkSetFlag" type="GraphNode"]
 title = "SetFlag"

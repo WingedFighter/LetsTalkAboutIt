@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bgb1eru2s14q2"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_start.gd" id="1_qp8dq"]
+[ext_resource type="Script" uid="uid://c4cwut8s44tbi" path="res://addons/letstalkaboutit/graph_items/talk_start.gd" id="1_qp8dq"]
 
 [node name="TalkStart" type="GraphNode"]
 offset_right = 46.0

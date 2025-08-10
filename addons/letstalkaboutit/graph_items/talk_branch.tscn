@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://rmukkqmo6t35"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_branch.gd" id="1_nfq8n"]
+[ext_resource type="Script" uid="uid://scjfxdippgwk" path="res://addons/letstalkaboutit/graph_items/talk_branch.gd" id="1_nfq8n"]
 
 [node name="TalkBranch" type="GraphNode"]
 process_mode = 3

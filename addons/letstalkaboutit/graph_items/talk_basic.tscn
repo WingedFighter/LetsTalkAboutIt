@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bkuyvpcwb2xtu"]
 
-[ext_resource type="Script" path="res://addons/letstalkaboutit/graph_items/talk_basic.gd" id="1_363hv"]
+[ext_resource type="Script" uid="uid://brp3t8wrwq07j" path="res://addons/letstalkaboutit/graph_items/talk_basic.gd" id="1_363hv"]
 
 [node name="TalkBasic" type="GraphNode"]
 process_mode = 3
