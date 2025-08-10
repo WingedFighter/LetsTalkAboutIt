@@ -21,7 +21,7 @@ const TalkManager: Script = preload("res://addons/letstalkaboutit/nodes/talk_man
 const TalkCharacter: Script = preload("res://addons/letstalkaboutit/nodes/talk_character.gd")
 const TalkDisplay: Script = preload("res://addons/letstalkaboutit/nodes/talk_display/talk_display.gd")
 
-var icon = preload("res://icon.svg")
+var icon = preload("res://addons/letstalkaboutit/icon.png")
 
 var graph_types = {
 	"TalkBasic": TalkBasic,
